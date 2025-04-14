@@ -5,7 +5,6 @@ As the wing has to pass static load tests of 20G, main task will be minimizing t
 
 Process is explained through series of small reports each pertaining to one part of the model or design.
 
-!!! CHECK BRANCHES FOR ALL ANALYZED VARIANTS !!!
 
 AC_HC - Acrobatic wing honeycomb variant
 
