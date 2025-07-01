@@ -7,7 +7,7 @@
     body {
       margin: 0;
       font-family: 'Adobe Caslon Pro', serif;
-      background-color: #001f3f; /* deep blue */
+      background-color: #001f3f;
       color: white;
       display: flex;
       height: 100vh;
@@ -26,6 +26,7 @@
       flex: 1;
       padding: 40px;
       box-sizing: border-box;
+      overflow-y: auto;
     }
 
     header {
@@ -69,13 +70,25 @@
     }
 
     .dropdown.show {
-      max-height: 500px; /* enough to reveal content */
+      max-height: 500px;
     }
 
     .dropdown div {
       padding: 10px;
       border-top: 1px solid #004080;
       font-size: 16px;
+      cursor: pointer;
+    }
+
+    .dropdown div:hover {
+      background-color: #004466;
+    }
+
+    img.project-image {
+      max-width: 100%;
+      margin-top: 20px;
+      border: 2px solid #004080;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -84,41 +97,73 @@
     <div class="project">
       <button onclick="toggleDropdown(this)">Aerobatic Wing Design</button>
       <div class="dropdown">
-        <div>Introduction</div>
-        <div>Aerodynamic Loads</div>
-        <div>Structure</div>
-        <div>FEA Model</div>
+        <div onclick="showSection('intro')">Introduction</div>
+        <div onclick="showSection('loads')">Aerodynamic Loads</div>
+        <div onclick="showSection('structure')">Structure</div>
+        <div onclick="showSection('fea')">FEA Model</div>
       </div>
     </div>
     <div class="project">
       <button onclick="toggleDropdown(this)">Project 2</button>
       <div class="dropdown">
-        <div>Section 2.1</div>
-        <div>Section 2.2</div>
+        <div onclick="showSection('p2s1')">Section 2.1</div>
+        <div onclick="showSection('p2s2')">Section 2.2</div>
       </div>
     </div>
     <div class="project">
       <button onclick="toggleDropdown(this)">Project 3</button>
       <div class="dropdown">
-        <div>Section 3.1</div>
-        <div>Section 3.2</div>
-        <div>Section 3.3</div>
-        <div>Section 3.4</div>
+        <div onclick="showSection('p3s1')">Section 3.1</div>
+        <div onclick="showSection('p3s2')">Section 3.2</div>
+        <div onclick="showSection('p3s3')">Section 3.3</div>
+        <div onclick="showSection('p3s4')">Section 3.4</div>
       </div>
     </div>
   </div>
+
   <div class="content">
     <header>My Projects</header>
-    <div class="intro">
+    <div class="intro" id="main-content">
       Hello, my name is Kristijan. I am an aeronautical engineering graduate and this is the place I upload my projects to.
     </div>
-    <!-- Content area for selected project details if needed -->
   </div>
 
   <script>
     function toggleDropdown(button) {
       const dropdown = button.nextElementSibling;
       dropdown.classList.toggle('show');
+    }
+
+    function showSection(sectionId) {
+      const content = {
+        intro: `
+          <h2>Aerobatic Wing Design – Introduction</h2>
+          <p>This section introduces the concept of aerobatic wing design, performance goals, and design constraints.</p>
+          <img src="images/intro.jpg" alt="Aerobatic Wing Diagram" class="project-image">
+        `,
+        loads: `
+          <h2>Aerobatic Wing Design – Aerodynamic Loads</h2>
+          <p>This section discusses the loading scenarios applied to the wing during flight maneuvers and how those are calculated.</p>
+          <img src="images/loads.jpg" alt="Load Diagram" class="project-image">
+        `,
+        structure: `
+          <h2>Aerobatic Wing Design – Structure</h2>
+          <p>The internal structure, including spars, ribs, and skin, is outlined here along with material choices.</p>
+        `,
+        fea: `
+          <h2>Aerobatic Wing Design – FEA Model</h2>
+          <p>This section shows the finite element model used to simulate stresses and deformations in the wing.</p>
+        `,
+        p2s1: `<h2>Project 2 – Section 2.1</h2><p>Coming soon...</p>`,
+        p2s2: `<h2>Project 2 – Section 2.2</h2><p>Coming soon...</p>`,
+        p3s1: `<h2>Project 3 – Section 3.1</h2><p>Coming soon...</p>`,
+        p3s2: `<h2>Project 3 – Section 3.2</h2><p>Coming soon...</p>`,
+        p3s3: `<h2>Project 3 – Section 3.3</h2><p>Coming soon...</p>`,
+        p3s4: `<h2>Project 3 – Section 3.4</h2><p>Coming soon...</p>`
+      };
+
+      const mainContent = document.getElementById("main-content");
+      mainContent.innerHTML = content[sectionId] || "<p>Section not found.</p>";
     }
   </script>
 </body>
