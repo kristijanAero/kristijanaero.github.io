@@ -100,23 +100,26 @@
 
     <button class="chapter-button" data-target="overview">Overview</button>
     <button class="chapter-button" data-target="goals">Goals</button>
-    <button class="chapter-button" data-target="wing-structure">Wing Structure</button>
-    <button class="chapter-button" data-target="materials">Materials</button>
-    <button class="chapter-button" data-target="current-status">Current Status</button>
-    <button class="chapter-button" data-target="next-steps">Next Steps</button>
-  </nav>
+    <button class="chapter-button" data-target="wing-structure">Aerodynamic Loads</button>
+    <button class="chapter-button" data-target="materials">Wing Structure</button>
+    <button class="chapter-button" data-target="current-status">Materials and Layups</button>
+    <button class="chapter-button" data-target="next-steps">FEA Model</button>
+    <button class="chapter-button" data-target="next-steps">Optimization</button>
+    <button class="chapter-button" data-target="next-steps">Results</button>  
+</nav>
 
   <main class="content">
     <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
 
     <section id="overview" tabindex="-1">
       <h3>Overview</h3>
-      <p>This project focuses on designing an aerobatic airplane wing inspired by the Zivko Edge 540, optimized for agility and performance.</p>
+      <p>This project focuses on designing an aerobatic airplane wing inspired by the Zivko Edge 540.
+      </p>
     </section>
 
     <section id="goals" tabindex="-1">
       <h3>Goals</h3>
-      <p>The goal is to design a wing that balances lift, drag, and maneuverability specifically for aerobatic flight conditions.</p>
+      <p>.</p>
     </section>
 
     <section id="wing-structure" tabindex="-1">
@@ -163,6 +166,49 @@
     if (buttons.length) {
       buttons[0].classList.add('active');
     }
+    <script>
+  const buttons = document.querySelectorAll('.chapter-button');
+  const sections = Array.from(buttons).map(btn => {
+    const id = btn.getAttribute('data-target');
+    return document.getElementById(id);
+  });
+
+  function setActiveButton(index) {
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
+    });
+  }
+
+  buttons.forEach((button, i) => {
+    button.addEventListener('click', () => {
+      const targetSection = sections[i];
+      if (targetSection) {
+        targetSection.focus();
+        window.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
+      }
+      setActiveButton(i);
+    });
+  });
+
+  // Highlight sidebar button on scroll
+  window.addEventListener('scroll', () => {
+    const scrollPos = window.scrollY || window.pageYOffset;
+    let currentIndex = 0;
+
+    // Find the section currently near top of viewport
+    sections.forEach((section, i) => {
+      if (section.offsetTop - 30 <= scrollPos) {
+        currentIndex = i;
+      }
+    });
+
+    setActiveButton(currentIndex);
+  });
+
+  // Set initial active button on page load
+  setActiveButton(0);
+</script>
+
   </script>
 
 </body>
