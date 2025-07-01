@@ -235,32 +235,7 @@
 
   </main>
 
-  <script>
-    const buttons = document.querySelectorAll('.chapter-button');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const targetId = button.getAttribute('data-target');
-        const targetSection = document.getElementById(targetId);
-
-        if (targetSection) {
-          targetSection.focus();
-          window.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
-        }
-
-        // Update active class
-        buttons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-      });
-    });
-
-    // Optional: set first button active on load
-    if (buttons.length) {
-      buttons[0].classList.add('active');
-    }
-<script>
-
-<script>
+ <script>
   const buttons = document.querySelectorAll('.chapter-button');
   const sections = Array.from(buttons).map(btn => {
     const id = btn.getAttribute('data-target');
@@ -289,7 +264,6 @@
     const scrollPos = window.scrollY || window.pageYOffset;
     let currentIndex = 0;
 
-    // Find the section currently near top of viewport
     sections.forEach((section, i) => {
       if (section.offsetTop - 30 <= scrollPos) {
         currentIndex = i;
@@ -302,7 +276,6 @@
   // Set initial active button on page load
   setActiveButton(0);
 </script>
-
 
 </body>
 </html>
