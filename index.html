@@ -100,23 +100,9 @@
         <div onclick="showSection('intro')">Introduction</div>
         <div onclick="showSection('loads')">Aerodynamic Loads</div>
         <div onclick="showSection('structure')">Structure</div>
+        <div onclick="showSection('mat')">Materials and Layups</div>
         <div onclick="showSection('fea')">FEA Model</div>
-      </div>
-    </div>
-    <div class="project">
-      <button onclick="toggleDropdown(this)">Project 2</button>
-      <div class="dropdown">
-        <div onclick="showSection('p2s1')">Section 2.1</div>
-        <div onclick="showSection('p2s2')">Section 2.2</div>
-      </div>
-    </div>
-    <div class="project">
-      <button onclick="toggleDropdown(this)">Project 3</button>
-      <div class="dropdown">
-        <div onclick="showSection('p3s1')">Section 3.1</div>
-        <div onclick="showSection('p3s2')">Section 3.2</div>
-        <div onclick="showSection('p3s3')">Section 3.3</div>
-        <div onclick="showSection('p3s4')">Section 3.4</div>
+        <div onclick="showSection('results')">Results</div>
       </div>
     </div>
   </div>
@@ -138,21 +124,29 @@
       const content = {
         intro: `
           <h2>Aerobatic Wing Design – Introduction</h2>
-          <p>This section introduces the concept of aerobatic wing design, performance goals, and design constraints.</p>
-          <img src="images/intro.jpg" alt="Aerobatic Wing Diagram" class="project-image">
+          <p>The goal of this project is the design and optimization of an aerobatic airplane wing made out of composite materials. The Zivko Edge 540 single seater airplane was chosen to be a reference aircraft, from which the wing shape and certain flight parameters were used in the aerodynamic analysis and structural configuration selection process.</p>
+          <img src="photos/edge540.jpg" alt="Figure 1 Zivko Edge 540 airplane in an aerobatic maneuver" class="project-image">
         `,
         loads: `
           <h2>Aerobatic Wing Design – Aerodynamic Loads</h2>
-          <p>This section discusses the loading scenarios applied to the wing during flight maneuvers and how those are calculated.</p>
+          <p>This section describes how the aerodynamic loads were obtained.</p>
           <img src="images/loads.jpg" alt="Load Diagram" class="project-image">
         `,
         structure: `
           <h2>Aerobatic Wing Design – Structure</h2>
           <p>The internal structure, including spars, ribs, and skin, is outlined here along with material choices.</p>
         `,
-        fea: `
+        mat: `
           <h2>Aerobatic Wing Design – FEA Model</h2>
           <p>This section shows the finite element model used to simulate stresses and deformations in the wing.</p>
+        `,
+        fea: `
+          <h2>Aerobatic Wing Design – FEA Model</h2>
+          <p>Coming soon.</p>
+        `,
+        results: `
+          <h2>Aerobatic Wing Design – FEA Model</h2>
+          <p>Coming soon.</p>
         `,
         p2s1: `<h2>Project 2 – Section 2.1</h2><p>Coming soon...</p>`,
         p2s2: `<h2>Project 2 – Section 2.2</h2><p>Coming soon...</p>`,
