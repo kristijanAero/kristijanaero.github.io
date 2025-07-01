@@ -27,10 +27,8 @@
       margin-bottom: 1rem;
       font-size: 1.8rem;
     }
-    .chapter {
-      margin-bottom: 1rem;
-    }
-    .chapter button {
+    .chapter-button {
+      display: block;
       width: 100%;
       background: none;
       border: none;
@@ -38,41 +36,19 @@
       font-size: 1.1rem;
       cursor: pointer;
       text-align: left;
-      padding: 0.5rem 0;
+      padding: 0.75rem 0;
       outline: none;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.3s;
+      transition: border-color 0.3s, color 0.3s;
     }
-    .chapter button:hover {
+    .chapter-button:hover {
       border-bottom: 1px solid #ffb347;
       color: #ffb347;
     }
-    .chapter.expanded button {
+    .chapter-button.active {
       color: #ffb347;
       font-weight: bold;
       border-bottom: 1px solid #ffb347;
-    }
-    .chapter ul {
-      list-style: none;
-      padding-left: 1rem;
-      margin-top: 0.5rem;
-      display: none;
-    }
-    .chapter.expanded ul {
-      display: block;
-    }
-    .chapter ul li {
-      margin-bottom: 0.4rem;
-    }
-    .chapter ul li a {
-      color: #cce0ff;
-      text-decoration: none;
-      font-size: 0.95rem;
-      cursor: pointer;
-    }
-    .chapter ul li a:hover {
-      color: #ffb347;
-      text-decoration: underline;
     }
     .content {
       flex-grow: 1;
@@ -122,29 +98,12 @@
   <nav class="sidebar" aria-label="Project chapters">
     <h2>Chapters</h2>
 
-    <div class="chapter">
-      <button type="button" aria-expanded="false" aria-controls="intro-list">Introduction</button>
-      <ul id="intro-list">
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#goals">Goals</a></li>
-      </ul>
-    </div>
-
-    <div class="chapter">
-      <button type="button" aria-expanded="false" aria-controls="design-list">Design Details</button>
-      <ul id="design-list">
-        <li><a href="#wing-structure">Wing Structure</a></li>
-        <li><a href="#materials">Materials</a></li>
-      </ul>
-    </div>
-
-    <div class="chapter">
-      <button type="button" aria-expanded="false" aria-controls="progress-list">Progress</button>
-      <ul id="progress-list">
-        <li><a href="#current-status">Current Status</a></li>
-        <li><a href="#next-steps">Next Steps</a></li>
-      </ul>
-    </div>
+    <button class="chapter-button" data-target="overview">Overview</button>
+    <button class="chapter-button" data-target="goals">Goals</button>
+    <button class="chapter-button" data-target="wing-structure">Wing Structure</button>
+    <button class="chapter-button" data-target="materials">Materials</button>
+    <button class="chapter-button" data-target="current-status">Current Status</button>
+    <button class="chapter-button" data-target="next-steps">Next Steps</button>
   </nav>
 
   <main class="content">
@@ -182,31 +141,28 @@
   </main>
 
   <script>
-    // Collapsible chapters
-    const chapterButtons = document.querySelectorAll('.chapter button');
+    const buttons = document.querySelectorAll('.chapter-button');
 
-    chapterButtons.forEach(button => {
+    buttons.forEach(button => {
       button.addEventListener('click', () => {
-        const expanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', String(!expanded));
-        button.parentElement.classList.toggle('expanded');
-      });
-    });
-
-    // Optional: Smooth scroll to sections
-    const links = document.querySelectorAll('.chapter ul li a');
-
-    links.forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
+        const targetId = button.getAttribute('data-target');
         const targetSection = document.getElementById(targetId);
+
         if (targetSection) {
           targetSection.focus();
           window.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
         }
+
+        // Update active class
+        buttons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
       });
     });
+
+    // Optional: set first button active on load
+    if (buttons.length) {
+      buttons[0].classList.add('active');
+    }
   </script>
 
 </body>
