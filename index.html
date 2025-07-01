@@ -1,241 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My CAE Projects</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name - Projects Portfolio</title>
   <style>
     body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
-      font-family: 'Adobe Caslon Pro', serif;
-      background-color: #001f3f;
-      color: white;
-      display: flex;
-      height: 100vh;
+      background: #f0f2f5;
+      color: #333;
+      line-height: 1.6;
     }
-
-    .sidebar {
-      width: 250px;
-      background-color: #003366;
-      padding: 20px;
-      padding-top: 50px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
-
-    .content {
-      flex: 1;
-      padding: 40px;
-      box-sizing: border-box;
-      overflow-y: auto;
-    }
-
     header {
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
-
-    .intro {
-      margin-bottom: 40px;
-      font-size: 18px;
-      line-height: 1.5;
-    }
-
-    .project {
-      margin-bottom: 10px;
-    }
-
-    .project button {
-      width: 100%;
-      background: none;
-      border: none;
+      background-color: #4a90e2;
       color: white;
-      text-align: left;
-      font-size: 18px;
-      cursor: pointer;
-      padding: 10px;
-      transition: background 0.3s;
+      padding: 2rem 1rem;
+      text-align: center;
     }
-
-    .project button:hover {
-      background-color: #004080;
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
     }
-
-    .dropdown {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s ease;
-      background-color: #002244;
-      margin-left: 10px;
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      font-weight: 300;
     }
-
-    .dropdown.show {
-      max-height: 500px;
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
-
-    .dropdown div {
-      padding: 10px;
-      border-top: 1px solid #004080;
-      font-size: 16px;
-      cursor: pointer;
+    section.projects {
+      margin-top: 2rem;
     }
-
-    .dropdown div:hover {
-      background-color: #004466;
+    section.projects h2 {
+      border-bottom: 3px solid #4a90e2;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
     }
-
-    img.project-image {
-      max-width: 100%;
-      margin-top: 20px;
-      border: 2px solid #004080;
-      border-radius: 8px;
+    .project {
+      background: white;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
-    p {
-      padding: 15px;
+    .project h3 {
+      margin-top: 0;
+      color: #4a90e2;
     }
-    
+    .project .status {
+      font-style: italic;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+    footer {
+      text-align: center;
+      margin: 3rem 0 1rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="sidebar">
+
+<header>
+  <h1>Your Name</h1>
+  <p>Developer | Creator | Problem Solver</p>
+</header>
+
+<main>
+  <section class="projects">
+    <h2>My Projects</h2>
+
     <div class="project">
-      <button onclick="toggleDropdown(this)">Aerobatic Wing Design</button>
-      <div class="dropdown">
-        <div onclick="showSection('intro')">Introduction</div>
-        <div onclick="showSection('loads')">Aerodynamic Loads</div>
-        <div onclick="showSection('structure')">Structure</div>
-        <div onclick="showSection('mat')">Materials and Layups</div>
-        <div onclick="showSection('fea')">FEA Model</div>
-        <div onclick="showSection('results')">Results</div>
-      </div>
+      <h3>Project One</h3>
+      <p class="status">Status: In Development</p>
+      <p>This is my first personal project. I'm actively working on developing it and will share more soon.</p>
     </div>
-  </div>
 
-  <div class="content">
-    <header>My Projects</header>
-    <div class="intro" id="main-content">
-      Hello, my name is Kristijan. I am an aeronautical engineering graduate and this is the place I upload my projects to.
+    <div class="project">
+      <h3>Project Two</h3>
+      <p class="status">Status: Coming Soon</p>
+      <p>Details about this project will be available here once development starts.</p>
     </div>
-  </div>
 
-  <script>
-    function toggleDropdown(button) {
-      const dropdown = button.nextElementSibling;
-      dropdown.classList.toggle('show');
-    }
+    <div class="project">
+      <h3>Project Three</h3>
+      <p class="status">Status: Coming Soon</p>
+      <p>Details about this project will be available here once development starts.</p>
+    </div>
+  </section>
+</main>
 
-    function showSection(sectionId) {
-      const content = {
-        intro: `
-          <h2>Aerobatic Wing Design – Introduction</h2>
-          <p>The goal of this project is the design and optimization of an aerobatic airplane wing made out of composite materials. The Zivko Edge 540 single seater airplane was chosen to be a reference aircraft, from which the wing shape and certain flight parameters were used in the aerodynamic analysis and structural configuration selection process.</p>
-          <img src="Photos/edge540.jpg" alt="Figure 1 Zivko Edge 540 airplane in an aerobatic maneuver" class="project-image">
-          <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; color: white; font-family: 'Adobe Caslon Pro', serif;">
-  <thead>
-    <tr style="background-color: #003366;">
-      <th>Parameter</th>
-      <th>Imperial</th>
-      <th>Metric</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Empty Weight</td>
-      <td>1320 lbs</td>
-      <td>598.74 kg</td>
-    </tr>
-    <tr>
-      <td>Max gross T/O weight</td>
-      <td>2200 lbs</td>
-      <td>997.90 kg</td>
-    </tr>
-    <tr>
-      <td>G rating gross</td>
-      <td>±3</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Max gross LDG weight</td>
-      <td>2100 lbs</td>
-      <td>952.54 kg</td>
-    </tr>
-    <tr>
-      <td>Max aerobatic weight single</td>
-      <td>1600 lbs</td>
-      <td>725.75 kg</td>
-    </tr>
-    <tr>
-      <td>G rating single</td>
-      <td>±10</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Wing loading empty</td>
-      <td>12.4 lbs/ft²</td>
-      <td>60.54 kg/m²</td>
-    </tr>
-    <tr>
-      <td>Max airspeed V_NE</td>
-      <td>230 kts</td>
-      <td>425.96 km/h</td>
-    </tr>
-    <tr>
-      <td>Max full aerobatic airspeed V_a</td>
-      <td>170 kts</td>
-      <td>314.84 km/h</td>
-    </tr>
-    <tr>
-      <td>Power off stall V_so</td>
-      <td>62 kts @ 2200 lbs</td>
-      <td>@ 997.90 kg</td>
-    </tr>
-    <tr>
-      <td>Max roll rate</td>
-      <td>420°/sec</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Max rate of climb</td>
-      <td>3700 ft/min</td>
-      <td>1127.76 m/min</td>
-    </tr>
-  </tbody>
-</table>
+<footer>
+  &copy; 2025 Your Name. All rights reserved.
+</footer>
 
-        `,
-        loads: `
-          <h2>Aerobatic Wing Design – Aerodynamic Loads</h2>
-          <p>This section describes how the aerodynamic loads were obtained.</p>
-          <img src="images/loads.jpg" alt="Load Diagram" class="project-image">
-        `,
-        structure: `
-          <h2>Aerobatic Wing Design – Structure</h2>
-          <p>The internal structure, including spars, ribs, and skin, is outlined here along with material choices.</p>
-        `,
-        mat: `
-          <h2>Aerobatic Wing Design – FEA Model</h2>
-          <p>This section shows the finite element model used to simulate stresses and deformations in the wing.</p>
-        `,
-        fea: `
-          <h2>Aerobatic Wing Design – FEA Model</h2>
-          <p>Coming soon.</p>
-        `,
-        results: `
-          <h2>Aerobatic Wing Design – FEA Model</h2>
-          <p>Coming soon.</p>
-        `,
-        p2s1: `<h2>Project 2 – Section 2.1</h2><p>Coming soon...</p>`,
-        p2s2: `<h2>Project 2 – Section 2.2</h2><p>Coming soon...</p>`,
-        p3s1: `<h2>Project 3 – Section 3.1</h2><p>Coming soon...</p>`,
-        p3s2: `<h2>Project 3 – Section 3.2</h2><p>Coming soon...</p>`,
-        p3s3: `<h2>Project 3 – Section 3.3</h2><p>Coming soon...</p>`,
-        p3s4: `<h2>Project 3 – Section 3.4</h2><p>Coming soon...</p>`
-      };
-
-      const mainContent = document.getElementById("main-content");
-      mainContent.innerHTML = content[sectionId] || "<p>Section not found.</p>";
-    }
-  </script>
 </body>
 </html>
