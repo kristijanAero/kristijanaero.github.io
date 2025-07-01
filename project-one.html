@@ -202,7 +202,26 @@
 
     <section id="loads" tabindex="-1">
       <h3>Aerodynamic Loads</h3>
-      <p></p>
+    <p>
+  To help with the configuration selection process, an aerodynamic analysis was conducted beforehand to extrapolate the pressure field at the marginal flight conditions. The whole process of calculating pressure coefficients was done in XFLR5, a computational tool for airfoils, wings, and planes. 
+</p>
+<p>
+  An important thing to notice about XFLR5 is it uses inviscid theories (LLT, VLM1, VLM2, 3D Panel) which cannot accurately capture pressure gradients at higher Reynolds numbers (&gt;1e7). As the “never exceed” velocity for the reference aircraft equals 230 kts, compressibility effects are expected. Per the note from XFLR5 documentation:
+</p>
+<blockquote>
+  “The VLM and 3D method merely interpolate 2D viscous drag from local wing lift – not great…”
+</blockquote>
+<p>
+  Consequences of this estimation are:
+</p>
+<ol>
+  <li>Underestimation of total drag</li>
+  <li>Over-estimation of glide ratio and other performance factors</li>
+</ol>
+<p>
+  Beyond these limitations, there are more to XFLR5, but these have the greatest impact on the results. As a result of the drawbacks listed above, resultant lift values are greater than those in real life scenarios. These greater lift values then consequently lead to greater loads on the wings, making the wing overbuilt by adding unnecessary mass with added structural elements and additional plies in composite layups.
+</p>
+
     </section>
 
     <section id="structure" tabindex="-1">
