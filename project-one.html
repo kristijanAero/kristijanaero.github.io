@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aerobatic Airplane Wing Design - Project Details</title>
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #001f4d; /* deep blue */
+      color: #f0e6d2; /* light cream */
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .sidebar {
+      background: #003366; /* dark blue */
+      width: 260px;
+      padding: 1rem;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+    .sidebar h2 {
+      color: #ffb347; /* light orange */
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    .chapter {
+      margin-bottom: 1rem;
+    }
+    .chapter button {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #ffd8a8;
+      font-size: 1.1rem;
+      cursor: pointer;
+      text-align: left;
+      padding: 0.5rem 0;
+      outline: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .chapter button:hover {
+      border-bottom: 1px solid #ffb347;
+      color: #ffb347;
+    }
+    .chapter.expanded button {
+      color: #ffb347;
+      font-weight: bold;
+      border-bottom: 1px solid #ffb347;
+    }
+    .chapter ul {
+      list-style: none;
+      padding-left: 1rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+    .chapter.expanded ul {
+      display: block;
+    }
+    .chapter ul li {
+      margin-bottom: 0.4rem;
+    }
+    .chapter ul li a {
+      color: #cce0ff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      cursor: pointer;
+    }
+    .chapter ul li a:hover {
+      color: #ffb347;
+      text-decoration: underline;
+    }
+    .content {
+      flex-grow: 1;
+      background: #00264d; /* slightly lighter dark blue */
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    .content section {
+      margin-bottom: 2.5rem;
+    }
+    .content section h3 {
+      color: #ffb347;
+      margin-top: 0;
+      border-bottom: 2px solid #ffb347;
+      padding-bottom: 0.3rem;
+    }
+    .back-link {
+      color: #ffb347;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      body, html {
+        flex-direction: column;
+        height: auto;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        overflow-x: auto;
+      }
+      .content {
+        padding: 1rem;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="sidebar" aria-label="Project chapters">
+    <h2>Chapters</h2>
+
+    <div class="chapter">
+      <button type="button" aria-expanded="false" aria-controls="intro-list">Introduction</button>
+      <ul id="intro-list">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#goals">Goals</a></li>
+      </ul>
+    </div>
+
+    <div class="chapter">
+      <button type="button" aria-expanded="false" aria-controls="design-list">Design Details</button>
+      <ul id="design-list">
+        <li><a href="#wing-structure">Wing Structure</a></li>
+        <li><a href="#materials">Materials</a></li>
+      </ul>
+    </div>
+
+    <div class="chapter">
+      <button type="button" aria-expanded="false" aria-controls="progress-list">Progress</button>
+      <ul id="progress-list">
+        <li><a href="#current-status">Current Status</a></li>
+        <li><a href="#next-steps">Next Steps</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="content">
+    <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
+
+    <section id="overview" tabindex="-1">
+      <h3>Overview</h3>
+      <p>This project focuses on designing an aerobatic airplane wing inspired by the Zivko Edge 540, optimized for agility and performance.</p>
+    </section>
+
+    <section id="goals" tabindex="-1">
+      <h3>Goals</h3>
+      <p>The goal is to design a wing that balances lift, drag, and maneuverability specifically for aerobatic flight conditions.</p>
+    </section>
+
+    <section id="wing-structure" tabindex="-1">
+      <h3>Wing Structure</h3>
+      <p>The wing utilizes a semi-monocoque structure to maintain strength while minimizing weight.</p>
+    </section>
+
+    <section id="materials" tabindex="-1">
+      <h3>Materials</h3>
+      <p>Advanced composites and lightweight alloys are chosen to optimize strength-to-weight ratio and durability.</p>
+    </section>
+
+    <section id="current-status" tabindex="-1">
+      <h3>Current Status</h3>
+      <p>Preliminary designs have been completed; now moving to simulation and testing phases.</p>
+    </section>
+
+    <section id="next-steps" tabindex="-1">
+      <h3>Next Steps</h3>
+      <p>Refinement of wing profiles and preparation for prototype manufacturing.</p>
+    </section>
+  </main>
+
+  <script>
+    // Collapsible chapters
+    const chapterButtons = document.querySelectorAll('.chapter button');
+
+    chapterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!expanded));
+        button.parentElement.classList.toggle('expanded');
+      });
+    });
+
+    // Optional: Smooth scroll to sections
+    const links = document.querySelectorAll('.chapter ul li a');
+
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.focus();
+          window.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
