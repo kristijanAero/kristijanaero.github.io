@@ -1,11 +1,5 @@
-===== Acrobatic Wing Analysis Overview ====
+===== Acrobatic Wing Design Overview ====
 
-Goal of the analysis is to compare different types of structural variations of the wing subjected to extreme loads.
-As the wing has to pass static load tests of 20G, main task will be minimizing the mass while still satisfying load conditions.
+Preliminary design process is underway. 
 
-
-AC_HC - Acrobatic wing honeycomb variant
-
-AC_ST - Acrobatic wing stiffeners variant - to be uploaded
-
-Accompanying the reports are files from either SolidWorks or Femap, as well as the code used in MATLAB calculations.
+At the moment, initial configuration has been made. Failure criteria are satisfied but the buckling of the skin close to the root is proving to be an issue. Once buckling is eliminated through certain layup modifications and/or rib quantity increase in the section of the wing between the root and aileron inner rib, first version of the project will be uploaded. 
