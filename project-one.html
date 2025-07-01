@@ -246,6 +246,38 @@
   <p>
     As a result, the extrapolated pressure field corresponds to flight conditions of <strong>230 kts</strong> and an angle of attack of <strong>9°</strong>.
   </p>
+   <img src="photos/pressure_9deg.png" alt="Pressure field on the upper surface of the wing" />
+   <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Pressure field on the upper surface of the wing</p>
+
+    <img src="photos/CLCD.png" alt="CL/CD graph" />
+   <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">CL/CD plot obtained through 3D Panel method</p>
+
+
+    <img src="photos/Lwingspan.png" alt="Lift plot" />
+   <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Lift distribution over the wingspan</p>
+
+   <p>
+  To get the two-dimensional pressure field, extrapolation of <em>C<sub>p</sub>(x)</em> and <em>L(b)</em> curve coordinates was needed (pressure coefficients on upper and lower surfaces were subtracted). These two coordinate sets were then multiplied and normalized to obtain the 2D pressure field.
+</p>
+
+<p>
+  This field can then be scaled by the loading scalar <em>½ n m g</em>, where:
+</p>
+
+<ul style="list-style-type: disc; padding-left: 1.5rem; color: #ffd8a8;">
+  <li><em>n</em> – loading factor</li>
+  <li><em>m</em> – mass of the airplane</li>
+  <li><em>g</em> – gravitational constant</li>
+</ul>
+
+<p>
+  In this case, the loading scalar equals <strong>0.5 × 726 × 9.81 = 42673.5 N</strong>.
+</p>
+
+<p>
+  All of the calculations were done in MATLAB. The resultant pressure field is presented below.
+</p>
+
 
     </section>
 
