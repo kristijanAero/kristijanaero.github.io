@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My CAE Projects</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Adobe Caslon Pro', serif;
+      background-color: #001f3f; /* deep blue */
+      color: white;
+      display: flex;
+      height: 100vh;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: #003366;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    header {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .intro {
+      margin-bottom: 40px;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
+    .project {
+      margin-bottom: 10px;
+    }
+
+    .project button {
+      width: 100%;
+      background: none;
+      border: none;
+      color: white;
+      text-align: left;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 10px;
+      transition: background 0.3s;
+    }
+
+    .project button:hover {
+      background-color: #004080;
+    }
+
+    .dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+      background-color: #002244;
+      margin-left: 10px;
+    }
+
+    .dropdown.show {
+      max-height: 500px; /* enough to reveal content */
+    }
+
+    .dropdown div {
+      padding: 10px;
+      border-top: 1px solid #004080;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="project">
+      <button onclick="toggleDropdown(this)">Project 1</button>
+      <div class="dropdown">
+        <div>Section 1.1</div>
+        <div>Section 1.2</div>
+        <div>Section 1.3</div>
+      </div>
+    </div>
+    <div class="project">
+      <button onclick="toggleDropdown(this)">Project 2</button>
+      <div class="dropdown">
+        <div>Section 2.1</div>
+        <div>Section 2.2</div>
+      </div>
+    </div>
+    <div class="project">
+      <button onclick="toggleDropdown(this)">Project 3</button>
+      <div class="dropdown">
+        <div>Section 3.1</div>
+        <div>Section 3.2</div>
+        <div>Section 3.3</div>
+        <div>Section 3.4</div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <header>My CAE Projects</header>
+    <div class="intro">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.
+    </div>
+    <!-- Content area for selected project details if needed -->
+  </div>
+
+  <script>
+    function toggleDropdown(button) {
+      const dropdown = button.nextElementSibling;
+      dropdown.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
