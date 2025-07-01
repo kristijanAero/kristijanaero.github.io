@@ -64,6 +64,23 @@
       margin-top: 0;
       border-bottom: 2px solid #ffb347;
       padding-bottom: 0.3rem;
+
+    .content {
+    flex-grow: 1;
+    background: #00264d; /* slightly lighter dark blue */
+    padding: 2rem;         /* padding for left and right */
+    max-width: 800px;      /* limit width like A4 */
+    margin: 0 auto;        /* center horizontally */
+    overflow-y: auto;
+}
+
+/* Make images responsive */
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: block;       /* remove inline gap */
+  margin: 1rem 0;       /* vertical spacing */
+}
     }
     .back-link {
       color: #ffb347;
