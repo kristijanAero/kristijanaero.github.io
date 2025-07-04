@@ -392,7 +392,52 @@
     <img src="photos/corr_factors_aoa.png" alt="pressure field" />
    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Three-Dimensional Correction Factors for the Control Surface Hingemoment Derivative due to Angle of Attack</p>
 
+<p>We can now calculate for extrapolated values, <code>ΔC<sub>hα</sub></code>:</p>
+<p><code>ΔC<sub>hα</sub> = 0.0006718</code></p>
+<p>Finally, we can obtain the final value of three dimensional control surface hingemoment derivative due to angle of attack:</p>
+<p><code>C<sub>hα</sub> = -0.2986</code></p>
 
+<p>Second step is the calculation of <code>C<sub>hδ</sub></code>:</p>
+
+<p>
+    <code>
+        C<sub>hδ</sub> = (cosΛ<sub>c/4</sub>) (cosΛ<sub>hl</sub>) × [ (c<sub>hδ</sub>)<sub>M</sub> + α<sub>δ</sub> (c<sub>hα</sub>)<sub>M</sub> ( (2 cosΛ<sub>c/4</sub>) / (A + 2 cosΛ<sub>c/4</sub>) ) ] + ΔC<sub>hδ</sub>
+    </code>
+</p>
+
+<p><code>(c<sub>hα</sub>)<sub>M</sub> = -0.2992</code></p>
+<p><code>(c<sub>hδ</sub>)<sub>M</sub> = (c<sub>hδ</sub>)<sub>bal</sub> / √(1 - M²)</code></p>
+<p><code>α<sub>δ</sub> = 0.5</code> (obtained from Fig.8.17 for 30° aileron deflection)</p>
+
+<p>We will start with <code>(c<sub>hδ</sub>)<sub>M</sub></code>. Solution to this coefficient follows the same path as the one for <code>(C<sub>hα</sub>)<sub>M</sub></code>, so any unnecessary descriptions will be omitted for this step.</p>
+
+<p>
+    <code>
+        (c<sub>hδ</sub>)<sub>bal</sub> = c"<sub>hδ</sub> × { (c<sub>hδ</sub>)<sub>bal</sub> / c"<sub>hδ</sub> }
+    </code>
+</p>
+
+<p>
+    <code>
+        c"<sub>hδ</sub> = c'<sub>hδ</sub> + 2 (c<sub>lδ</sub>)<sub>theory</sub> × [1 - { c<sub>lδ</sub> / (c<sub>lδ</sub>)<sub>theory</sub> }] × { tan(Φ'<sub>te</sub>/2) - (t/c) }
+    </code>
+</p>
+
+<p><code>(c<sub>hδ</sub>)<sub>bal</sub> / c"<sub>hδ</sub> ≈ 0.91</code></p>
+
+<p>Because it was proven before that <code>c"<sub>hδ</sub> = c'<sub>hδ</sub></code>, it follows that:</p>
+
+<p>
+    <code>
+        c"<sub>hδ</sub> = (c'<sub>hδ</sub> / (c<sub>hδ</sub>)<sub>theory</sub>) × (c<sub>hδ</sub>)<sub>theory</sub>
+    </code>
+</p>
+
+<p><code>c"<sub>hδ</sub> = 0.91 × -0.77 = -0.7007</code></p>
+
+
+ <img src="photos/derivative_defl.png" alt="pressure field" />
+   <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Two-Dimensional Control Surface Hingemoment Derivative due to Control Surface Deflection</p>
 
 
     </section>
