@@ -281,6 +281,86 @@
     <img src="photos/pressurefield.jpg" alt="pressure field" />
    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">2D Pressure field over the wetted wing surface projection</p>
 
+<p>For calculating the control surface force, the hingemoment approximation found in <strong>Roskam Airplane Design Part VI, Chapter 10</strong> was used. Specifically, the <em>Three-Dimensional Control Surface and Tab Hingemoment Derivatives</em> method was applied. The three-dimensional hingemoment coefficient for a control surface is estimated from:</p>
+
+    <p>
+        <code>C<sub>h</sub> = C<sub>h0</sub> + C<sub>hα</sub>·α + C<sub>hδ</sub>·δ + C<sub>hδt</sub>·δ<sub>t</sub></code>
+    </p>
+
+    <ul>
+        <li><strong>C<sub>h0</sub></strong> – Zero-angle of attack, zero control surface and tab deflection hingemoment coefficient (0 for symmetric airfoils)</li>
+        <li><strong>C<sub>hα</sub></strong> – Derivative due to angle of attack</li>
+        <li><strong>C<sub>hδ</sub></strong> – Derivative due to control surface deflection</li>
+        <li><strong>C<sub>hδt</sub></strong> – Derivative due to tab deflection (not considered here)</li>
+    </ul>
+
+    <h3>Step 1: Calculation of <code>C<sub>hα</sub></code></h3>
+
+    <p>
+        <code>C<sub>hα</sub> = [A·cos(Λ<sub>c/4</sub>)] / [A + 2·cos(Λ<sub>c/4</sub>)] · (C<sub>hα</sub>)<sub>M</sub> + ΔC<sub>hα</sub></code><br>
+        Since there's no sweep: <code>cos(Λ<sub>c/4</sub>) = 1</code>
+    </p>
+
+    <p>
+        <code>(C<sub>hα</sub>)<sub>M</sub> = (C<sub>hα</sub>)<sub>balance</sub> / √(1 - M²)</code><br>
+        Balance ratio = t<sub>c</sub> / (2c<sub>f</sub>) = 84 / (2×260) ≈ 0.162<br>
+        From figure: <code>(C<sub>hα</sub>)<sub>balance</sub> ≈ -0.2803</code><br>
+        Thus: <code>(C<sub>hα</sub>)<sub>M</sub> = -0.2992</code>
+    </p>
+
+    <p>
+        <strong>ΔC<sub>hα</sub></strong> = 0.0006718<br>
+        Final result: <code>C<sub>hα</sub> = -0.2986</code>
+    </p>
+
+    <h3>Step 2: Calculation of <code>C<sub>hδ</sub></code></h3>
+
+    <p>
+        <code>C<sub>hδ</sub> = (cosΛ<sub>c/4</sub>)(cosΛ<sub>hl</sub>) × [(C<sub>hδ</sub>)<sub>M</sub> + α<sub>δ</sub>(C<sub>hα</sub>)<sub>M</sub> · (2cosΛ<sub>c/4</sub> / (A + 2cosΛ<sub>c/4</sub>))] + ΔC<sub>hδ</sub></code>
+    </p>
+
+    <p>
+        <code>α<sub>δ</sub> = 0.5</code><br>
+        From diagram: <code>(C<sub>hδ</sub>)<sub>balance</sub> = -0.5676</code><br>
+        Thus: <code>(C<sub>hδ</sub>)<sub>M</sub> = -0.6059</code>
+    </p>
+
+    <p>
+        <strong>ΔC<sub>hδ</sub></strong> = 0.00349<br>
+        Final result: <code>C<sub>hδ</sub> = -0.6314</code>
+    </p>
+
+    <p>
+        Tab deflection coefficient <code>C<sub>hδt</sub></code> is assumed to be zero.
+    </p>
+
+    <h3>Final Three-Dimensional Hingemoment Coefficient</h3>
+
+    <p>
+        <code>C<sub>h</sub> = C<sub>hα</sub>·α + C<sub>hδ</sub>·δ</code><br>
+        <code>C<sub>h</sub> = -0.2986 × 0.1658 - 0.7239 × 0.5236 = -0.4285</code>
+    </p>
+
+    <p>
+        Negative value indicates a restoring moment towards neutral.
+    </p>
+
+    <h3>Hingemoment and Force Calculation</h3>
+
+    <p>
+        <code>M<sub>hinge</sub> = 0.5 × ρ × V² × S<sub>aileron</sub> × MAC<sub>aileron</sub> × C<sub>h</sub></code><br>
+        <code>ρ = 1.225 kg/m³, V = 119 m/s, S<sub>aileron</sub> = 0.9868125 m², MAC = 0.34625 m</code><br>
+        <code>|M<sub>hinge</sub>| = 1269.92 Nm</code>
+    </p>
+
+    <p>
+        <code>F<sub>hinge</sub> = M<sub>hinge</sub> / MAC = 3667.63 N</code><br>
+        Applying 12G load factor: <code>F<sub>hinge_12G</sub> = 44011.56 N</code>
+    </p>
+
+    <p>
+        This force acts on the rib edges in the direction of lift.
+    </p>
 
 
     </section>
