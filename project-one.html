@@ -446,6 +446,63 @@
  <img src="photos/nose_defl.png" alt="nose defl" />
    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Effect of Nose Shape and Balance on the Two-Dimensional Control Surface Hingemoment Derivative due to Control Surface Deflection</p>
 
+<p>Finally we get:</p>
+<p><code>(c<sub>hδ</sub>)<sub>M</sub> = (c<sub>hδ</sub>)<sub>bal</sub> / √(1 - M²) = (-0.5676) / √(1 - 0.35²) = -0.6059</code></p>
+
+<p>Next, we ought to calculate <code>ΔC<sub>hδ</sub></code>:</p>
+<p><code>ΔC<sub>hδ</sub> = ((ΔC<sub>hδ</sub>) / (c<sub>lδ</sub> B<sub>2</sub> K<sub>δ</sub> cosΛ<sub>c/4</sub> cosΛ<sub>hl</sub>)) × (c<sub>lδ</sub> B<sub>2</sub> K<sub>δ</sub> cosΛ<sub>c/4</sub> cosΛ<sub>hl</sub>)</code></p>
+
+<p>The first member of the equation is a factor obtained from Fig.10.78a.</p>
+
+ <img src="photos/corr_factors_defl.png" alt="corr factors defl" />
+   <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Three-Dimensional Correction Factors for the Control Surface Hingemoment Derivative due to Control Surface Deflections</p>
+
+<p><code>c<sub>lδ</sub></code> is found in Fig.8.14 with the value of 0.37. <code>K<sub>δ</sub></code> is basically the same as <code>K<sub>α</sub></code> with a different index and has the same value of 1.35. Same goes for <code>B<sub>2</sub></code>, which is 1.05.</p>
+
+ <img src="photos/flap_eff.png" alt="flap eff" />
+   <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Lift Effectiveness of a Plain Flap</p>
+
+   <p>We can now get ΔC<sub>hδ</sub>:</p>
+<p><code>ΔC<sub>hδ</sub> = 0.009 × 0.37 × 1.05 × 1 = 0.00349</code></p>
+
+<p>Lastly,</p>
+<p>
+    <code>C<sub>hδ</sub> = 1 × [ -0.6059 + 0.5 × (-0.2992) × (2 / (8.23 + 2)) ] + 0.00349</code><br>
+    <code>C<sub>hδ</sub> = -0.6314</code>
+</p>
+
+<p>Since tab isn't considered in the design, three-dimensional control surface hingemoment derivative due to a tab deflection will be considered zero.</p>
+
+<p>After calculating the needed coefficients, we get estimated total three-dimensional hingemoment coefficient for a control surface:</p>
+<p>
+    <code>C<sub>h</sub> = C<sub>hα</sub> α + C<sub>hδ</sub> δ = -0.2986 × 0.1658 - 0.7239 × 0.5236</code><br>
+    <code>C<sub>h</sub> = -0.4285</code>
+</p>
+
+<p>Negative coefficient value means the moment is acting opposite to the direction of the control surface deflection. Basically, the force acting upon the control surface wants it to return to the neutral position.</p>
+
+<p>If hingemoment equals:</p>
+<p>
+    <code>M<sub>hinge</sub> = (1/2) ρ<sub>∞</sub> v<sub>∞</sub><sup>2</sup> S<sub>aileron</sub> MAC<sub>aileron</sub> C<sub>h</sub></code><br>
+    <code>ρ<sub>∞</sub> = 1.225 kg/m<sup>3</sup></code><br>
+    <code>v<sub>∞</sub> = 119 m/s</code><br>
+    <code>S<sub>aileron</sub> = 0.9868125 m<sup>2</sup></code><br>
+    <code>MAC<sub>aileron</sub> = 0.34625 m</code><br>
+    <code>|M<sub>hinge</sub>| = 1269.92 Nm</code>
+</p>
+
+<p>Force on hinge:</p>
+<p>
+    <code>F<sub>hinge</sub> = M<sub>hinge</sub> / MAC<sub>aileron</sub></code><br>
+    <code>F<sub>hinge</sub> = 3667.63 N</code>
+</p>
+
+<p>Multiplying <code>F<sub>hinge</sub></code> by a loading factor of 12G gives the hinge force applied to the aircraft under maximum loading conditions:</p>
+<p>
+    <code>F<sub>hinge</sub><sub>12g</sub> = 44011.56 N</code>
+</p>
+
+<p>This force will be applied to the rib edges in the direction of the lift.</p>
 
 
 
