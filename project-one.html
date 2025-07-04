@@ -281,87 +281,105 @@
     <img src="photos/pressurefield.jpg" alt="pressure field" />
    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">2D Pressure field over the wetted wing surface projection</p>
 
-<p>For calculating the control surface force, the hingemoment approximation found in <strong>Roskam Airplane Design Part VI, Chapter 10</strong> was used. Specifically, the <em>Three-Dimensional Control Surface and Tab Hingemoment Derivatives</em> method was applied. The three-dimensional hingemoment coefficient for a control surface is estimated from:</p>
+For calculating the control surface force, hingemoment approximation found in Roskam Airplane Design Part VI Chapter 10 was used. Specifically, a Three-Dimensional Control Surface and Tab Hingemoment Derivatives method was used. The three-dimensional hingemoment coefficient for a control surface is estimated from: 
+c_h=c_(h_0 )+c_(h_α ) α+c_(h_δ ) δ+c_(h_(δ_t ) ) δ_t
+C_(h_0 )- zero angle of attack, zero control surface deflection and zero tab deflection hingemoment coefficient – for symmetric airfoils equals 0
+C_(h_α )- three dimensional control surface hingemoment derivative due to angle of attack
+C_(h_δ )- three dimensional control surface hingemoment derivative due to control surface deflection
+C_(h_(δ_t ) )- three dimensinoal control surface hingemoment derivative due to a tab deflection
 
-    <p>
-        <code>C<sub>h</sub> = C<sub>h0</sub> + C<sub>hα</sub>·α + C<sub>hδ</sub>·δ + C<sub>hδt</sub>·δ<sub>t</sub></code>
-    </p>
+First step is to calculate C_(h_α ) and needed variables.
+C_(h_α )=Acos(Λ_(c/4) )/(A+2cos⁡(Λ_(c/4))) 〖(C_(h_α ))〗_M+Δ〖C_h〗_α
+Because there is no sweep angle on the wing, cos⁡(Λ_(c/4)) = 0.
+	〖(〖C_h〗_α)〗_M=(C_(h_α ) )_balance/√(1-M^2 )
+(C_(h_α ) )_balance is calculated from all the necessary parameters found in Fig.10.65a.
+Since there is no overhang, balance ratio is equal to t_c/(2c_f )=84/(2×260)≈ 0.162, making (c_(h_α ) )_balance/〖C"〗_(h_α )   ≈ 0.91 (Read from diagram below for round nose).
+ 
+Figure 8 Effect of Nose Shape and Balance on the Two-Dimensional Hingemoment Derivative due to Angle of Attack
+〖C"〗_(h_α ) is obtained from:
+〖c"〗_(h_α )=〖c'〗_(h_α )+2(c_(l_α ) )_theory^  [1-{c_(l_α )/(c_(l_α ) )_theory ] {tan⁡(〖Φ^'〗_te/2)-(t/c)}^
+〖c'〗_(h_α )={〖c^'〗_(h_α )/(c_(h_α ) )_theory } (c_(h_α ) )_theory
+Per the instructions for the Eq.10.128, if the condition:
+tan⁡((Φ_te^')/2)=tan⁡((Φ_te^'')/2)=tan⁡(Φ_te/2)=t/c
+is satisfied, then c_(h_α)^''=c_(h_α)^'. This then leads to 〖c''〗_(h_α )= 0.77 × - 0.4 = - 0.308. Proof of Eq.10.128 shows that the upper and lower boundaries of the trailing edge are non-curved lines.
+ 
+Figure 9 Two-Dimensional Control Surface Hingemoment Derivative due to Angle of Attack
+This leads us to finally being able to get 〖(C_(h_α ))〗_balanced. If  (c_(h_α ) )_balanced/〖c"〗_(h_α  ) ≈ 0.91 then (c_(h_α ) )_balanced = -0.2803.
+Now that we now know (c_(h_α ) )_balanced, we can calculate 〖〖(C〗_(h_α ))〗_M for M = 0.35 (V_NE≈119 m/s).
+(C_(h_α ) )_M = -0.2992
 
-    <ul>
-        <li><strong>C<sub>h0</sub></strong> – Zero-angle of attack, zero control surface and tab deflection hingemoment coefficient (0 for symmetric airfoils)</li>
-        <li><strong>C<sub>hα</sub></strong> – Derivative due to angle of attack</li>
-        <li><strong>C<sub>hδ</sub></strong> – Derivative due to control surface deflection</li>
-        <li><strong>C<sub>hδt</sub></strong> – Derivative due to tab deflection (not considered here)</li>
-    </ul>
+	ΔC_(h_α )=((ΔC_(h_α ))/(c_(l_α ) B_2 K_α cosΛ_(c/4)  ))*(c_(l_α ) B_2 K_α cosΛ_(c/4))
+((ΔC_(h_α ))/(c_(l_α ) B_2 K_α cosΛ_(c/4)  )) - a factor obtained from Figure 10.77a
+c_(l_α )- airfoil lift-curve-slope of the surface to which the control surface is attached
+B_2 – accounts for control surface and balance chord ratios – determined from Figure 10.77c
+K_α – accoutns for the effect of control surface span – found from:
+	K_α=((K_α )_(η_i ) (1-η_i )-(K_α )_(η_0 ) (1-η_0 ))/((η_0-η_i ) )
+η_i – is the inboard span station of the control surface as a fraction of the main surface semi-span
+		(K_α )_(η_i ) – found from Figure 10.77b 
+η_0 – outboard span station of the control surface as a fraction of the main surface semi-span
+(K_α )_(η_0 )- found from Figure 10.77b
 
-    <h3>Step 1: Calculation of <code>C<sub>hα</sub></code></h3>
+Reading the diagram in Fig.10.77a, ((ΔC_(h_α ))/(c_(l_α ) B_2 K_α cosΛ_(c/4)  )) for aspect ratio of 8.23 is 0.004.
+Since the aileron spans from 25.2% of the wingspan inboard all the way to the wing tip, η_o will be 1, because the ailerons outward rib is colinear to the wings tip rib. For η_i=0.252, 〖〖(K〗_α)〗_(η_i )=1.35. For η_o=1, 〖〖(K〗_α)〗_(η_0 )= 4.25.  Considering this:
+K_α=1.35
+B_2 is obtained from diagram in Fig.10.77c for 〖c^'〗_f/c'≈0.2063.
+B_2=1.05
+C_(l_α ) was calculated in XFLR5 and is valued at .11848.
+ 
+Figure 10 Three-Dimensional Correction Factors for the Control Surface Hingemoment Derivative due to Angle of Attack
+We can now calculate for extrapolated values, ΔC_(h_α ):
+ΔC_(h_α )= 0.0006718
+Finally, we can obtain the final value of three dimensional control surface hingemoment derivative due to angle of attack:
+〖C_h〗_α=-0.2986
 
-    <p>
-        <code>C<sub>hα</sub> = [A·cos(Λ<sub>c/4</sub>)] / [A + 2·cos(Λ<sub>c/4</sub>)] · (C<sub>hα</sub>)<sub>M</sub> + ΔC<sub>hα</sub></code><br>
-        Since there's no sweep: <code>cos(Λ<sub>c/4</sub>) = 1</code>
-    </p>
+Second step is the calculation of C_(h_δ ).
+C_(h_δ )=(cos⁡〖Λ_(c/4) 〗 )(cosΛ_hl )×[(c_(h_δ ) )_M+α_δ (c_(h_α ) )_M ((2cosΛ_(c/4))/(A+2cosΛ_(c/4)  ))]+ΔC_(h_δ )
+(c_(h_α ) )_M= -0.2992
+(c_(h_δ ) )_M=(c_(h_δ ) )_bal/√(1-M^2 )
+α_δ= 0.5 (obtained from Fig.8.17 for 30° aileron deflection)
+We will start with (c_(h_δ ) )_M. Solution to this coefficient follows the same path as the one for (C_(h_α ) )_M, so any unnecessary descriptions will be ommited for this step.
+(c_(h_δ ) )_bal=(〖c^''〗_(h_δ ) ){(c_(h_δ ) )_bal/〖c^''〗_(h_δ ) }
+〖c"〗_(h_δ )=〖c'〗_(h_δ )+2(c_(l_δ ) )_theory^  [1-{c_(l_δ )/(c_(l_δ ) )_theory ] {tan⁡(〖Φ^'〗_te/2)-(t/c)}^
+(c_(h_δ ) )_bal/〖c^''〗_(h_δ ) ≈ 0.91
+Because it was proven before that c_(h_δ)^''=c_(h_δ)^', it follows that c_(h_δ)^''=((c_(h_δ)^')/(c_(h_δ ) )_theory )×(c_(h_δ ) )_theory
+c_(h_δ)^''= 0.91×- 0.77 = - 0.7007.
+ 
+Figure 11 Two-Dimensional Control Surface Hingemoment Derivative due to Control Surface Deflection
 
-    <p>
-        <code>(C<sub>hα</sub>)<sub>M</sub> = (C<sub>hα</sub>)<sub>balance</sub> / √(1 - M²)</code><br>
-        Balance ratio = t<sub>c</sub> / (2c<sub>f</sub>) = 84 / (2×260) ≈ 0.162<br>
-        From figure: <code>(C<sub>hα</sub>)<sub>balance</sub> ≈ -0.2803</code><br>
-        Thus: <code>(C<sub>hα</sub>)<sub>M</sub> = -0.2992</code>
-    </p>
-
-    <p>
-        <strong>ΔC<sub>hα</sub></strong> = 0.0006718<br>
-        Final result: <code>C<sub>hα</sub> = -0.2986</code>
-    </p>
-
-    <h3>Step 2: Calculation of <code>C<sub>hδ</sub></code></h3>
-
-    <p>
-        <code>C<sub>hδ</sub> = (cosΛ<sub>c/4</sub>)(cosΛ<sub>hl</sub>) × [(C<sub>hδ</sub>)<sub>M</sub> + α<sub>δ</sub>(C<sub>hα</sub>)<sub>M</sub> · (2cosΛ<sub>c/4</sub> / (A + 2cosΛ<sub>c/4</sub>))] + ΔC<sub>hδ</sub></code>
-    </p>
-
-    <p>
-        <code>α<sub>δ</sub> = 0.5</code><br>
-        From diagram: <code>(C<sub>hδ</sub>)<sub>balance</sub> = -0.5676</code><br>
-        Thus: <code>(C<sub>hδ</sub>)<sub>M</sub> = -0.6059</code>
-    </p>
-
-    <p>
-        <strong>ΔC<sub>hδ</sub></strong> = 0.00349<br>
-        Final result: <code>C<sub>hδ</sub> = -0.6314</code>
-    </p>
-
-    <p>
-        Tab deflection coefficient <code>C<sub>hδt</sub></code> is assumed to be zero.
-    </p>
-
-    <h3>Final Three-Dimensional Hingemoment Coefficient</h3>
-
-    <p>
-        <code>C<sub>h</sub> = C<sub>hα</sub>·α + C<sub>hδ</sub>·δ</code><br>
-        <code>C<sub>h</sub> = -0.2986 × 0.1658 - 0.7239 × 0.5236 = -0.4285</code>
-    </p>
-
-    <p>
-        Negative value indicates a restoring moment towards neutral.
-    </p>
-
-    <h3>Hingemoment and Force Calculation</h3>
-
-    <p>
-        <code>M<sub>hinge</sub> = 0.5 × ρ × V² × S<sub>aileron</sub> × MAC<sub>aileron</sub> × C<sub>h</sub></code><br>
-        <code>ρ = 1.225 kg/m³, V = 119 m/s, S<sub>aileron</sub> = 0.9868125 m², MAC = 0.34625 m</code><br>
-        <code>|M<sub>hinge</sub>| = 1269.92 Nm</code>
-    </p>
-
-    <p>
-        <code>F<sub>hinge</sub> = M<sub>hinge</sub> / MAC = 3667.63 N</code><br>
-        Applying 12G load factor: <code>F<sub>hinge_12G</sub> = 44011.56 N</code>
-    </p>
-
-    <p>
-        This force acts on the rib edges in the direction of lift.
-    </p>
-
+For the round nose and a balance ratio of 0.162 reading a diagram in Fig.10.71 we find (c_(h_δ ) )_balance to be around - 0.5676. 
+ 
+Figure 12 Effect of Nose Shape and Balance on the Two-Dimensional Control Surface Hingemoment Derivative due to Control Surface Deflection
+Finally we get:
+(c_(h_δ ) )_M=(c_(h_δ ) )_bal/√(1-M^2 )=(- 0.5676)/√(1-〖0.35〗^2 )=- 0.6059
+Next, we ought to calculate ΔC_(h_δ ).
+ΔC_(h_δ )=((ΔC_(h_δ ))/(c_(l_δ ) B_2 K_δ cosΛ_(c/4)  cosΛ_hl ))×(c_(l_δ ) B_2 K_δ cosΛ_(c/4) cosΛ_hl)
+First member of the equation is a factor obtained from Fig.10.78a. 
+ 
+Figure 13 Three Dimensional Correction Factors for the Control Surface Hingemoment Derivative due to Control Surface Deflections
+c_(l_δ ) is found in Fig.8.14 with the value of 0.37. K_δ  is basically the same as K_α with a different index and has the same value of 1.35. Same goes for B_2, which is 1.05. 
+ 
+We can now get ΔC_(h_δ ) value: 
+ΔC_(h_δ )= 0.009×0.37×1.05×1=0.00349
+Lastly, 
+C_(h_δ )=1×[- 0.6059+0.5×- 0.2992(2/(8.23+2))]+0.00349
+C_(h_δ )= - 0.6314
+Since tab isn't considered in the design, three dimensinoal control surface hingemoment derivative due to a tab deflection will be considered a zero.
+After calculating the needed coefficients, we get estimated total three-dimensional hingemoment coefficient for a control surface:
+C_h=C_(h_α ) α+C_(h_δ ) δ=-0.2986 ×0.1658- 0.7239×0.5236 
+C_h=- 0.4285
+Negative coefficient value means, the moment is acting the opposite way of the direction to which the control surface is deflected. Basically, the force acting upon the control surface wants it to go back to the neutral position.
+If hingemoment equals to: 
+M_hinge=1/2 ρ_∞ v_∞^2 S_aileron MAC_aileron C_h  
+ρ_∞=1.225 kg/m^3
+v_∞=119 m/s 
+S_aileron=0.9868125 m^2
+MAC_aileron=0.34625 m
+〖|M〗_hinge |= 1269.92 Nm
+F_hinge=M_hinge/(MAC_aileron )
+F_hinge=3667.63 N
+Multiplying F_hinge by loading factor of 12G we get the hinge force applied to the aircraft under the maximum loading conditions:
+〖F_hinge〗_12g=44011.56 N
+This force will be applied to the rib edges in the direction of the lift.
 
     </section>
 
