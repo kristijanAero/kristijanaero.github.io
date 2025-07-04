@@ -281,34 +281,39 @@
     <img src="photos/pressurefield.jpg" alt="pressure field" />
    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">2D Pressure field over the wetted wing surface projection</p>
 
-<p>For calculating the control surface force, hingemoment approximation found in Roskam Airplane Design Part VI Chapter 10 was used. Specifically, a Three-Dimensional Control Surface and Tab Hingemoment Derivatives method was used. The three-dimensional hingemoment coefficient for a control surface is estimated from:</p>
-
-<p style="text-align:center;">
-\[ c_h = c_{h_0} + c_{h_\alpha} \alpha + c_{h_\delta} \delta + c_{h_{\delta_t}} \delta_t \]
+<p>
+    For calculating the control surface force, hingemoment approximation found in Roskam Airplane Design Part VI Chapter 10 was used. Specifically, a Three-Dimensional Control Surface and Tab Hingemoment Derivatives method was used. The three-dimensional hingemoment coefficient for a control surface is estimated from:
 </p>
 
-<p><strong>\( C_{h_0} \)</strong> - zero angle of attack, zero control surface deflection and zero tab deflection hingemoment coefficient – for symmetric airfoils equals 0</p>
-<p><strong>\( C_{h_\alpha} \)</strong> - three dimensional control surface hingemoment derivative due to angle of attack</p>
-<p><strong>\( C_{h_\delta} \)</strong> - three dimensional control surface hingemoment derivative due to control surface deflection</p>
-<p><strong>\( C_{h_{\delta_t}} \)</strong> - three dimensional control surface hingemoment derivative due to a tab deflection</p>
-
-<p>First step is to calculate \( C_{h_\alpha} \) and needed variables.</p>
-
-<p style="text-align:center;">
-\[ C_{h_\alpha} = \frac{A \cos(\Lambda_{c/4})}{A + 2 \cos(\Lambda_{c/4})} (C_{h_\alpha})_M + \Delta C_{h_\alpha} \]
+<p>
+    <code>c<sub>h</sub> = c<sub>h0</sub> + c<sub>hα</sub> α + c<sub>hδ</sub> δ + c<sub>hδ<sub>t</sub></sub> δ<sub>t</sub></code>
 </p>
 
-<p>Because there is no sweep angle on the wing, \( \cos(\Lambda_{c/4}) = 0 \).</p>
-
-<p style="text-align:center;">
-\[ (C_{h_\alpha})_M = \frac{(C_{h_\alpha})_{\text{balance}}}{\sqrt{1 - M^2}} \]
+<p>
+    <code>c<sub>h0</sub></code> - zero angle of attack, zero control surface deflection and zero tab deflection hingemoment coefficient – for symmetric airfoils equals 0<br>
+    <code>c<sub>hα</sub></code> - three dimensional control surface hingemoment derivative due to angle of attack<br>
+    <code>c<sub>hδ</sub></code> - three dimensional control surface hingemoment derivative due to control surface deflection<br>
+    <code>c<sub>hδ<sub>t</sub></sub></code> - three dimensional control surface hingemoment derivative due to a tab deflection
 </p>
 
-<p>\((C_{h_\alpha})_{\text{balance}}\) is calculated from all the necessary parameters found in Fig. 10.65a.</p>
+<p>
+    First step is to calculate <code>c<sub>hα</sub></code> and needed variables.
+</p>
 
-<p>Since there is no overhang, balance ratio is equal to \( \frac{t_c}{2 c_f} = \frac{84}{2 \times 260} \approx 0.162 \), making \(\frac{(c_{h_\alpha})_{\text{balance}}}{C''_{h_\alpha}} \approx 0.91\) (Read from diagram below for round nose).</p>
+<p>
+    <code>c<sub>hα</sub> = [A · cos(Λ<sub>c/4</sub>)] / [A + 2 · cos(Λ<sub>c/4</sub>)] · (c<sub>hα</sub>)<sub>M</sub> + Δc<sub>hα</sub></code><br>
+    Because there is no sweep angle on the wing, <code>cos(Λ<sub>c/4</sub>) = 0</code>.
+</p>
 
+<p>
+    <code>(c<sub>hα</sub>)<sub>M</sub> = (c<sub>hα</sub>)<sub>balance</sub> / √(1 - M<sup>2</sup>)</code><br>
+    <code>(c<sub>hα</sub>)<sub>balance</sub></code> is calculated from all the necessary parameters found in Fig.10.65a.
+</p>
 
+<p>
+    Since there is no overhang, balance ratio is equal to <code>t<sub>c</sub> / (2 c<sub>f</sub>) = 84 / (2 × 260) ≈ 0.162</code>, making<br>
+    <code>(c<sub>hα</sub>)<sub>balance</sub> / c"&sub>hα</sub> ≈ 0.91</code> (Read from diagram below for round nose).
+</p>
     <img src="photos/nose_aoa.png" alt="pressure field" />
    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Effect of Nose Shape and Balance on the Two-Dimensional Hingemoment Derivative due to Angle of Attack</p>
 
