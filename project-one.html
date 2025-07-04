@@ -345,6 +345,56 @@
     <img src="photos/derivative_aoa.png" alt="pressure field" />
    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Two-Dimensional Control Surface Hingemoment Derivative due to Angle of Attack</p>
 
+<p>This leads us to finally being able to get <code>(C<sub>hα</sub>)<sub>balanced</sub></code>. If <code>(c<sub>hα</sub>)<sub>balanced</sub> / c"&sub>hα</sub> ≈ 0.91</code> then <code>(c<sub>hα</sub>)<sub>balanced</sub> = -0.2803</code>.</p>
+
+<p>Now that we know <code>(c<sub>hα</sub>)<sub>balanced</sub></code>, we can calculate <code>(C<sub>hα</sub>)<sub>M</sub></code> for <code>M = 0.35</code> (V<sub>NE</sub>≈119 m/s).</p>
+
+<p><code>(C<sub>hα</sub>)<sub>M</sub> = -0.2992</code></p>
+
+<p>
+    <code>ΔC<sub>hα</sub> = ((ΔC<sub>hα</sub>) / (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>)) × (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>)</code>
+</p>
+
+<p><code>((ΔC<sub>hα</sub>) / (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>))</code> - a factor obtained from Figure 10.77a</p>
+
+<p><code>c<sub>lα</sub></code> - airfoil lift-curve slope of the surface to which the control surface is attached</p>
+
+<p><code>B<sub>2</sub></code> – accounts for control surface and balance chord ratios – determined from Figure 10.77c</p>
+
+<p><code>K<sub>α</sub></code> – accounts for the effect of control surface span – found from:</p>
+
+<p>
+    <code>
+    K<sub>α</sub> = [ (K<sub>α</sub>)<sub>η<sub>i</sub></sub> (1 - η<sub>i</sub>) - (K<sub>α</sub>)<sub>η<sub>0</sub></sub> (1 - η<sub>0</sub>) ] / (η<sub>0</sub> - η<sub>i</sub>)
+    </code>
+</p>
+
+<p><code>η<sub>i</sub></code> – inboard span station of the control surface as a fraction of the main surface semi-span</p>
+
+<p><code>(K<sub>α</sub>)<sub>η<sub>i</sub></sub></code> – found from Figure 10.77b</p>
+
+<p><code>η<sub>0</sub></code> – outboard span station of the control surface as a fraction of the main surface semi-span</p>
+
+<p><code>(K<sub>α</sub>)<sub>η<sub>0</sub></sub></code> – found from Figure 10.77b</p>
+
+<p>Reading the diagram in Fig.10.77a, <code>((ΔC<sub>hα</sub>) / (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>))</code> for aspect ratio of 8.23 is 0.004.</p>
+
+<p>Since the aileron spans from 25.2% of the wingspan inboard all the way to the wing tip, <code>η<sub>0</sub></code> will be 1, because the aileron's outward rib is colinear to the wing's tip rib. For <code>η<sub>i</sub> = 0.252</code>, <code>(K<sub>α</sub>)<sub>η<sub>i</sub></sub> = 1.35</code>. For <code>η<sub>0</sub> = 1</code>, <code>(K<sub>α</sub>)<sub>η<sub>0</sub></sub> = 4.25</code>. Considering this:</p>
+
+<p><code>K<sub>α</sub> = 1.35</code></p>
+
+<p><code>B<sub>2</sub></code> is obtained from diagram in Fig.10.77c for <code>c'<sub>f</sub> / c' ≈ 0.2063</code>.</p>
+
+<p><code>B<sub>2</sub> = 1.05</code></p>
+
+<p><code>C<sub>lα</sub></code> was calculated in XFLR5 and is valued at 0.11848.</p>
+
+    <img src="photos/corr_factors_aoa.png" alt="pressure field" />
+   <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Three-Dimensional Correction Factors for the Control Surface Hingemoment Derivative due to Angle of Attack</p>
+
+
+
+
     </section>
 
     <section id="mats" tabindex="-1">
