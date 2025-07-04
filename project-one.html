@@ -283,8 +283,8 @@
 
 <p>For calculating the control surface force, hingemoment approximation found in Roskam Airplane Design Part VI Chapter 10 was used. Specifically, a Three-Dimensional Control Surface and Tab Hingemoment Derivatives method was used. The three-dimensional hingemoment coefficient for a control surface is estimated from:</p>
 
-<p>
-  \( c_h = c_{h_0} + c_{h_\alpha} \alpha + c_{h_\delta} \delta + c_{h_{\delta_t}} \delta_t \)
+<p style="text-align:center;">
+\[ c_h = c_{h_0} + c_{h_\alpha} \alpha + c_{h_\delta} \delta + c_{h_{\delta_t}} \delta_t \]
 </p>
 
 <p><strong>\( C_{h_0} \)</strong> - zero angle of attack, zero control surface deflection and zero tab deflection hingemoment coefficient – for symmetric airfoils equals 0</p>
@@ -294,14 +294,14 @@
 
 <p>First step is to calculate \( C_{h_\alpha} \) and needed variables.</p>
 
-<p>
-  \( C_{h_\alpha} = \frac{A \cos(\Lambda_{c/4})}{A + 2 \cos(\Lambda_{c/4})} (C_{h_\alpha})_M + \Delta C_{h_\alpha} \)
+<p style="text-align:center;">
+\[ C_{h_\alpha} = \frac{A \cos(\Lambda_{c/4})}{A + 2 \cos(\Lambda_{c/4})} (C_{h_\alpha})_M + \Delta C_{h_\alpha} \]
 </p>
 
 <p>Because there is no sweep angle on the wing, \( \cos(\Lambda_{c/4}) = 0 \).</p>
 
-<p>
-  \((C_h)_\alpha)_M = \frac{(C_{h_\alpha})_{\text{balance}}}{\sqrt{1 - M^2}}\)
+<p style="text-align:center;">
+\[ (C_{h_\alpha})_M = \frac{(C_{h_\alpha})_{\text{balance}}}{\sqrt{1 - M^2}} \]
 </p>
 
 <p>\((C_{h_\alpha})_{\text{balance}}\) is calculated from all the necessary parameters found in Fig. 10.65a.</p>
