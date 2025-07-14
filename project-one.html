@@ -156,8 +156,8 @@
   <script>
     const buttons = document.querySelectorAll('.chapter-button');
     const sections = document.querySelectorAll('main section');
-  
-    // Scroll and focus on button click
+
+    // Scroll to section on button click (no manual active setting)
     buttons.forEach(button => {
       button.addEventListener('click', () => {
         const targetId = button.getAttribute('data-target');
@@ -165,12 +165,11 @@
         if (section) {
           section.scrollIntoView({ behavior: 'smooth', block: 'start' });
           section.focus({ preventScroll: true });
-          // Do NOT manually set .active class here — observer will handle it
         }
       });
     });
-  
-    // Highlight correct button on scroll
+
+    // Intersection observer handles highlighting
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -184,10 +183,10 @@
       root: document.querySelector('.content'),
       threshold: 0.3,
     });
-  
+
     sections.forEach(section => observer.observe(section));
   </script>
-  
+
 </body>
 </html>
 
