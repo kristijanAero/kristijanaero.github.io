@@ -561,17 +561,23 @@
   });
 
   content.addEventListener('scroll', () => {
-    const scrollPos = content.scrollTop;
-    let currentIndex = 0;
+  const contentRect = content.getBoundingClientRect();
 
-    sections.forEach((section, i) => {
-      if (section.offsetTop <= scrollPos + 10) {  // +10 for slight offset
-        currentIndex = i;
-      }
-    });
+  let currentIndex = 0;
+  let closestDistance = -Infinity;
 
-    setActiveButton(currentIndex);
+  sections.forEach((section, i) => {
+    const sectionRect = section.getBoundingClientRect();
+    const distance = sectionRect.top - contentRect.top;
+
+    if (distance <= 24 && distance > closestDistance) {
+      closestDistance = distance;
+      currentIndex = i;
+    }
   });
+
+  setActiveButton(currentIndex);
+});
 
   // Initialize first active button on page load
   setActiveButton(0);
