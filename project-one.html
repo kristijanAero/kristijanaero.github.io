@@ -54,10 +54,15 @@
       flex-grow: 1;
       background: #00264d; /* slightly lighter dark blue */
       padding: 2rem;
+      max-width: 800px;
+      margin: 0 auto;
       overflow-y: auto;
+      scroll-behavior: smooth;
     }
     .content section {
       margin-bottom: 2.5rem;
+      scroll-margin-top: 1.5rem; /* So heading isn’t hidden when scrolled to */
+      outline: none; /* avoid default outline when focused */
     }
     .content section h3 {
       color: #ffb347;
@@ -66,23 +71,14 @@
       padding-bottom: 0.3rem;
     }
 
-    .content {
-    flex-grow: 1;
-    background: #00264d; /* slightly lighter dark blue */
-    padding: 2rem;         /* padding for left and right */
-    max-width: 800px;      /* limit width like A4 */
-    margin: 0 auto;        /* center horizontally */
-    overflow-y: auto;
-}
-
-/* Make images responsive */
-.content img {
-  max-width: 100%;
-  height: auto;
-  display: block;       /* remove inline gap */
-  margin: 1rem 0;       /* vertical spacing */
-}
+    /* Make images responsive */
+    .content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 1rem 0;
     }
+
     .back-link {
       color: #ffb347;
       text-decoration: none;
@@ -123,7 +119,7 @@
     <button class="chapter-button" data-target="fea">FEA Model</button>
     <button class="chapter-button" data-target="optimization">Optimization</button>
     <button class="chapter-button" data-target="results">Results</button>  
-</nav>
+  </nav>
 
   <main class="content">
     <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
@@ -540,10 +536,8 @@
 
  <script>
   const buttons = document.querySelectorAll('.chapter-button');
-  const sections = Array.from(buttons).map(btn => {
-    const id = btn.getAttribute('data-target');
-    return document.getElementById(id);
-  });
+  const sections = Array.from(buttons).map(btn => document.getElementById(btn.dataset.target));
+  const content = document.querySelector('.content');
 
   function setActiveButton(index) {
     buttons.forEach((btn, i) => {
@@ -555,20 +549,23 @@
     button.addEventListener('click', () => {
       const targetSection = sections[i];
       if (targetSection) {
-        targetSection.focus();
-        window.scrollTo({ top: targetSection.offsetTop - 20, behavior: 'smooth' });
+        // Scroll the content container smoothly to the section
+        content.scrollTo({
+          top: targetSection.offsetTop,
+          behavior: 'smooth'
+        });
+        targetSection.focus({ preventScroll: true });
+        setActiveButton(i);
       }
-      setActiveButton(i);
     });
   });
 
-  // Highlight sidebar button on scroll
-  window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY || window.pageYOffset;
+  content.addEventListener('scroll', () => {
+    const scrollPos = content.scrollTop;
     let currentIndex = 0;
 
     sections.forEach((section, i) => {
-      if (section.offsetTop - 30 <= scrollPos) {
+      if (section.offsetTop <= scrollPos + 10) {  // +10 for slight offset
         currentIndex = i;
       }
     });
@@ -576,7 +573,7 @@
     setActiveButton(currentIndex);
   });
 
-  // Set initial active button on page load
+  // Initialize first active button on page load
   setActiveButton(0);
 </script>
 
