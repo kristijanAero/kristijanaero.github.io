@@ -504,7 +504,7 @@
 
     </section>
 
-    <section id="struc" tabindex="-1">
+    <section id="structure" tabindex="-1">
       <h3>Wing Structure</h3>
       <p>Wing Structure is being defined with different stiffening methods evaluation ongoing. Since buckling failure mode wasn't being satisfied with reasonable configurations and composite layups, redesign of aircrafts layups is in progress aswell as new materials testing phase.</p>
     </section>
@@ -535,43 +535,37 @@
   </main>
 
  <script>
-  const buttons = document.querySelectorAll('.chapter-button');
-  const sections = Array.from(buttons).map(btn => document.getElementById(btn.dataset.target));
-  const content = document.querySelector('.content');
+const buttons = document.querySelectorAll('.chapter-button');
+const sections = Array.from(buttons).map(btn => document.getElementById(btn.dataset.target));
+const content = document.querySelector('.content');
 
-  function setActiveButton(index) {
-    buttons.forEach((btn, i) => {
-      btn.classList.toggle('active', i === index);
-    });
-  }
-
-  buttons.forEach((button, i) => {
-    button.addEventListener('click', () => {
-      const targetSection = sections[i];
-      if (targetSection) {
-        // Scroll the content container smoothly to the section
-        content.scrollTo({
-          top: targetSection.offsetTop,
-          behavior: 'smooth'
-        });
-        targetSection.focus({ preventScroll: true });
-        setActiveButton(i);
-      }
-    });
+function setActiveButton(index) {
+  buttons.forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
   });
+}
 
-  content.addEventListener('scroll', () => {
-  const contentRect = content.getBoundingClientRect();
+buttons.forEach((button, i) => {
+  button.addEventListener('click', () => {
+    const targetSection = sections[i];
+    if (targetSection) {
+      content.scrollTo({
+        top: targetSection.offsetTop,
+        behavior: 'smooth'
+      });
+      targetSection.focus({ preventScroll: true });
+      setActiveButton(i);
+    }
+  });
+});
 
+content.addEventListener('scroll', () => {
+  const scrollPos = content.scrollTop + 10;
   let currentIndex = 0;
-  let closestDistance = -Infinity;
 
   sections.forEach((section, i) => {
-    const sectionRect = section.getBoundingClientRect();
-    const distance = sectionRect.top - contentRect.top;
-
-    if (distance <= 24 && distance > closestDistance) {
-      closestDistance = distance;
+    const heading = section.querySelector('h3');
+    if (heading && heading.offsetTop <= scrollPos) {
       currentIndex = i;
     }
   });
@@ -579,8 +573,8 @@
   setActiveButton(currentIndex);
 });
 
-  // Initialize first active button on page load
-  setActiveButton(0);
+// Initialize first active button on page load
+setActiveButton(0);
 </script>
 
 </body>
