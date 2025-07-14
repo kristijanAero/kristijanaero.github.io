@@ -8,21 +8,21 @@
     body, html {
       margin: 0; padding: 0; height: 100%;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #001f4d;
-      color: #f0e6d2;
+      background: #001f4d; /* deep blue */
+      color: #f0e6d2; /* light cream */
       display: flex;
       height: 100vh;
       overflow: hidden;
     }
     .sidebar {
-      background: #003366;
+      background: #003366; /* dark blue */
       width: 260px;
       padding: 1rem;
       box-sizing: border-box;
       overflow-y: auto;
     }
     .sidebar h2 {
-      color: #ffb347;
+      color: #ffb347; /* light orange */
       margin-top: 0;
       margin-bottom: 1rem;
       font-size: 1.8rem;
@@ -52,10 +52,8 @@
     }
     .content {
       flex-grow: 1;
-      background: #00264d;
+      background: #00264d; /* slightly lighter dark blue */
       padding: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
       overflow-y: auto;
     }
     .content section {
@@ -67,11 +65,23 @@
       border-bottom: 2px solid #ffb347;
       padding-bottom: 0.3rem;
     }
-    .content img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 1rem 0;
+
+    .content {
+    flex-grow: 1;
+    background: #00264d; /* slightly lighter dark blue */
+    padding: 2rem;         /* padding for left and right */
+    max-width: 800px;      /* limit width like A4 */
+    margin: 0 auto;        /* center horizontally */
+    overflow-y: auto;
+}
+
+/* Make images responsive */
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: block;       /* remove inline gap */
+  margin: 1rem 0;       /* vertical spacing */
+}
     }
     .back-link {
       color: #ffb347;
@@ -105,6 +115,7 @@
 
   <nav class="sidebar" aria-label="Project chapters">
     <h2>Chapters</h2>
+
     <button class="chapter-button" data-target="overview">Overview</button>
     <button class="chapter-button" data-target="loads">Aerodynamic Loads</button>
     <button class="chapter-button" data-target="structure">Wing Structure</button>
@@ -112,83 +123,7 @@
     <button class="chapter-button" data-target="fea">FEA Model</button>
     <button class="chapter-button" data-target="optimization">Optimization</button>
     <button class="chapter-button" data-target="results">Results</button>  
-  </nav>
-
-  <main class="content">
-    <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
-
-    <section id="overview" tabindex="-1">
-      <h3>Overview</h3>
-      <p>Content goes here...</p>
-    </section>
-
-    <section id="loads" tabindex="-1">
-      <h3>Aerodynamic Loads</h3>
-      <p>Content goes here...</p>
-    </section>
-
-    <section id="structure" tabindex="-1">
-      <h3>Wing Structure</h3>
-      <p>Content goes here...</p>
-    </section>
-
-    <section id="mats" tabindex="-1">
-      <h3>Materials and Layups</h3>
-      <p>Content goes here...</p>
-    </section>
-
-    <section id="fea" tabindex="-1">
-      <h3>FEA Model</h3>
-      <p>Content goes here...</p>
-    </section>
-
-    <section id="optimization" tabindex="-1">
-      <h3>Optimization</h3>
-      <p>Content goes here...</p>
-    </section>
-
-    <section id="results" tabindex="-1">
-      <h3>Results</h3>
-      <p>Content goes here...</p>
-    </section>
-  </main>
-
-  <script>
-    const buttons = document.querySelectorAll('.chapter-button');
-    const sections = document.querySelectorAll('main section');
-
-    // Scroll to section on button click (no manual active setting)
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const targetId = button.getAttribute('data-target');
-        const section = document.getElementById(targetId);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          section.focus({ preventScroll: true });
-        }
-      });
-    });
-
-    // Intersection observer handles highlighting
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          buttons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.target === id);
-          });
-        }
-      });
-    }, {
-      root: document.querySelector('.content'),
-      threshold: 0.3,
-    });
-
-    sections.forEach(section => observer.observe(section));
-  </script>
-
-</body>
-</html>
+</nav>
 
   <main class="content">
     <a href="index.html" class="back-link">&larr; Back to Portfolio</a>
