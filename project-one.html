@@ -156,7 +156,7 @@
   <script>
     const buttons = document.querySelectorAll('.chapter-button');
     const sections = document.querySelectorAll('main section');
-    
+  
     // Scroll and focus on button click
     buttons.forEach(button => {
       button.addEventListener('click', () => {
@@ -165,10 +165,7 @@
         if (section) {
           section.scrollIntoView({ behavior: 'smooth', block: 'start' });
           section.focus({ preventScroll: true });
-        
-          // Set active class on click
-          buttons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
+          // Do NOT manually set .active class here — observer will handle it
         }
       });
     });
@@ -190,7 +187,7 @@
   
     sections.forEach(section => observer.observe(section));
   </script>
-
+  
 </body>
 </html>
 
