@@ -155,8 +155,8 @@
 
   <script>
     const buttons = document.querySelectorAll('.chapter-button');
-    const sections = document.querySelectorAll('main .content section');
-
+    const sections = document.querySelectorAll('main section');
+    
     // Scroll and focus on button click
     buttons.forEach(button => {
       button.addEventListener('click', () => {
@@ -165,35 +165,30 @@
         if (section) {
           section.scrollIntoView({ behavior: 'smooth', block: 'start' });
           section.focus({ preventScroll: true });
+        
+          // Set active class on click
+          buttons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
         }
       });
     });
-
-    // Highlight button based on scroll
-    const observerOptions = {
-      root: document.querySelector('.content'),
-      rootMargin: '0px 0px -70% 0px',
-      threshold: 0
-    };
-
+  
+    // Highlight correct button on scroll
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('id');
-          buttons.forEach(button => {
-            if (button.getAttribute('data-target') === id) {
-              button.classList.add('active');
-            } else {
-              button.classList.remove('active');
-            }
+          const id = entry.target.id;
+          buttons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.target === id);
           });
         }
       });
-    }, observerOptions);
-
-    sections.forEach(section => {
-      observer.observe(section);
+    }, {
+      root: document.querySelector('.content'),
+      threshold: 0.3,
     });
+  
+    sections.forEach(section => observer.observe(section));
   </script>
 
 </body>
