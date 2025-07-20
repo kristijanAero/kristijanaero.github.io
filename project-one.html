@@ -95,15 +95,22 @@
         height: auto;
         overflow: auto;
       }
+    
       .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
         width: 100%;
         max-height: none;
-        overflow-x: auto;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
         border-bottom: 1px solid #ffb347;
+        overflow-x: auto;
+        background: #003366;
+        padding: 1rem 0.5rem;
       }
+    
       .chapter-button {
         flex: 1 1 45%;
         padding: 0.5rem;
@@ -111,6 +118,7 @@
         border-bottom: none;
         border-right: 1px solid #ffb347;
       }
+    
       .content {
         max-width: 100%;
         padding: 1rem;
@@ -572,10 +580,22 @@ buttons.forEach((button, i) => {
   button.addEventListener('click', () => {
     const targetSection = sections[i];
     if (targetSection) {
-      content.scrollTo({
-        top: targetSection.offsetTop,
-        behavior: 'smooth'
-      });
+      const isMobile = window.innerWidth <= 900;
+
+      if (isMobile) {
+        // Scroll the full page on mobile
+        window.scrollTo({
+          top: targetSection.getBoundingClientRect().top + window.scrollY - 80,
+          behavior: 'smooth'
+        });
+      } else {
+        // Scroll the content container on desktop
+        content.scrollTo({
+          top: targetSection.offsetTop,
+          behavior: 'smooth'
+        });
+      }
+
       targetSection.focus({ preventScroll: true });
       setActiveButton(i);
     }
