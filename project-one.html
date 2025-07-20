@@ -27,6 +27,27 @@
       margin-bottom: 1rem;
       font-size: 1.8rem;
     }
+
+    .burger {
+      display: none; /* default hidden */
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      z-index: 2000;
+      width: 30px;
+      height: 22px;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .burger span {
+      display: block;
+      height: 4px;
+      background: #ffb347;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
     .chapter-button {
       display: block;
       width: 100%;
@@ -126,8 +147,8 @@
         overflow: visible;
       }
 }
+</style>
 
-  </style>
 </head>
 <body>
 
