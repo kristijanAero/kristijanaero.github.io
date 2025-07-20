@@ -89,22 +89,34 @@
     .back-link:hover {
       text-decoration: underline;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       body, html {
         flex-direction: column;
         height: auto;
+        overflow: auto;
       }
       .sidebar {
         width: 100%;
-        height: auto;
-        max-height: 200px;
+        max-height: none;
         overflow-x: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        border-bottom: 1px solid #ffb347;
+      }
+      .chapter-button {
+        flex: 1 1 45%;
+        padding: 0.5rem;
+        text-align: center;
+        border-bottom: none;
+        border-right: 1px solid #ffb347;
       }
       .content {
+        max-width: 100%;
         padding: 1rem;
-        max-height: none;
+        margin: 0;
       }
-    }
+}
   </style>
 </head>
 <body>
