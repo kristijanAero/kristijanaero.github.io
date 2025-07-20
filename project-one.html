@@ -564,20 +564,17 @@
 
     </section>
 
-    <section id="structure" tabindex="-1">
-      <h3>Wing Structure</h3>
+<section id="structure" tabindex="-1">
+<h3>Wing Structure</h3>
 <p>Starting idea of the project was to test out how different stiffening solutions affect the structural response of the wing. After making few iterative models, it was noticed that only using the honeycomb core inside of the wings' skin, noticeably lowers the overall wing stiffness thus increasing the susceptibility of critical points to failure. It was then decided that the wing skin will only be stiffened using 'T' profiled stiffeners, or stringers, since combined use of honeycombs and stringers is redundant and adds unnecessary mass to the structure. </p> <h4>Spar Placement</h4> <p> Usually, wing spars are placed at about 25% and 65% of wings' chord length. This matches the maximum thickness of the airfoil and the location of the aerodynamic center of the wing. By looking at the pressure field obtained in the previous chapter, it can be noticed that the maximum pressure acting upon the wing is located between 0 and 200 mm from the leading edge. If this was the only criteria it would lead to the front spar being positioned at 200 mm or around 12% of the root chord length so the environmental loads get effectively transferred to the spars caps. This positioning would put the front spar too much forward of the desireable wings center of gravity. Considering aswell, that the maximum thickness for the NACA0012 airfoil used for the wing is located at 30% of the airfoils chord, it was then decided that a good compromise between the two facts be to place the front wing spar at around 20% of the root chord or 345 mm from the leading edge. </p> <p> Aft spar location was decided by measuring the control surface dimensions of the reference airplane Edge 540 (ailerons). Aft spar location on the root chord is measured at 1176 mm and 588 at the tip which makes it positioned at 70 % of the root and tip chord length respectively. Aft spar will be used as a fixture location for the aileron. </p>  <h4>Rib Spacing</h4> <p> Rib positioning was obtained through an iterative process of simple buckle analyses and was set to 240 mm spacing (14.3 % of the root chord length) at the inner section of the wing (pre aileron) and 356.25 mm spacing(21.2 % of the root chord length) in the aileron zone. Since the wing is being optimized only in regards to the static analysis, buckle analyses might show the wing to be oversized (aswell as undersized) in regards to buckling - if that happens it is possible to increase/decrease the rib spacings and thus reduce the number of ribs in the wing. Considering the expected mass of one rib is around 200 g, (Mass of the inner section rib is 208 g) having 3 or 4 extra ribs throughout the wing doesn't impact the overall wing mass in any significant way. </p> <h4>Stringer Layout</h4> <p> 4 stringers were placed equidistantly between the wing spars (measured from caps edges, wing box side). For the last 4 sections of the wing, only the outer stringers are present, since there isn't enough space for all of the stringers to be extended root-to-tip - low wing tip side buckling loads were considered during this design decision.<p>
       
 <img src="photos/ovrallCAD.png" alt="CAD imported" />
 <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Wing CAD model imported into Abaqus CAE</p>
 
-<iframe
-  src="drawings/ovrallDim.pdf#zoom=0"
-  width="300" height="400"
-  style="border:1px solid #ccc; cursor:pointer;"
-  title="Overall Wing Dimensions"
-  onclick="window.open('drawings/ovrallDim.pdf', '_blank')"
-></iframe>
+<img src="drawings/ovrallDimThumbnail.png" alt="Overall Dimensions PDF Preview" id="pdfPreview" style="width:300px; cursor:pointer; border:1px solid #ccc;" />
+
+
+
 
       </p>
     </section>
@@ -671,8 +668,58 @@
 
   // Set default active on load
   setActiveButton(0);
+
+  // PDF modal script (added as requested)
+  const preview = document.getElementById('pdfPreview');
+  const modal = document.getElementById('pdfModal');
+  const closeBtn = document.getElementById('closePdf');
+
+  preview.addEventListener('click', () => {
+    modal.style.display = 'flex';  // Show the modal, flex enables centering
+  });
+
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';  // Hide modal on close button click
+  });
+
+  // Also close modal if user clicks outside the iframe (on the modal background)
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
 </script>
 
+
+<div id="pdfModal" style="
+  display:none;
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  z-index:3000;">
+  
+  <div style="position:relative; width:90vw; height:90vh; background:#fff; box-shadow: 0 0 20px #000;">
+    <button id="closePdf" style="position:absolute; top:10px; right:10px; font-size:1.5rem; cursor:pointer;">✕</button>
+    <iframe src="drawings/ovrallDim.pdf" style="width:100%; height:100%;" frameborder="0"></iframe>
+  </div>
+</div>
+
+<div id="pdfModal" style="
+  display:none;
+  position:fixed;
+  top:0; left:0; right:0; bottom:0;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  z-index:3000;">
+  
+  <div style="position:relative; width:90vw; height:90vh; background:#fff; box-shadow: 0 0 20px #000;">
+    <button id="closePdf" style="position:absolute; top:10px; right:10px; font-size:1.5rem; cursor:pointer;">✕</button>
+    <iframe src="drawings/elmntsDim.pdf" style="width:100%; height:100%;" frameborder="0"></iframe>
+  </div>
+</div>
 
 </body>
 </html>
