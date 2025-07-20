@@ -675,12 +675,6 @@
   setActiveButton(0);
 
   
-  // Also close modal if user clicks outside the iframe (on the modal background)
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
 
   document.querySelectorAll('img[id^="pdfPreview"]').forEach(preview => {
     const modalId = preview.id.replace('pdfPreview', 'pdfModal');
