@@ -96,40 +96,49 @@
         overflow: auto;
       }
     
-      .sidebar {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        width: 100%;
-        max-height: none;
+      .burger {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        border-bottom: 1px solid #ffb347;
-        overflow-x: auto;
-        background: #003366;
-        padding: 1rem 0.5rem;
       }
     
-      .chapter-button {
-        flex: 1 1 45%;
-        padding: 0.5rem;
-        text-align: center;
-        border-bottom: none;
-        border-right: 1px solid #ffb347;
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        transform: translateX(-100%);
+        width: 260px;
+        background: #003366;
+        padding: 1rem;
+        box-sizing: border-box;
+        overflow-y: auto;
+        transition: transform 0.3s ease;
+        z-index: 1500;
+      }
+    
+      .sidebar.open {
+        transform: translateX(0);
       }
     
       .content {
         max-width: 100%;
         padding: 1rem;
         margin: 0;
+        overflow: visible;
       }
 }
+
   </style>
 </head>
 <body>
 
-  <nav class="sidebar" aria-label="Project chapters">
+<!-- Burger Menu Icon -->
+<div class="burger" id="burger" aria-label="Toggle menu" role="button" tabindex="0">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+  <nav class="sidebar" id="sidebar" aria-label="Project chapters">
     <h2>Chapters</h2>
 
     <button class="chapter-button" data-target="overview">Overview</button>
@@ -565,60 +574,72 @@
 
   </main>
 
- <script>
-const buttons = document.querySelectorAll('.chapter-button');
-const sections = Array.from(buttons).map(btn => document.getElementById(btn.dataset.target));
-const content = document.querySelector('.content');
+<script>
+  const buttons = document.querySelectorAll('.chapter-button');
+  const sections = Array.from(buttons).map(btn => document.getElementById(btn.dataset.target));
+  const content = document.querySelector('.content');
+  const burger = document.getElementById('burger');
+  const sidebar = document.getElementById('sidebar');
 
-function setActiveButton(index) {
-  buttons.forEach((btn, i) => {
-    btn.classList.toggle('active', i === index);
+  // Toggle sidebar on mobile
+  burger.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
   });
-}
 
-buttons.forEach((button, i) => {
-  button.addEventListener('click', () => {
-    const targetSection = sections[i];
-    if (targetSection) {
-      const isMobile = window.innerWidth <= 900;
+  // Scroll to section on click
+  buttons.forEach((button, i) => {
+    button.addEventListener('click', () => {
+      const targetSection = sections[i];
+      if (targetSection) {
+        const isMobile = window.innerWidth <= 900;
 
-      if (isMobile) {
-        // Scroll the full page on mobile
-        window.scrollTo({
-          top: targetSection.getBoundingClientRect().top + window.scrollY - 80,
-          behavior: 'smooth'
-        });
-      } else {
-        // Scroll the content container on desktop
-        content.scrollTo({
-          top: targetSection.offsetTop,
-          behavior: 'smooth'
-        });
+        if (isMobile) {
+          window.scrollTo({
+            top: targetSection.getBoundingClientRect().top + window.scrollY - 80,
+            behavior: 'smooth'
+          });
+          sidebar.classList.remove('open'); // Close menu after click
+        } else {
+          content.scrollTo({
+            top: targetSection.offsetTop,
+            behavior: 'smooth'
+          });
+        }
+
+        targetSection.focus({ preventScroll: true });
+        setActiveButton(i);
       }
-
-      targetSection.focus({ preventScroll: true });
-      setActiveButton(i);
-    }
-  });
-});
-
-content.addEventListener('scroll', () => {
-  const scrollPos = content.scrollTop + 10;
-  let currentIndex = 0;
-
-  sections.forEach((section, i) => {
-    const heading = section.querySelector('h3');
-    if (heading && heading.offsetTop <= scrollPos) {
-      currentIndex = i;
-    }
+    });
   });
 
-  setActiveButton(currentIndex);
-});
+  // Highlight active chapter
+  function setActiveButton(index) {
+    buttons.forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
+    });
+  }
 
-// Initialize first active button on page load
-setActiveButton(0);
+  // Track scroll for active highlight (desktop only)
+  content.addEventListener('scroll', () => {
+    if (window.innerWidth > 900) {
+      const scrollPos = content.scrollTop + 10;
+      let currentIndex = 0;
+
+      sections.forEach((section, i) => {
+        const heading = section.querySelector('h3');
+        if (heading && heading.offsetTop <= scrollPos) {
+          currentIndex = i;
+        }
+      });
+
+      setActiveButton(currentIndex);
+    }
+  });
+
+  // Set default active on load
+  setActiveButton(0);
 </script>
+
 
 </body>
 </html>
