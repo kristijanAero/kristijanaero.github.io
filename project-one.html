@@ -674,19 +674,7 @@
   // Set default active on load
   setActiveButton(0);
 
-  // PDF modal script (added as requested)
-  const preview = document.getElementById('pdfPreview');
-  const modal = document.getElementById('pdfModal');
-  const closeBtn = document.getElementById('closePdf');
-
-  preview.addEventListener('click', () => {
-    modal.style.display = 'flex';  // Show the modal, flex enables centering
-  });
-
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';  // Hide modal on close button click
-  });
-
+  
   // Also close modal if user clicks outside the iframe (on the modal background)
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
