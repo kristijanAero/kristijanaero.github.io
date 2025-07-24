@@ -114,6 +114,66 @@
     .back-link:hover {
       text-decoration: underline;
     }
+
+
+    .gallery-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .main-photo {
+      width: 100%;
+      max-height: 500px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .thumbnails-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .arrow {
+      font-size: 2rem;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 1rem;
+      color: white;
+    }
+
+    .thumbnails {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 10px;
+      max-width: 80%;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .thumbnails::-webkit-scrollbar {
+      display: none;
+    }
+
+    .thumbnails img {
+      height: 80px;
+      cursor: pointer;
+      border-radius: 5px;
+      opacity: 0.6;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .thumbnails img:hover,
+    .thumbnails img.active {
+      opacity: 1;
+      transform: scale(1.1);
+      border: 2px solid #fff;
+    }
+
     @media (max-width: 900px) {
       body, html {
         flex-direction: column;
@@ -651,7 +711,40 @@
 
     <section id="fea" tabindex="-1">
       <h3>Numerical Model</h3>
-      <p>See chapter "Wing Structure".</p>
+      
+      <div class="gallery-container">
+  <img id="mainPhoto" class="main-photo" src="photos/meshOverall.png" alt="Main Photo">
+
+  <div class="thumbnails-wrapper">
+    <div class="arrow" onclick="scrollThumbnails(-1)">&#10094;</div>
+    <div class="thumbnails" id="thumbnails">
+      <img src="photos/meshOverall.png" onclick="setMainPhoto(this)" class="active" alt="meshOverall">
+      <img src="photos/meshSkinDetail1.png" onclick="setMainPhoto(this)" alt="meshSkinDetail1">
+      <img src="photos/meshSkinDetail2.png" onclick="setMainPhoto(this)" alt="meshSkinDetail2">
+      <img src="photos/meshSkinDetail3.png" onclick="setMainPhoto(this)" alt="meshSkinDetail3">
+      <img src="photos/meshLEOverall.png" onclick="setMainPhoto(this)" alt="meshLEOverall">
+      <img src="photos/meshLEDetail1.png" onclick="setMainPhoto(this)" alt="meshLEDetail1">
+      <img src="photos/meshTEOverall.png" onclick="setMainPhoto(this)" alt="meshTEOverall">
+      <img src="photos/meshSkeletonOverall.png" onclick="setMainPhoto(this)" alt="meshSkeletonOverall">
+      <img src="photos/meshSkeletonDetail1.png" onclick="setMainPhoto(this)" alt="meshSkeletonDetail1">
+      <img src="photos/meshSkeletonDetail2.png" onclick="setMainPhoto(this)" alt="meshSkeletonDetail2">
+      <img src="photos/meshSparsOverall.png" onclick="setMainPhoto(this)" alt="meshSparsOverall">
+      <img src="photos/meshSparsDetail.png" onclick="setMainPhoto(this)" alt="meshSparsDetail">
+      <img src="photos/meshRibsInner.png" onclick="setMainPhoto(this)" alt="meshRibsInner">
+      <img src="photos/meshRibsMiddle.png" onclick="setMainPhoto(this)" alt="meshRibsMiddle">
+      <img src="photos/meshRibsOuter.png" onclick="setMainPhoto(this)" alt="meshRibsOuter">
+      <img src="photos/meshStringersOverall.png" onclick="setMainPhoto(this)" alt="meshStringersOverall">
+      <img src="photos/meshStringersDetail1.png" onclick="setMainPhoto(this)" alt="meshStringersDetail1">
+      <img src="photos/meshStringerTEOverall.png" onclick="setMainPhoto(this)" alt="meshStringerTEOverall">
+      <img src="photos/meshARgreaterThan2.png" onclick="setMainPhoto(this)" alt="meshARgreaterThan2">
+    </div>
+    <div class="arrow" onclick="scrollThumbnails(1)">&#10095;</div>
+  </div>
+  <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">
+    Figure: Selected photo shown above. Scroll or click a thumbnail to change view.
+  </p>
+</div>
+
     </section>
 
 
@@ -733,6 +826,24 @@
 
   // Set default active on load
   setActiveButton(0);
+
+  // Gallery functions below
+
+  function setMainPhoto(imgElement) {
+    const main = document.getElementById("mainPhoto");
+    main.src = imgElement.src;
+
+    const thumbnails = document.querySelectorAll(".thumbnails img");
+    thumbnails.forEach(img => img.classList.remove("active"));
+    imgElement.classList.add("active");
+  }
+
+  function scrollThumbnails(direction) {
+    const container = document.getElementById("thumbnails");
+    const scrollAmount = 100;
+    container.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+  }
+
 </script>
 
 
