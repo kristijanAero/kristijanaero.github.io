@@ -712,38 +712,45 @@
     <section id="fea" tabindex="-1">
       <h3>Numerical Model</h3>
       
-      <div class="gallery-container">
-  <img id="mainPhoto" class="main-photo" src="photos/meshOverall.png" alt="Main Photo">
+<div class="gallery-container">
+  <div class="main-photo-wrapper" style="position: relative; display: inline-block;">
+    <div class="main-arrow left-arrow" onclick="prevMainPhoto()" style="position: absolute; top: 50%; left: 5px; transform: translateY(-50%); cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;">&#10094;</div>
+
+    <img id="mainPhoto" class="main-photo" src="photos/meshOverall.png" alt="Main Photo" style="display: block; max-width: 100%;">
+
+    <div class="main-arrow right-arrow" onclick="nextMainPhoto()" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;">&#10095;</div>
+  </div>
 
   <div class="thumbnails-wrapper">
     <div class="arrow" onclick="scrollThumbnails(-1)">&#10094;</div>
-    <div class="thumbnails" id="thumbnails">
-      <img src="photos/meshOverall.png" onclick="setMainPhoto(this)" class="active" alt="meshOverall">
-      <img src="photos/meshSkinDetail1.png" onclick="setMainPhoto(this)" alt="meshSkinDetail1">
-      <img src="photos/meshSkinDetail2.png" onclick="setMainPhoto(this)" alt="meshSkinDetail2">
-      <img src="photos/meshSkinDetail3.png" onclick="setMainPhoto(this)" alt="meshSkinDetail3">
-      <img src="photos/meshLEOverall.png" onclick="setMainPhoto(this)" alt="meshLEOverall">
-      <img src="photos/meshLEDetail1.png" onclick="setMainPhoto(this)" alt="meshLEDetail1">
-      <img src="photos/meshTEOverall.png" onclick="setMainPhoto(this)" alt="meshTEOverall">
-      <img src="photos/meshSkeletonOverall.png" onclick="setMainPhoto(this)" alt="meshSkeletonOverall">
-      <img src="photos/meshSkeletonDetail1.png" onclick="setMainPhoto(this)" alt="meshSkeletonDetail1">
-      <img src="photos/meshSkeletonDetail2.png" onclick="setMainPhoto(this)" alt="meshSkeletonDetail2">
-      <img src="photos/meshSparsOverall.png" onclick="setMainPhoto(this)" alt="meshSparsOverall">
-      <img src="photos/meshSparsDetail.png" onclick="setMainPhoto(this)" alt="meshSparsDetail">
-      <img src="photos/meshRibsInner.png" onclick="setMainPhoto(this)" alt="meshRibsInner">
-      <img src="photos/meshRibsMiddle.png" onclick="setMainPhoto(this)" alt="meshRibsMiddle">
-      <img src="photos/meshRibsOuter.png" onclick="setMainPhoto(this)" alt="meshRibsOuter">
-      <img src="photos/meshStringersOverall.png" onclick="setMainPhoto(this)" alt="meshStringersOverall">
-      <img src="photos/meshStringersDetail1.png" onclick="setMainPhoto(this)" alt="meshStringersDetail1">
-      <img src="photos/meshStringerTEOverall.png" onclick="setMainPhoto(this)" alt="meshStringerTEOverall">
-      <img src="photos/meshARgreaterThan2.png" onclick="setMainPhoto(this)" alt="meshARgreaterThan2">
+    <div class="thumbnails" id="thumbnails" style="overflow-x: auto; white-space: nowrap;">
+      <!-- Put your thumbnail images here -->
+      <img src="photos/meshOverall.png" onclick="setMainPhoto(this)" class="active" alt="thumb1">
+      <img src="photos/meshSkinDetail1.png" onclick="setMainPhoto(this)" alt="thumb2">
+      <img src="photos/meshSkinDetail2.png" onclick="setMainPhoto(this)" alt="thumb3">
+      <img src="photos/meshSkinDetail3.png" onclick="setMainPhoto(this)" alt="thumb4">
+      <img src="photos/meshLEOverall.png" onclick="setMainPhoto(this)" alt="thumb5">
+      <img src="photos/meshLEDetail1.png" onclick="setMainPhoto(this)" alt="thumb6">
+      <img src="photos/meshTEOverall.png" onclick="setMainPhoto(this)" alt="thumb7">
+      <img src="photos/meshSkeletonOverall.png" onclick="setMainPhoto(this)" alt="thumb8">
+      <img src="photos/meshSkeletonDetail1.png" onclick="setMainPhoto(this)" alt="thumb9">
+      <img src="photos/meshSkeletonDetail2.png" onclick="setMainPhoto(this)" alt="thumb10">
+      <img src="photos/meshSparsOverall.png" onclick="setMainPhoto(this)" alt="thumb11">
+      <img src="photos/meshSparsDetail.png" onclick="setMainPhoto(this)" alt="thumb12">
+      <img src="photos/meshRibsInner.png" onclick="setMainPhoto(this)" alt="thumb13">
+      <img src="photos/meshRibsMiddle.png" onclick="setMainPhoto(this)" alt="thumb14">
+      <img src="photos/meshRibsOuter.png" onclick="setMainPhoto(this)" alt="thumb15">
+      <img src="photos/meshStringersOverall.png" onclick="setMainPhoto(this)" alt="thumb16">
+      <img src="photos/meshStringersDetail1.png" onclick="setMainPhoto(this)" alt="thumb17">
+      <img src="photos/meshStringerTEOverall.png" onclick="setMainPhoto(this)" alt="thumb18">
+      <img src="photos/meshARgreaterThan2.png" onclick="setMainPhoto(this)" alt="thumb19">
     </div>
     <div class="arrow" onclick="scrollThumbnails(1)">&#10095;</div>
   </div>
-  <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">
-    Figure: Selected photo shown above. Scroll or click a thumbnail to change view.
-  </p>
+
+  <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Figure: Selected photo shown above. Scroll or click a thumbnail to change view.</p>
 </div>
+
 
     </section>
 
@@ -827,23 +834,65 @@
   // Set default active on load
   setActiveButton(0);
 
-  // Gallery functions below
+  // Gallery related code
 
+  const thumbnailsContainer = document.getElementById("thumbnails");
+  const thumbnails = thumbnailsContainer.querySelectorAll("img");
+  const mainPhoto = document.getElementById("mainPhoto");
+
+  // Current active index for the gallery
+  let currentIndex = 0;
+
+  // Set main photo and update active thumbnail
   function setMainPhoto(imgElement) {
-    const main = document.getElementById("mainPhoto");
-    main.src = imgElement.src;
+    mainPhoto.src = imgElement.src;
 
-    const thumbnails = document.querySelectorAll(".thumbnails img");
-    thumbnails.forEach(img => img.classList.remove("active"));
-    imgElement.classList.add("active");
+    thumbnails.forEach((img, i) => {
+      img.classList.toggle("active", img === imgElement);
+      if (img === imgElement) currentIndex = i;
+    });
+
+    scrollThumbnailIntoView(currentIndex);
   }
 
+  // Scroll thumbnails ribbon by direction (-1 or 1)
   function scrollThumbnails(direction) {
-    const container = document.getElementById("thumbnails");
     const scrollAmount = 100;
-    container.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+    thumbnailsContainer.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
   }
 
+  // Scroll the thumbnails container to center the active thumbnail if possible
+  function scrollThumbnailIntoView(index) {
+    const thumbnail = thumbnails[index];
+    if (!thumbnail) return;
+
+    const containerRect = thumbnailsContainer.getBoundingClientRect();
+    const thumbRect = thumbnail.getBoundingClientRect();
+
+    // Calculate how much to scroll to center the thumbnail
+    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
+
+    thumbnailsContainer.scrollBy({ left: offset, behavior: "smooth" });
+  }
+
+  // Show previous image on main image arrow click
+  function prevMainPhoto() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      setMainPhoto(thumbnails[currentIndex]);
+    }
+  }
+
+  // Show next image on main image arrow click
+  function nextMainPhoto() {
+    if (currentIndex < thumbnails.length - 1) {
+      currentIndex++;
+      setMainPhoto(thumbnails[currentIndex]);
+    }
+  }
+
+  // Initialize the gallery - mark first thumbnail active on load
+  setMainPhoto(thumbnails[0]);
 </script>
 
 
