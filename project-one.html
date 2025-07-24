@@ -714,17 +714,28 @@
       
 <div class="gallery-container">
   <div class="main-photo-wrapper" style="position: relative; display: inline-block;">
-    <div class="main-arrow left-arrow" onclick="prevMainPhoto()" style="position: absolute; top: 50%; left: 5px; transform: translateY(-50%); cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;">&#10094;</div>
+    <div class="main-arrow left-arrow" onclick="prevMainPhoto()" 
+         style="position: absolute; top: 50%; left: 5px; transform: translateY(-50%);
+                cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
+                background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;">
+      &#10094;
+    </div>
 
     <img id="mainPhoto" class="main-photo" src="photos/meshOverall.png" alt="Main Photo" style="display: block; max-width: 100%;">
 
-    <div class="main-arrow right-arrow" onclick="nextMainPhoto()" style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%); cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;">&#10095;</div>
+    <div class="main-arrow right-arrow" onclick="nextMainPhoto()" 
+         style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%);
+                cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
+                background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;">
+      &#10095;
+    </div>
   </div>
 
-  <div class="thumbnails-wrapper">
-    <div class="arrow" onclick="scrollThumbnails(-1)">&#10094;</div>
-    <div class="thumbnails" id="thumbnails" style="overflow-x: auto; white-space: nowrap;">
-      <!-- Put your thumbnail images here -->
+  <div class="thumbnails-wrapper" style="display: flex; align-items: center; margin-top: 10px;">
+    <div class="arrow" onclick="scrollThumbnails(-1)" 
+         style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10094;</div>
+    <div class="thumbnails" id="thumbnails" style="overflow-x: auto; white-space: nowrap; flex: 1;">
+      <!-- Thumbnail images -->
       <img src="photos/meshOverall.png" onclick="setMainPhoto(this)" class="active" alt="thumb1">
       <img src="photos/meshSkinDetail1.png" onclick="setMainPhoto(this)" alt="thumb2">
       <img src="photos/meshSkinDetail2.png" onclick="setMainPhoto(this)" alt="thumb3">
@@ -745,11 +756,11 @@
       <img src="photos/meshStringerTEOverall.png" onclick="setMainPhoto(this)" alt="thumb18">
       <img src="photos/meshARgreaterThan2.png" onclick="setMainPhoto(this)" alt="thumb19">
     </div>
-    <div class="arrow" onclick="scrollThumbnails(1)">&#10095;</div>
+    <div class="arrow" onclick="scrollThumbnails(1)" 
+         style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10095;</div>
   </div>
-
-  <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Figure: Selected photo shown above. Scroll or click a thumbnail to change view.</p>
 </div>
+
 
 
     </section>
