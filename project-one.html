@@ -717,10 +717,6 @@
 <p>After creation, the 3D model of the wing was imported as .step file into the Abaqus CAE preprocessor. 
 To simplify the optimization process, composite layups of certain wing areas were grouped. For the wing skin between the front and aft spar caps, 3 layup groups were created: G1, G2 and G3, going from the root of the wing outwards. For G1 and G2 layup groups, ply drop-off was taken into consideration and thus they were made to extend to half the section outwards. These layup extensions were added to minimize the stresses that would otherwise happen if the ply drop-off happened in the area where the skin connects to the ribs. Skin/Stringer overlaps in those areas were also grouped within the three groups: G1S, G2S and G3S, S denoting 'stringers'. Leading edge skin was divided into 12 layups (to add some flexibility to the model - even though one layup would suffice), trailing edge into 4, spar caps into two layups – compressive and tensile, or upper and lower cap – C1 and C2 respectively; spar webs were defined with only one layup, the same as skin stringers and top-to-bottom stringers added in the trailing edge. Ribs were also defined through one layup. Overhang area has the same layup properties that their section counterparts have (overhang middle skin has the same layup as G1 group, overhang upper cap layup is equal to C1, etc…). Out of all the stiffening elements, only the wingbox stringers were modeled to have both the cap and a web, to model the failure index plot as precisely as possible, especially because they're located in critically loaded area of the wing.</p>
 
-<img src="photos/compositeLayups.png" alt="CAD imported" />
-<p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Composite layup sections</p>
-
-
 <p>For the initial model, all of the layups were made to be quasi-isotropic: [+-45/0/90]<sub>s</sub>, with exceptions of ribs and spar webs, which had 5 mm of aluminium honeycomb core inserts.</p>
 
 <p>Layup label Definitions:</p>
@@ -782,6 +778,9 @@ To simplify the optimization process, composite layups of certain wing areas wer
         </tr>
     </tbody>
 </table>
+
+<img src="photos/compositeLayups.png" alt="CAD imported" />
+<p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Composite layup sections</p>
 
 <p>Optimization analyses will be run using a static solver. 
 To model the aileron hinge moments, continuum distributing coupling was defined between two inner and two outer rib edges on the trailing edge side and with a uniform weighting method. Aileron hinge force was then divided by half and applied at each of the reference points.</p>
