@@ -626,7 +626,9 @@
 
 <section id="structure" tabindex="-1">
 <h3>Wing Structure</h3>
-<p>Starting idea of the project was to test out how different stiffening solutions affect the structural response of the wing. After making few iterative models, it was noticed that only using the honeycomb core inside of the wings' skin, noticeably lowers the overall wing stiffness thus increasing the susceptibility of critical points to failure. It was then decided that the wing skin will only be stiffened using 'T' profiled stiffeners, or stringers, since combined use of honeycombs and stringers is redundant and adds unnecessary mass to the structure. </p> <h4>Spar Placement</h4> <p> Usually, wing spars are placed at about 25% and 65% of wings' chord length. This matches the maximum thickness of the airfoil and the location of the aerodynamic center of the wing. By looking at the pressure field obtained in the previous chapter, it can be noticed that the maximum pressure acting upon the wing is located between 0 and 200 mm from the leading edge. If this was the only criteria it would lead to the front spar being positioned at 200 mm or around 12% of the root chord length so the environmental loads get effectively transferred to the spars caps. This positioning would put the front spar too much forward of the desireable wings center of gravity. Considering aswell, that the maximum thickness for the NACA0012 airfoil used for the wing is located at 30% of the airfoils chord, it was then decided that a good compromise between the two facts be to place the front wing spar at around 20% of the root chord or 345 mm from the leading edge. </p> <p> Aft spar location was decided by measuring the control surface dimensions of the reference airplane Edge 540 (ailerons). Aft spar location on the root chord is measured at 1176 mm and 588 at the tip which makes it positioned at 70 % of the root and tip chord length respectively. Aft spar will be used as a fixture location for the aileron. </p>  <h4>Rib Spacing</h4> <p> Rib positioning was obtained through an iterative process of simple buckle analyses and was set to 240 mm spacing (14.3 % of the root chord length) at the inner section of the wing (pre aileron) and 356.25 mm spacing(21.2 % of the root chord length) in the aileron zone. Since the wing is being optimized only in regards to the static analysis, buckle analyses might show the wing to be oversized (aswell as undersized) in regards to buckling - if that happens it is possible to increase/decrease the rib spacings and thus reduce the number of ribs in the wing. Considering the expected mass of one rib is around 200 g, (Mass of the inner section rib is 208 g) having 3 or 4 extra ribs throughout the wing doesn't impact the overall wing mass in any significant way. </p> <h4>Stringer Layout</h4> <p> 4 stringers were placed equidistantly between the wing spars (measured from caps edges, wing box side). For the last 4 sections of the wing, only the outer stringers are present, since there isn't enough space for all of the stringers to be extended root-to-tip - low wing tip side buckling loads were considered during this design decision.<p>
+<p>Starting idea of the project was to test out how different stiffening solutions affect the structural response of the wing. After making few iterative models, it was noticed that only using the honeycomb core inside of the wings' skin, noticeably lowers the overall wing stiffness thus increasing the susceptibility of critical points to failure. It was then decided that the wing skin will only be stiffened using 'T' profiled stiffeners, or stringers, since combined use of honeycombs and stringers is redundant and adds unnecessary mass to the structure. </p> <h4>Spar Placement</h4> <p> Usually, wing spars are placed at about 25% and 65% of wings' chord length. This matches the maximum thickness of the airfoil and the location of the aerodynamic center of the wing. By looking at the pressure field obtained in the previous chapter, it can be noticed that the maximum pressure acting upon the wing is located between 0 and 200 mm from the leading edge. If this was the only criteria it would lead to the front spar being positioned at 200 mm or around 12% of the root chord length so the environmental loads get effectively transferred to the spars caps. This positioning would put the front spar too much forward of the desireable wings center of gravity. Considering aswell, that the maximum thickness for the NACA0012 airfoil used for the wing is located at 30% of the airfoils chord, it was then decided that a good compromise between the two facts be to place the front wing spar at around 20% of the root chord or 345 mm from the leading edge. </p> <p> Aft spar location was decided by measuring the control surface dimensions of the reference airplane Edge 540 (ailerons). Aft spar location on the root chord is measured at 1176 mm and 588 at the tip which makes it positioned at 70 % of the root and tip chord length respectively. Aft spar will be used as a fixture location for the aileron. </p>  <h4>Rib Spacing</h4> <p> Rib positioning was obtained through an iterative process of simple buckle analyses and was set to 240 mm spacing (14.3 % of the root chord length) at the inner section of the wing (pre aileron) and 356.25 mm spacing(21.2 % of the root chord length) in the aileron zone. Since the wing is being optimized only in regards to the static analysis, buckle analyses might show the wing to be oversized (aswell as undersized) in regards to buckling - if that happens it is possible to increase/decrease the rib spacings and thus reduce the number of ribs in the wing. Considering the expected mass of one rib is around 200 g, (Mass of the inner section rib is 208 g) having 3 or 4 extra ribs throughout the wing doesn't impact the overall wing mass in any significant way. </p> <h4>Stringer Layout</h4> <p> 4 stringers were placed equidistantly between the wing spars (measured from caps edges, wing box side). For the last 4 sections of the wing, only the outer stringers are present, since there isn't enough space for all of the stringers to be extended root-to-tip - low wing tip side buckling loads were considered during this design decision. To stiffen the trailing edge section of the wing, 4 top-to-bottom skin stiffening elements were also added with equal distance between all.<p>
+<p> To avoid stress singularities present at the intersection of the three faces in non-manifold geommetries, a skin/cap overhang was added at the root of the wing. For this overhang area, no failure index values will be measured, and only the wing without the overhang addition will be considered during the optimization process.</p>
+
       
 <img src="photos/ovrallCAD.png" alt="CAD imported" />
 <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Wing CAD model imported into Abaqus CAE</p>
@@ -725,6 +727,8 @@
 
     <img id="mainPhoto" class="main-photo" src="photos/meshOverall.png" alt="Main Photo" style="display: block; max-width: 100%;">
 
+    <div id="mainPhotoDescription" style="margin-top: 10px; font-style: italic; color: #555;"></div>
+
     <div class="main-arrow right-arrow" onclick="nextMainPhoto()" 
          style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%);
                 cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
@@ -738,7 +742,7 @@
          style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10094;</div>
     <div class="thumbnails" id="thumbnails" style="overflow-x: auto; white-space: nowrap; flex: 1;">
       <!-- Thumbnail images -->
-      <img src="photos/meshOverall.png" onclick="setMainPhoto(this)" class="active" alt="thumb1">
+      <img src="photos/meshOverall.png" onclick="setMainPhoto(this)" class="active" alt="thumb1" data-description="Overall wing mesh.">>
       <img src="photos/meshSkinDetail1.png" onclick="setMainPhoto(this)" alt="thumb2">
       <img src="photos/meshSkinDetail2.png" onclick="setMainPhoto(this)" alt="thumb3">
       <img src="photos/meshSkinDetail3.png" onclick="setMainPhoto(this)" alt="thumb4">
@@ -856,17 +860,19 @@
   // Current active index for the gallery
   let currentIndex = 0;
 
-  // Set main photo and update active thumbnail
-  function setMainPhoto(imgElement) {
-    mainPhoto.src = imgElement.src;
+function setMainPhoto(imgElement) {
+  mainPhoto.src = imgElement.src;
 
-    thumbnails.forEach((img, i) => {
-      img.classList.toggle("active", img === imgElement);
-      if (img === imgElement) currentIndex = i;
-    });
+  document.getElementById("mainPhotoDescription").textContent = imgElement.dataset.description || "";
 
-    scrollThumbnailIntoView(currentIndex);
-  }
+  thumbnails.forEach((img, i) => {
+    img.classList.toggle("active", img === imgElement);
+    if (img === imgElement) currentIndex = i;
+  });
+
+  scrollThumbnailIntoView(currentIndex);
+}
+
 
   // Scroll thumbnails ribbon by direction (-1 or 1)
   function scrollThumbnails(direction) {
@@ -906,6 +912,7 @@
 
   // Initialize the gallery - mark first thumbnail active on load
   setMainPhoto(thumbnails[0]);
+
 </script>
 
 
