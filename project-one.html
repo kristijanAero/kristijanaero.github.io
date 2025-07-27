@@ -713,6 +713,61 @@
 
     <section id="fea" tabindex="-1">
       <h3>Numerical Model</h3>
+
+<p>After creation, the 3D model of the wing was imported as .step file into the Abaqus CAE preprocessor. 
+To simplify the optimization process, composite layups of certain wing areas were grouped. For the wing skin between the front and aft spar caps, 3 layup groups were created: G1, G2 and G3, going from the root of the wing outwards. For G1 and G2 layup groups, ply drop-off was taken into consideration and thus they were made to extend to half the section outwards. These layup extensions were added to minimize the stresses that would otherwise happen if the ply drop-off happened in the area where the skin connects to the ribs. Skin/Stringer overlaps in those areas were also grouped within the three groups: G1S, G2S and G3S, S denoting 'stringers'. Leading edge skin was divided into 12 layups (to add some flexibility to the model - even though one layup would suffice), trailing edge into 4, spar caps into two layups – compressive and tensile, or upper and lower cap – C1 and C2 respectively; spar webs were defined with only one layup, the same as skin stringers and top-to-bottom stringers added in the trailing edge. Ribs were also defined through one layup. Overhang area has the same layup properties that their section counterparts have (overhang middle skin has the same layup as G1 group, overhang upper cap layup is equal to C1, etc…). Out of all the stiffening elements, only the wingbox stringers were modeled to have both the cap and a web, to model the failure index plot as precisely as possible, especially because they're located in critically loaded area of the wing.</p>
+
+<img src="photos/compositeLayups.png" alt="CAD imported" />
+<p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Composite layup sections</p>
+
+
+<p>For the initial model, all of the layups were made to be quasi-isotropic: [+-45/0/90]<sub>s</sub>, with exceptions of ribs and spar webs, which had 5 mm of aluminium honeycomb core inserts.</p>
+
+<p>Layup label Definitions:</p>
+<ul>
+    <li><code>G1</code> Root side section of the wingbox skin</li>
+    <li><code>G2</code> Middle section of the wingbox skin</li>
+    <li><code>G3</code> Tip side section of the wingbox skin</li>
+    <li><code>G1S, G2S, G3S</code> Wingbox skin+stringer caps overlap section</li>
+    <li><code>LE1-LE12</code> Leading edge sections</li>
+    <li><code>TE1–TE4</code> Trailing edge sections</li>
+    <li><code>C1</code> Compression spar caps</li>
+    <li><code>C2</code> Tension spar caps</li>
+    <li><code>W</code> Spar webs</li>
+    <li><code>SSW</code> Stringer web sections</li>
+    <li><code>STE</code> Trailing edge stiffener sections</li>
+    <li><code>R</code> Ribs</li>
+</ul>
+
+<p>Optimization analyses will be run using a static solver. 
+To model the aileron hinge moments, continuum distributing coupling was defined between two inner and two outer rib edges on the trailing edge side and with a uniform weighting method. Aileron hinge force was then divided by half and applied at each of the reference points.</p>
+
+<p>Pressure field resulting from lift was applied to lower section of the wing using an analytical field and a 12G loading magnitude. 
+Encastre was applied to the root of the wing.</p>
+
+<p>Model was meshed using 32 340 elements and 31 021 nodes. 32 326 of the elements were S4R and 14 were S3 elements to help with the mesh of curved and narrow sections of the geometry. Average aspect ratio of the mesh elements was 1.41. The model contained elements with AR&gt;2 but considering those elements were present in areas not significant in respect to loading, mesh refinement wasn't carried out – same goes for S3 elements. 
+Below are the photos showing mesh throughout the wing geometry. Wingbox skin mesh was represented with section colors to better show how the mesh transitions spanwise.</p>
+
+<p>
+    <code>MAC<sub>aileron</sub> = 0.34625 m</code><br>
+    <code>|M<sub>hinge</sub>| = 1269.92 Nm</code>
+</p>
+
+<p>Force on hinge:</p>
+<p>
+    <code>F<sub>hinge</sub> = M<sub>hinge</sub> / MAC<sub>aileron</sub></code><br>
+    <code>F<sub>hinge</sub> = 3667.63 N</code>
+</p>
+
+<p>Multiplying <code>F<sub>hinge</sub></code> by a loading factor of 12G gives the hinge force applied to the aircraft under maximum loading conditions:</p>
+<p>
+    <code>F<sub>hinge</sub><sub>12g</sub> = 44011.56 N</code>
+</p>
+
+<p>This force will be applied to the rib edges in the direction of the lift.</p>
+
+
+
       
 <div class="gallery-container">
   <div class="main-photo-wrapper" style="position: relative; display: inline-block;">
