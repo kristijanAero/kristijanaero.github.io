@@ -724,20 +724,64 @@ To simplify the optimization process, composite layups of certain wing areas wer
 <p>For the initial model, all of the layups were made to be quasi-isotropic: [+-45/0/90]<sub>s</sub>, with exceptions of ribs and spar webs, which had 5 mm of aluminium honeycomb core inserts.</p>
 
 <p>Layup label Definitions:</p>
-<ul>
-    <li><code>G1</code> Root side section of the wingbox skin</li>
-    <li><code>G2</code> Middle section of the wingbox skin</li>
-    <li><code>G3</code> Tip side section of the wingbox skin</li>
-    <li><code>G1S, G2S, G3S</code> Wingbox skin+stringer caps overlap section</li>
-    <li><code>LE1-LE12</code> Leading edge sections</li>
-    <li><code>TE1–TE4</code> Trailing edge sections</li>
-    <li><code>C1</code> Compression spar caps</li>
-    <li><code>C2</code> Tension spar caps</li>
-    <li><code>W</code> Spar webs</li>
-    <li><code>SSW</code> Stringer web sections</li>
-    <li><code>STE</code> Trailing edge stiffener sections</li>
-    <li><code>R</code> Ribs</li>
-</ul>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Layup Label</th>
+            <th>Definition</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>G1</code></td>
+            <td>Root side section of the wingbox skin</td>
+        </tr>
+        <tr>
+            <td><code>G2</code></td>
+            <td>Middle section of the wingbox skin</td>
+        </tr>
+        <tr>
+            <td><code>G3</code></td>
+            <td>Tip side section of the wingbox skin</td>
+        </tr>
+        <tr>
+            <td><code>G1S, G2S, G3S</code></td>
+            <td>Wingbox skin+stringer caps overlap section</td>
+        </tr>
+        <tr>
+            <td><code>LE1-LE12</code></td>
+            <td>Leading edge sections</td>
+        </tr>
+        <tr>
+            <td><code>TE1–TE4</code></td>
+            <td>Trailing edge sections</td>
+        </tr>
+        <tr>
+            <td><code>C1</code></td>
+            <td>Compression spar caps</td>
+        </tr>
+        <tr>
+            <td><code>C2</code></td>
+            <td>Tension spar caps</td>
+        </tr>
+        <tr>
+            <td><code>W</code></td>
+            <td>Spar webs</td>
+        </tr>
+        <tr>
+            <td><code>SSW</code></td>
+            <td>Stringer web sections</td>
+        </tr>
+        <tr>
+            <td><code>STE</code></td>
+            <td>Trailing edge stiffener sections</td>
+        </tr>
+        <tr>
+            <td><code>R</code></td>
+            <td>Ribs</td>
+        </tr>
+    </tbody>
+</table>
 
 <p>Optimization analyses will be run using a static solver. 
 To model the aileron hinge moments, continuum distributing coupling was defined between two inner and two outer rib edges on the trailing edge side and with a uniform weighting method. Aileron hinge force was then divided by half and applied at each of the reference points.</p>
