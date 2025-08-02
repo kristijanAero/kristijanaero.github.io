@@ -862,9 +862,8 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
       Optimization was automated with a Python script whose goal is to run the <code>.inp</code> file through Abaqus/Standard, extrapolate the needed results, feed them into a genetic algorithm, and then edit the <code>.inp</code> file with the evolved variables – the process is repeated until the algorithm converges.
     </p>
 
-    <img src="photos/genOptiFlow.png" alt="gen opti flow" style="transform: scale(0.5); transform-origin: top left;"/>
+    <img src="photos/genOptiFlow.png" alt="gen opti flow" style="width: 50%; height: auto;"/>
     <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Optimization Algorithm Flowchart</p>
-
 
     <p>
       Only the wingbox skin and spar caps were subjected to the optimization. Control variables used were: maximum Tsai-Wu failure index (TSAIWU) and y-direction displacement of the wing tip (U2). TSAIWU was set to have the upper limit of &lt;1, while the upper limit of U2 was set to be 10% of the half-wingspan, which equals 380 mm. The algorithm also follows a rule of minimizing the mass of the wing (variable <code>MASS</code>). It was expected for the total mass of the wing to be less than 30 kg.
