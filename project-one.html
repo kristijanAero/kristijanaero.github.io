@@ -951,6 +951,11 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
   </tbody>
 </table>
 
+<p>After 2184 runs it was noticed the algorithm wasn't converging anymore and thus the simulation was stopped. Even though algorithm sought any solution with Tsai-Wu failure index lower than 1 (while also satisfying other constraints) it was decided that only the thickness sets with Tsai-Wu values lower than 0.95 will be considered to introduce some level of safety margin into the design (Numerical model already considers the material idealized - ply interlaminar interface is considered perfectly bonded, etc.). Chosen solution is presented with an orange point in Tsai-Wu/Mass plot below.</p>
+
+    <img src="photos/optiplot2D.png" alt="opti 2D" style="width: 50%; height: auto;"/>
+    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Tsai-Wu/Mass optimization plot</p>
+
 
     <section id="results" tabindex="-1">
       <h3>Results</h3>
