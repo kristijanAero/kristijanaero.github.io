@@ -866,8 +866,27 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
     <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Optimization Algorithm Flowchart</p>
 
     <p>
-      Only the wingbox skin and spar caps were subjected to the optimization. Control variables used were: maximum Tsai-Wu failure index (TSAIWU) and y-direction displacement of the wing tip (U2). TSAIWU was set to have the upper limit of &lt;1, while the upper limit of U2 was set to be 10% of the half-wingspan, which equals 380 mm. The algorithm also follows a rule of minimizing the mass of the wing (variable <code>MASS</code>). It was expected for the total mass of the wing to be less than 30 kg.
+      Only the wingbox skin and spar caps were subjected to the optimization. Control variables used were: maximum Tsai-Wu failure index (TSAIWU) and y-direction displacement of the wing tip (U2). TSAIWU was set to have the upper limit of &lt;1, while the upper limit of U2 was set to be 10% of the half-wingspan, which equals 380 mm. The algorithm also follows a rule of minimizing the mass of the wing (variable <code>MASS</code>). It was expected for the total mass of the wing to be less than 30 kg. If the solution violates any of these constraints, algorithm is instructed to penalize it and diverge from it.
     </p>
+
+    <table border="1" cellpadding="5" cellspacing="0">
+      <tr>
+        <th>Variable</th>
+        <th>Constraint</th>
+      </tr>
+      <tr>
+        <td>TSAIW</td>
+        <td> &lt; 1></td>
+      </tr>
+      <tr>
+        <td>U2</td>
+        <td>&lt; 380 mm</td>
+      </tr>
+      <tr>
+        <td>Mass</td>
+        <td>&lt; 32 kg</td>
+      </tr>
+    </table>
 
     <p>
       Groups G1, G2, and G3 and layups C1 and C2 had upper and lower bounds set with a constant increment of 0.125, which represents the thickness of a single ply in millimeters. Since the variable bounds need to be as narrow as possible to ease and speed up the optimization process, a few iterative runs were made with the goal of testing different upper-bound layups.
