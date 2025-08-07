@@ -956,6 +956,104 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
     <img src="photos/optimizationPlot2D.png" alt="opti 2D" style="width: 100%; height: auto;"/>
     <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Tsai-Wu/Mass optimization plot with a chosen solution shown</p>
 
+  <p>Results from the best solution are as follows (thicknesses per ply):</p>
+
+  <table>
+    <tr><th>Mass</th><td>28.133 kg</td></tr>
+    <tr><th>TSAIW</th><td>0.94767</td></tr>
+    <tr><th>U2</th><td>328.5 mm</td></tr>
+  </table>
+
+  <p>
+    It is expected for the failure index to be smaller by around 5-15 % once the realistic layups are implemented in the model,
+    which can be proven using CLT. Also, new CAE model will have a slightly bigger mass since the G1 and G2 layups will be extended
+    by half a distance between the ribs to prevent stress peak on areas where skin and ribs meet.
+  </p>
+
+<table>
+  <tr>
+    <th>Section</th>
+    <th>Orientation</th>
+    <th>Thickness (mm)</th>
+  </tr>
+
+  <tr><td rowspan="3">C1</td><td>+45/-45</td><td>0.250</td></tr>
+  <tr><td>0</td><td>1.750</td></tr>
+  <tr><td>90</td><td>0.250</td></tr>
+
+  <tr><td rowspan="3">C2</td><td>+45/-45</td><td>0.250</td></tr>
+  <tr><td>0</td><td>1.650</td></tr>
+  <tr><td>90</td><td>0.250</td></tr>
+
+  <tr><td rowspan="3">G1</td><td>+45/-45</td><td>0.250</td></tr>
+  <tr><td>0</td><td>0.500</td></tr>
+  <tr><td>90</td><td>0.250</td></tr>
+
+  <tr><td rowspan="3">G2</td><td>+45/-45</td><td>0.125</td></tr>
+  <tr><td>0</td><td>0.250</td></tr>
+  <tr><td>90</td><td>0.125</td></tr>
+
+  <tr><td rowspan="3">G3</td><td>+45/-45</td><td>0.125</td></tr>
+  <tr><td>0</td><td>0.125</td></tr>
+  <tr><td>90</td><td>0.125</td></tr>
+</table>
+
+  <p>
+    When it comes to deciding what layups will be used based on the chosen solution, certain composite design guidelines are to be followed.
+    Important notice is that these guidelines were established based on empiric and experimental data and real world data is still needed to
+    validate the design of a structure. Also, these guidlines were established back when fiber materials were still more brittle than what they
+    are today, hence some OEMs circumvent these guidelines through rigorous testing, manufacturing methods and other design features that help
+    in preventing delaminations and other defects. Design guidelines used in this project are as follows:
+  </p>
+
+  <ol>
+    <li>Laminates are to be symmetric about their middle surfaces.</li>
+    <li>Laminates are required to be balanced.</li>
+    <li>Laminates will be fiber-dominated at least 10% of their plies in each of the 0, +-45 and 90 direction.</li>
+    <li>Keep a reasonable number of primary load carrying plies away from the outer surfaces.</li>
+    <li>Laminates should be symmetric and ballanced to minimize buckling strengths.</li>
+    <li>Use of +-45 plies on the outer surfaces is recommended for stability critical laminates.</li>
+    <li>Limit layer thicknesses withing laminate to 0.5 mm or less.</li>
+    <li>The Poisson's ratio mismatch between a stiffener and apanel that are bonded or cocured together should be less than 0.1.</li>
+    <li>The maximum percentage of plies in any direction will be 60% for composites where geometric discontinuities are present (holes, etc.)</li>
+    <li>Laminates at mechanically-fastened joints should be fiber-dominated , contain no more than 60% plies at any single orientation, and contain no less than 35% +-45 plies.</li>
+  </ol>
+
+  <p>Based on the presented guidelines, determined layups for the wingbox section are:</p>
+
+  <table>
+    <tr>
+      <th>Section</th>
+      <th>Layup</th>
+      <th>Total Thickness</th>
+    </tr>
+    <tr>
+      <td>C1</td>
+      <td>[+-45/0_4/+-45/0_4/90/0_4/90/0_2]_s</td>
+      <td>5.00 mm</td>
+    </tr>
+    <tr>
+      <td>C2</td>
+      <td>[+-45/0_4/+-45/0_4/90/0_4/90/0]_s</td>
+      <td>4.75 mm</td>
+    </tr>
+    <tr>
+      <td>G1</td>
+      <td>[[+-45/0/90]_2/0_2]_s</td>
+      <td>2.50 mm</td>
+    </tr>
+    <tr>
+      <td>G2</td>
+      <td>[+-45/0/90/0]_s</td>
+      <td>1.25 mm</td>
+    </tr>
+    <tr>
+      <td>G3</td>
+      <td>[+-45/0/90]_s</td>
+      <td>1.00 mm</td>
+    </tr>
+  </table>
+    
 
     <section id="results" tabindex="-1">
       <h3>Results</h3>
