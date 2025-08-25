@@ -31,8 +31,10 @@
     }
     main {
       max-width: 900px;
-      margin: 2rem auto;
+      width: 100%;             /* make content adapt to window width */
+      margin: 2rem auto;       /* center horizontally */
       padding: 0 1rem;
+      box-sizing: border-box;  /* keep padding inside width */
     }
     section.projects {
       margin-top: 2rem;
@@ -77,6 +79,10 @@
     @media (max-width: 600px) {
       header h1 {
         font-size: 2rem;
+      }
+      main {
+        margin: 1rem;
+        padding: 0 0.5rem;
       }
     }
   </style>
