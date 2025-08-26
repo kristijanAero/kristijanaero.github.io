@@ -11,6 +11,8 @@
       background: #001f4d; /* deep blue */
       color: #f0e6d2; /* light cream */
       display: flex;
+      justify-content: center; /* centers sidebar + content horizontally */
+      align-items: flex-start; /* aligns top; change to center for vertical centering */
       min-height: 100%;
       overflow: auto; /* allow scrollbar on window */
     }
@@ -80,9 +82,9 @@
       flex-grow: 1;
       background: #00264d; /* slightly lighter dark blue */
       padding: 2rem;
-      max-width: 794px; /* A4 width */
+      max-width: 850px; /* slightly wider than A4 */
       min-height: 1123px; /* A4 height */
-      margin: 2rem auto; /* centers content horizontally */
+      margin: 2rem 0; /* vertical spacing only, horizontal centering handled by body flex */
     }
     .content section {
       margin-bottom: 2.5rem;
