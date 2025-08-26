@@ -6,14 +6,17 @@
 <title>Aerobatic Airplane Wing Design - Project Details</title>
 <style>
 body, html {
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #001f4d; /* deep blue */
   color: #f0e6d2; /* light cream */
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
+  
+  display: flex;             /* keep flex layout */
+  justify-content: center;    /* center horizontally */
+  align-items: flex-start;    /* top align, change to 'center' if you want vertical centering */
+  overflow: auto;            /* allow scrollbar on window */
 }
 .sidebar {
   background: #003366; /* dark blue */
@@ -27,6 +30,9 @@ body, html {
   margin-top: 0;
   margin-bottom: 1rem;
   font-size: 1.8rem;
+}
+.sidebar, .content {
+  flex-shrink: 0; /* ensures they keep their width */
 }
 .burger {
   display: none; /* default hidden */
@@ -1280,9 +1286,6 @@ function setMainPhoto(imgElement) {
   setMainPhoto(thumbnails[0]);
 
 </script>
-
-
-
 
 </body>
 </html>
