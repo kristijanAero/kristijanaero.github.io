@@ -10,21 +10,24 @@ body, html {
   padding: 0;
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #001f4d; /* deep blue */
-  color: #f0e6d2; /* light cream */
-  
-  display: flex;             /* keep flex layout */
-  justify-content: center;    /* center horizontally */
-  align-items: flex-start;    /* top align, change to 'center' if you want vertical centering */
-  overflow: auto;            /* allow scrollbar on window */
+  background: #001f4d;
+  color: #f0e6d2;
+  display: flex;           /* keep sidebar + content side by side */
+  overflow: auto;          /* normal scrollbar on window */
+  justify-content: center; /* horizontally center content + sidebar group */
 }
 .sidebar {
-  background: #003366; /* dark blue */
+  background: #003366;
   width: 260px;
   padding: 1rem;
   box-sizing: border-box;
   overflow-y: auto;
+  flex-shrink: 0;         /* prevent shrinking */
+  height: 100vh;           /* make it full height */
+  position: sticky;
+  top: 0;                  /* keeps sidebar at top when scrolling content */
 }
+
 .sidebar h2 {
   color: #ffb347; /* light orange */
   margin-top: 0;
@@ -82,11 +85,11 @@ body, html {
 }
 .content {
   flex-grow: 1;
-  background: #00264d; /* slightly lighter dark blue */
+  background: #00264d;
   padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-  overflow-y: auto;
+  max-width: 900px;        /* slightly wider than A4 */
+  margin: 0 2rem;          /* center content horizontally */
+  overflow-y: auto;        /* scroll inside content */
   scroll-behavior: smooth;
 }
 .content section {
