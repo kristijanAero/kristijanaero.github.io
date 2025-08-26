@@ -6,13 +6,13 @@
   <title>Aerobatic Airplane Wing Design - Project Details</title>
   <style>
     body, html {
-      margin: 0; padding: 0; height: 100%;
+      margin: 0; padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #001f4d; /* deep blue */
       color: #f0e6d2; /* light cream */
       display: flex;
-      height: 100vh;
-      overflow: hidden;
+      min-height: 100%;
+      overflow: auto; /* allow scrollbar on window */
     }
     .sidebar {
       background: #003366; /* dark blue */
@@ -75,19 +75,19 @@
       font-weight: bold;
       border-bottom: 1px solid #ffb347;
     }
+
     .content {
       flex-grow: 1;
       background: #00264d; /* slightly lighter dark blue */
       padding: 2rem;
-      max-width: 800px;
-      margin: 0 auto;
-      overflow-y: auto;
-      scroll-behavior: smooth;
+      max-width: 794px; /* A4 width */
+      min-height: 1123px; /* A4 height */
+      margin: 2rem auto; /* centers content horizontally */
     }
     .content section {
       margin-bottom: 2.5rem;
-      scroll-margin-top: 1.5rem; /* So heading isn’t hidden when scrolled to */
-      outline: none; /* avoid default outline when focused */
+      scroll-margin-top: 1.5rem;
+      outline: none;
     }
     .content section h3 {
       color: #ffb347;
@@ -114,7 +114,6 @@
     .back-link:hover {
       text-decoration: underline;
     }
-
 
     .gallery-container {
       max-width: 800px;
@@ -180,11 +179,11 @@
         height: auto;
         overflow: auto;
       }
-    
+
       .burger {
         display: flex;
       }
-    
+
       .sidebar {
         position: fixed;
         top: 0;
@@ -199,19 +198,19 @@
         transition: transform 0.3s ease;
         z-index: 1500;
       }
-    
+
       .sidebar.open {
         transform: translateX(0);
       }
-    
+
       .content {
         max-width: 100%;
+        min-height: auto;
+        margin: 2rem auto;
         padding: 1rem;
-        margin: 0;
-        overflow: visible;
       }
-}
-</style>
+    }
+  </style>
 
 </head>
 <body>
