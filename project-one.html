@@ -1130,6 +1130,12 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 
     <p>Observing the new results with only wingbox skin and spar caps layups being changed, it is noticed that the location of the maximum Tsai Wu failure index has been translated onto a front spar web (OPTI1). Thus, it has been decided to add 2 additional +-45 \degree plies onto each side of the midplane of spar web layups (OPTI2). This change has reduced maximum Tsai Wu failure index from 0.977 to 0.8, and also changing the location of maximum failure index to spar cap skin interface. Maximum displacement in Y direction for the first optimized iteration (OPTI0) is 295.4 mm, and maximum displacement in Y direction for strengthened spar webs is 289.1, which represents a change of 2.2% (6.3 mm).</p>
 
+    Below is the U2 displacement diagram in spanwise direction for top side of the both front and aft spar caps. Bottom sides' displacement wasn't plotted because of how the pressure field loading is applied since it might not show "realistic" results and the displacement might be more aggressive than it would in real world situation.
+    
+    <img src="photos/U2plot.png" alt="u2 spanwise" style="width: 100%; height: auto;"/>
+    <p> style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Spanwise displacement of Front and Aft Spar Cap Topside in Y direction</p>
+
+
     <p><b>Important notice about the maximum failure location and value:</b> When optimization was being run, maximum failure index was being measured for the whole wing structure - layups were simple 8 ply quasi-isotropic symmetric layups with thick plies (as described in the optimization chapter). After the results were obtained, realistic layups were implemented into the model (OPTI1), thus changing the properties of those layups including the stiffnesses. Implementation of those realistic layups resulted with different structural behavior (different material properties) under the loading conditions meaning different results were obtained - this is why maximum failure index value and location was different between the optimized model with thick plies (OPTI0) and modified one with realistic layups (OPTI1).</p>
 
     <img src="photos/opti1results.png" alt="opti 1 results" style="width: 100%; height: auto;"/>
@@ -1208,7 +1214,6 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 
     <img src="photos/mode6.png" alt="mode 6" style="width: 100%; height: auto;"/>
     <p> style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Mode 6, 179.900 Hz</p>
-
 
     </section>
 
