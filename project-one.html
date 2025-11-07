@@ -1234,12 +1234,33 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 
     <p>Running the extended model, a potential stress singularity issue was noticed. To pinpoint the problem to a stress singularity, multiple models with differentiating mesh sizes were ran. To compare all of the models one point and one element location were picked. For comparison of U2 displacements, a node on the leading edge of the tip airfoil was chosen; and for comparison of TSAIW failure index in relation to thickness, an element near the front spar and leading edge interface was chosen. Both the node and element are shown in the images below.</p>
 
+<div class="gallery-container">
+  <div class="main-photo-wrapper" style="position: relative; display: inline-block;">
+    <div class="main-arrow left-arrow" onclick="prevMainPhoto()" 
+      style="position: absolute; top: 50%; left: 5px; transform: translateY(-50%);
+             cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
+             background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;
+             text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);">
+      &#10094;
+    </div>
+
+    <img id="mainPhoto" class="main-photo" src="photos/global60.png" alt="Main Photo" style="display: block; max-width: 100%;">
+
+    <div id="mainPhotoDescription" style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem">Global size = 60 mm</div>
+
+    <div class="main-arrow right-arrow" onclick="nextMainPhoto()" 
+      style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%);
+             cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
+             background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;">
+      &#10095;
+    </div>
+  </div>
+
   <div class="thumbnails-wrapper" style="display: flex; align-items: center; margin-top: 10px;">
     <div class="arrow" onclick="scrollThumbnails(-1)" 
          style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10094;</div>
     <div class="thumbnails" id="thumbnails" style="overflow-x: auto; white-space: nowrap; flex: 1;">
-      <!-- Thumbnail images -->
-      <img src="photos/convergencePlottingMesh.png" onclick="setMainPhoto(this)" alt="thumb6" data-description="Root side leading edge skin mesh">
+      <img src="photos/convergencePlottingMesh.png" onclick="setMainPhoto(this)" alt="thumb0" data-description="Root side leading edge skin mesh">
       <img src="photos/global60.png" onclick="setMainPhoto(this)" class="active" alt="thumb1" data-description="Global size = 60 mm">
       <img src="photos/global50.png" onclick="setMainPhoto(this)" alt="thumb2" data-description="Global size = 50 mm">
       <img src="photos/global30.png" onclick="setMainPhoto(this)" alt="thumb3" data-description="Global size = 30 mm">
@@ -1249,6 +1270,8 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
     <div class="arrow" onclick="scrollThumbnails(1)" 
          style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10095;</div>
   </div>
+</div>
+
 
   </main>
 
