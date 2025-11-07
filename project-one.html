@@ -1236,41 +1236,42 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 
 <div class="gallery-container">
   <div class="main-photo-wrapper" style="position: relative; display: inline-block;">
-    <div class="main-arrow left-arrow" onclick="prevMainPhoto()" 
-      style="position: absolute; top: 50%; left: 5px; transform: translateY(-50%);
-             cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
-             background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;
-             text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);">
-      &#10094;
-    </div>
+    <div class="main-arrow left-arrow" onclick="prevMainPhoto2()" 
+     style="position: absolute; top: 50%; left: 5px; transform: translateY(-50%);
+            cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
+            background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);">
+  &#10094;
+</div>
 
-    <img id="mainPhoto" class="main-photo" src="photos/global60.png" alt="Main Photo" style="display: block; max-width: 100%;">
+    <img id="mainPhoto2" class="main-photo" src="photos/global60.png" alt="Main Photo" style="display: block; max-width: 100%;">
 
-    <div id="mainPhotoDescription" style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem">Global size = 60 mm</div>
+    <div id="mainPhotoDescription2" style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem"></div>
 
-    <div class="main-arrow right-arrow" onclick="nextMainPhoto()" 
-      style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%);
-             cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
-             background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;">
+    <div class="main-arrow right-arrow" onclick="nextMainPhoto2()" 
+         style="position: absolute; top: 50%; right: 5px; transform: translateY(-50%);
+                cursor: pointer; font-size: 2rem; color: white; user-select: none; z-index: 10;
+                background: rgba(0,0,0,0.4); padding: 5px 10px; border-radius: 50%;">
       &#10095;
     </div>
   </div>
 
   <div class="thumbnails-wrapper" style="display: flex; align-items: center; margin-top: 10px;">
-    <div class="arrow" onclick="scrollThumbnails(-1)" 
+    <div class="arrow" onclick="scrollThumbnails2(-1)" 
          style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10094;</div>
-    <div class="thumbnails" id="thumbnails" style="overflow-x: auto; white-space: nowrap; flex: 1;">
-      <img src="photos/convergencePlottingMesh.png" onclick="setMainPhoto(this)" alt="thumb0" data-description="Root side leading edge skin mesh">
-      <img src="photos/global60.png" onclick="setMainPhoto(this)" class="active" alt="thumb1" data-description="Global size = 60 mm">
-      <img src="photos/global50.png" onclick="setMainPhoto(this)" alt="thumb2" data-description="Global size = 50 mm">
-      <img src="photos/global30.png" onclick="setMainPhoto(this)" alt="thumb3" data-description="Global size = 30 mm">
-      <img src="photos/global30damage.png" onclick="setMainPhoto(this)" alt="thumb4" data-description="Global size = 30 mm - with damage model">
-      <img src="photos/global15localrefinement.png" onclick="setMainPhoto(this)" alt="thumb5" data-description="Global size = 15 mm with local refinements">
+    <div class="thumbnails" id="thumbnails2" style="overflow-x: auto; white-space: nowrap; flex: 1;">
+      <img src="photos/convergencePlottingMesh.png" onclick="setMainPhoto2(this)" alt="thumb6" data-description="Root side leading edge skin mesh">
+      <img src="photos/global60.png" onclick="setMainPhoto2(this)" class="active" alt="thumb1" data-description="Global size = 60 mm">
+      <img src="photos/global50.png" onclick="setMainPhoto2(this)" alt="thumb2" data-description="Global size = 50 mm">
+      <img src="photos/global30.png" onclick="setMainPhoto2(this)" alt="thumb3" data-description="Global size = 30 mm">
+      <img src="photos/global30damage.png" onclick="setMainPhoto2(this)" alt="thumb4" data-description="Global size = 30 mm - with damage model">
+      <img src="photos/global15localrefinement.png" onclick="setMainPhoto2(this)" alt="thumb5" data-description="Global size = 15 mm with local refinements">
     </div>
-    <div class="arrow" onclick="scrollThumbnails(1)" 
+    <div class="arrow" onclick="scrollThumbnails2(1)" 
          style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10095;</div>
   </div>
 </div>
+
 
 
   </main>
@@ -1401,6 +1402,57 @@ function setMainPhoto(imgElement) {
 
   // Initialize the gallery - mark first thumbnail active on load
   setMainPhoto(thumbnails[0]);
+
+// SECOND GALLERY
+  const thumbnailsContainer2 = document.getElementById("thumbnails2");
+  const thumbnails2 = thumbnailsContainer2.querySelectorAll("img");
+  const mainPhoto2 = document.getElementById("mainPhoto2");
+
+  let currentIndex2 = 0;
+
+  function setMainPhoto2(imgElement) {
+    mainPhoto2.src = imgElement.src;
+    document.getElementById("mainPhotoDescription2").textContent = imgElement.dataset.description || "";
+
+    thumbnails2.forEach((img, i) => {
+      img.classList.toggle("active", img === imgElement);
+      if (img === imgElement) currentIndex2 = i;
+    });
+
+    scrollThumbnailIntoView2(currentIndex2);
+  }
+
+  function scrollThumbnails2(direction) {
+    const scrollAmount = 100;
+    thumbnailsContainer2.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+  }
+
+  function scrollThumbnailIntoView2(index) {
+    const thumbnail = thumbnails2[index];
+    if (!thumbnail) return;
+
+    const containerRect = thumbnailsContainer2.getBoundingClientRect();
+    const thumbRect = thumbnail.getBoundingClientRect();
+    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
+
+    thumbnailsContainer2.scrollBy({ left: offset, behavior: "smooth" });
+  }
+
+  function prevMainPhoto2() {
+    if (currentIndex2 > 0) {
+      currentIndex2--;
+      setMainPhoto2(thumbnails2[currentIndex2]);
+    }
+  }
+
+  function nextMainPhoto2() {
+    if (currentIndex2 < thumbnails2.length - 1) {
+      currentIndex2++;
+      setMainPhoto2(thumbnails2[currentIndex2]);
+    }
+  }
+
+  setMainPhoto2(thumbnails2[0]);
 
 </script>
 
