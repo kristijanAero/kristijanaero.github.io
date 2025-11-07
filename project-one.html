@@ -1224,12 +1224,31 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 
     </section>
 
-    <p> Next stage contains analysis of the wing in the wing-fuselage assembly. This stage represents more realistic wing structure where the spars are extended as to connect to the fuselage of the airplane. It was decided that the two wings will share both front and aft spars to make the structure simpler. This means that during the manufacturing process, only two spars are made that span from one wing tip to the other. In this stage, it is expected that modifications to the current wing structure will be needed.</p>
+    <p>From the optimized wing model a new model was made. This model differs from the previous one as it has both the front and aft spars extended by 500 mm. This way the wing is made to be set into a fuselage located slot where it will be pinned by a bolt on each side of the wing. To make the analysis simpler, bolts were represented as pin boundary conditions in the middle of the extended spars' webs. To realistically model bolt and sandwich assembly interface, real life experiment results for validation are needed, and there are no exceptions hence surface based modelling should be avoided.</p>
 
-    <img src="photos/preliminary.png" alt="preliminary" style="width: 100%; height: auto;"/>
-    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Preliminary wing model for the second phase of simulation testing</p>
+    <img src="photos/extendedSections.png" alt="EXT model sections" style="width: 85%; height: auto;"/>
+    <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">EXT model sections</p>
+
+    <p>Boundary conditions for EXT model (Extended spars model) are symmetry on ends of the spars about XY plane and pins on the center of the extended spar webs. Contact modelling was tried but failed with big convergence issues and high stress peaks so simplification was introduced. It is assumed that the maximum displacements of the spars (in location where the slots would be) won't exceed clearance for spar-slot assembly.</p>
 
 
+    <p>Running the extended model, a potential stress singularity issue was noticed. To pinpoint the problem to a stress singularity, multiple models with differentiating mesh sizes were ran. To compare all of the models one point and one element location were picked. For comparison of U2 displacements, a node on the leading edge of the tip airfoil was chosen; and for comparison of TSAIW failure index in relation to thickness, an element near the front spar and leading edge interface was chosen. Both the node and element are shown in the images below.</p>
+
+  <div class="thumbnails-wrapper" style="display: flex; align-items: center; margin-top: 10px;">
+    <div class="arrow" onclick="scrollThumbnails(-1)" 
+         style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10094;</div>
+    <div class="thumbnails" id="thumbnails" style="overflow-x: auto; white-space: nowrap; flex: 1;">
+      <!-- Thumbnail images -->
+      <img src="photos/convergencePlottingMesh.png" onclick="setMainPhoto(this)" alt="thumb6" data-description="Root side leading edge skin mesh">
+      <img src="photos/global60.png" onclick="setMainPhoto(this)" class="active" alt="thumb1" data-description="Global size = 60 mm">
+      <img src="photos/global50.png" onclick="setMainPhoto(this)" alt="thumb2" data-description="Global size = 50 mm">
+      <img src="photos/global30.png" onclick="setMainPhoto(this)" alt="thumb3" data-description="Global size = 30 mm">
+      <img src="photos/global30damage.png" onclick="setMainPhoto(this)" alt="thumb4" data-description="Global size = 30 mm - with damage model">
+      <img src="photos/global15localrefinement.png" onclick="setMainPhoto(this)" alt="thumb5" data-description="Global size = 15 mm with local refinements">
+    </div>
+    <div class="arrow" onclick="scrollThumbnails(1)" 
+         style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10095;</div>
+  </div>
 
   </main>
 
