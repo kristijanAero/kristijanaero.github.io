@@ -224,7 +224,9 @@ body, html {
     <button class="chapter-button" data-target="mats">Materials</button>
     <button class="chapter-button" data-target="fea">Numerical Model</button>
     <button class="chapter-button" data-target="optimization">Optimization</button>
-    <button class="chapter-button" data-target="optimization results">Optimization results</button>  
+    <button class="chapter-button" data-target="optimization results">Optimization results</button>
+    <button class="chapter-button" data-target="extended model">Extended model</button>  
+
   </nav>
 
   <main class="content">
@@ -1224,6 +1226,9 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 
     </section>
 
+<section id="extended model" tabindex="-1">
+<h3>Extended model</h3>
+
     <p>From the optimized wing model a new model was made. This model differs from the previous one as it has both the front and aft spars extended by 500 mm. This way the wing is made to be set into a fuselage located slot where it will be pinned by a bolt on each side of the wing. To make the analysis simpler, bolts were represented as pin boundary conditions in the middle of the extended spars' webs. To realistically model bolt and sandwich assembly interface, real life experiment results for validation are needed, and there are no exceptions hence surface based modelling should be avoided.</p>
 
     <img src="photos/extendedSections.png" alt="EXT model sections" style="width: 85%; height: auto;"/>
@@ -1271,11 +1276,13 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
   </div>
 </div>
 
+<p>When running the models to test the convergence, an issue was encountered. Every model had trouble converging after a certain point since the required time increment was less than specified (1e22). Presumably </p>
+
 <p>Plotting TSAIW index distribution on the targeted element in the leading edge - front spar cap interface, a significant discrepancy was noticed for the model using global element size of 15 mm. Rest of the results show same trendline.</p>
 
 <img src="photos/extended_convergence.jpg" alt="extended TSAIW convergence" style="width: 100%; height: auto;"/>
 <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Model convergence using TSAIW failure index values of targeted element measured on integration point</p>
-
+</section>
 
 </main>
 
