@@ -1243,8 +1243,8 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 
   <p>When the whole structure bends, bending stresses are distributed not only over the caps but also over the surrounding elements. If the spar can survive this magnitude of bending in isolation, the structure itself can survive it, since stress distribution was shown to be maximal on the spar layups in the optimized model and reduced to lower values on the surrounding skin.</p>
 
-  <p>Images of different mesh sizes with location of stress peaks can be found below together with TSAIW distribution through thickness for the element experiencing high failure index values</p>
-  
+  <p>Images of different mesh sizes with location of stress peaks can be found below together with TSAIW distribution through thickness for the element experiencing high failure index values. Values show the last increment of convergence before simulation ended.</p>
+
 <div class="gallery-container">
   <div class="main-photo-wrapper" style="position: relative; display: inline-block;">
     <div class="main-arrow left-arrow" onclick="prevMainPhoto2()" 
@@ -1282,7 +1282,6 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
   </div>
 </div>
 
-<p>When running the models to test the convergence, an issue was encountered. Every model had trouble converging, most likely because of the high deformations caused by high stiffness ratio in the above mention interface. Considering this, displacement U2 was plotted for time period thats equal for each model (majority of the models ended around the same time period in the model and outputted the same number of iteration results).</p>
 
 <img src="photos/extended_convergence.jpg" alt="extended TSAIW convergence" style="width: 100%; height: auto;"/>
 <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Model convergence using TSAIW failure index values of targeted element measured on integration point</p>
