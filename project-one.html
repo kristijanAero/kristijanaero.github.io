@@ -1237,8 +1237,14 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
     <p>Boundary conditions for EXT model (Extended spars model) are symmetry on ends of the spars about XY plane and pins on the center of the extended spar webs. Contact modelling was tried but failed with big convergence issues and high stress peaks so simplification was introduced. It is assumed that the maximum displacements of the spars (in location where the slots would be) won't exceed clearance for spar-slot assembly.</p>
 
 
-    <p>Running the extended model, a potential stress singularity issue was noticed. To pinpoint the problem to a stress singularity, multiple models with differentiating mesh sizes were ran. To compare all of the models one point and one element location were picked. For comparison of U2 displacements, a node on the leading edge of the tip airfoil was chosen; and for comparison of TSAIW failure index in relation to thickness, an element near the front spar and leading edge interface was chosen. Both the node and element are shown in the images below.</p>
+  <p>When running the extended model, high stress peaks were observed at the spar cap and leading edge overlap interface. To determine whether these stresses represent numerical singularities, a mesh convergence study was performed. Since the TSAIW values showed minimal variation across different mesh densities, it can be confidently stated that these stress peaks result from the stiffness mismatch between the C2 and LE layups.</p>
 
+  <p>An appropriate approach to address this issue would be to model the geometry using solid elements and define an adhesive layer between the target layups. However, considering that this approach would be both time-consuming and resource-intensive, a second-best solution would be to simulate the bending of the front spar only, using displacement boundary conditions.</p>
+
+  <p>When the whole structure bends, bending stresses are distributed not only over the caps but also over the surrounding elements. If the spar can survive this magnitude of bending in isolation, the structure itself can survive it, since stress distribution was shown to be maximal on the spar layups in the optimized model and reduced to lower values on the surrounding skin.</p>
+
+  <p>Images of different mesh sizes with location of stress peaks can be found below together with TSAIW distribution through thickness for the element experiencing high failure index values</p>
+  
 <div class="gallery-container">
   <div class="main-photo-wrapper" style="position: relative; display: inline-block;">
     <div class="main-arrow left-arrow" onclick="prevMainPhoto2()" 
@@ -1276,9 +1282,7 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
   </div>
 </div>
 
-<p>When running the models to test the convergence, an issue was encountered. Every model had trouble converging after a certain point since the required time increment was less than specified (1e22). Presumably because of the existance of singularity in the model. Considering this, displacement U2 was plotted for time period thats equal for each model (majority of the models ended around the same time period in the model and outputted the same number of iteration results).</p>
-
-<p>Plotting TSAIW index distribution on the targeted element in the leading edge - front spar cap interface, a significant discrepancy was noticed for the model using global element size of 15 mm. Rest of the results show same trendline.</p>
+<p>When running the models to test the convergence, an issue was encountered. Every model had trouble converging, most likely because of the high deformations caused by high stiffness ratio in the above mention interface. Considering this, displacement U2 was plotted for time period thats equal for each model (majority of the models ended around the same time period in the model and outputted the same number of iteration results).</p>
 
 <img src="photos/extended_convergence.jpg" alt="extended TSAIW convergence" style="width: 100%; height: auto;"/>
 <p style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem;">Model convergence using TSAIW failure index values of targeted element measured on integration point</p>
