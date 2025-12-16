@@ -1332,78 +1332,77 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
 </main>
 
 <script>
+
   const buttons = document.querySelectorAll('.chapter-button');
-  const sections = Array.from(buttons).map(btn => document.getElementById(btn.dataset.target));
-  const content = document.querySelector('.content');
-  const burger = document.getElementById('burger');
-  const sidebar = document.getElementById('sidebar');
+const sections = Array.from(buttons).map(btn => document.getElementById(btn.dataset.target));
+const content = document.querySelector('.content');
+const burger = document.getElementById('burger');
+const sidebar = document.getElementById('sidebar');
 
-  // Toggle sidebar on mobile
-  burger.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
-  });
+// Toggle sidebar on mobile
+burger.addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+});
 
-  // Scroll to section on click
-  buttons.forEach((button, i) => {
-    button.addEventListener('click', () => {
-      const targetSection = sections[i];
-      if (targetSection) {
-        const isMobile = window.innerWidth <= 900;
+// Scroll to section on click
+buttons.forEach((button, i) => {
+  button.addEventListener('click', () => {
+    const targetSection = sections[i];
+    if (targetSection) {
+      const isMobile = window.innerWidth <= 900;
 
-        if (isMobile) {
-          window.scrollTo({
-            top: targetSection.getBoundingClientRect().top + window.scrollY - 80,
-            behavior: 'smooth'
-          });
-          sidebar.classList.remove('open'); // Close menu after click
-        } else {
-          content.scrollTo({
-            top: targetSection.offsetTop,
-            behavior: 'smooth'
-          });
-        }
-
-        targetSection.focus({ preventScroll: true });
-        setActiveButton(i);
+      if (isMobile) {
+        window.scrollTo({
+          top: targetSection.getBoundingClientRect().top + window.scrollY - 80,
+          behavior: 'smooth'
+        });
+        sidebar.classList.remove('open'); // Close menu after click
+      } else {
+        content.scrollTo({
+          top: targetSection.offsetTop,
+          behavior: 'smooth'
+        });
       }
-    });
-  });
 
-  // Highlight active chapter
-  function setActiveButton(index) {
-    buttons.forEach((btn, i) => {
-      btn.classList.toggle('active', i === index);
-    });
-  }
-
-  // Track scroll for active highlight (desktop only)
-  content.addEventListener('scroll', () => {
-    if (window.innerWidth > 900) {
-      const scrollPos = content.scrollTop + 10;
-      let currentIndex = 0;
-
-      sections.forEach((section, i) => {
-        const heading = section.querySelector('h3');
-        if (heading && heading.offsetTop <= scrollPos) {
-          currentIndex = i;
-        }
-      });
-
-      setActiveButton(currentIndex);
+      targetSection.focus({ preventScroll: true });
+      setActiveButton(i);
     }
   });
+});
 
-  // Set default active on load
-  setActiveButton(0);
+// Highlight active chapter
+function setActiveButton(index) {
+  buttons.forEach((btn, i) => {
+    btn.classList.toggle('active', i === index);
+  });
+}
 
-  // Gallery related code
+// Track scroll for active highlight (desktop only)
+content.addEventListener('scroll', () => {
+  if (window.innerWidth > 900) {
+    const scrollPos = content.scrollTop + 10;
+    let currentIndex = 0;
 
-  const thumbnailsContainer = document.getElementById("thumbnails");
-  const thumbnails = thumbnailsContainer.querySelectorAll("img");
-  const mainPhoto = document.getElementById("mainPhoto");
+    sections.forEach((section, i) => {
+      const heading = section.querySelector('h3');
+      if (heading && heading.offsetTop <= scrollPos) {
+        currentIndex = i;
+      }
+    });
 
-  // Current active index for the gallery
-  let currentIndex = 0;
+    setActiveButton(currentIndex);
+  }
+});
+
+// Set default active on load
+setActiveButton(0);
+
+// FIRST GALLERY
+const thumbnailsContainer = document.getElementById("thumbnails");
+const thumbnails = thumbnailsContainer.querySelectorAll("img");
+const mainPhoto = document.getElementById("mainPhoto");
+
+let currentIndex = 0;
 
 function setMainPhoto(imgElement) {
   mainPhoto.src = imgElement.src;
@@ -1418,201 +1417,140 @@ function setMainPhoto(imgElement) {
   scrollThumbnailIntoView(currentIndex);
 }
 
+function scrollThumbnails(direction) {
+  const scrollAmount = 100;
+  thumbnailsContainer.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+}
 
-  // Scroll thumbnails ribbon by direction (-1 or 1)
-  function scrollThumbnails(direction) {
-    const scrollAmount = 100;
-    thumbnailsContainer.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+function scrollThumbnailIntoView(index) {
+  const thumbnail = thumbnails[index];
+  if (!thumbnail) return;
+
+  const containerRect = thumbnailsContainer.getBoundingClientRect();
+  const thumbRect = thumbnail.getBoundingClientRect();
+
+  const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
+
+  thumbnailsContainer.scrollBy({ left: offset, behavior: "smooth" });
+}
+
+function prevMainPhoto() {
+  if (currentIndex > 0) {
+    currentIndex--;
+    setMainPhoto(thumbnails[currentIndex]);
   }
+}
 
-  // Scroll the thumbnails container to center the active thumbnail if possible
-  function scrollThumbnailIntoView(index) {
-    const thumbnail = thumbnails[index];
-    if (!thumbnail) return;
-
-    const containerRect = thumbnailsContainer.getBoundingClientRect();
-    const thumbRect = thumbnail.getBoundingClientRect();
-
-    // Calculate how much to scroll to center the thumbnail
-    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
-
-    thumbnailsContainer.scrollBy({ left: offset, behavior: "smooth" });
+function nextMainPhoto() {
+  if (currentIndex < thumbnails.length - 1) {
+    currentIndex++;
+    setMainPhoto(thumbnails[currentIndex]);
   }
+}
 
-  // Show previous image on main image arrow click
-  function prevMainPhoto() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      setMainPhoto(thumbnails[currentIndex]);
-    }
-  }
-
-  // Show next image on main image arrow click
-  function nextMainPhoto() {
-    if (currentIndex < thumbnails.length - 1) {
-      currentIndex++;
-      setMainPhoto(thumbnails[currentIndex]);
-    }
-  }
-
-  // Initialize the gallery - mark first thumbnail active on load
-  setMainPhoto(thumbnails[0]);
+setMainPhoto(thumbnails[0]);
 
 // SECOND GALLERY
-  const thumbnailsContainer2 = document.getElementById("thumbnails2");
-  const thumbnails2 = thumbnailsContainer2.querySelectorAll("img");
-  const mainPhoto2 = document.getElementById("mainPhoto2");
+const thumbnailsContainer2 = document.getElementById("thumbnails2");
+const thumbnails2 = thumbnailsContainer2.querySelectorAll("img");
+const mainPhoto2 = document.getElementById("mainPhoto2");
 
-  let currentIndex2 = 0;
+let currentIndex2 = 0;
 
-  function setMainPhoto2(imgElement) {
-    mainPhoto2.src = imgElement.src;
-    document.getElementById("mainPhotoDescription2").textContent = imgElement.dataset.description || "";
+function setMainPhoto2(imgElement) {
+  mainPhoto2.src = imgElement.src;
+  document.getElementById("mainPhotoDescription2").textContent = imgElement.dataset.description || "";
 
-    thumbnails2.forEach((img, i) => {
-      img.classList.toggle("active", img === imgElement);
-      if (img === imgElement) currentIndex2 = i;
-    });
+  thumbnails2.forEach((img, i) => {
+    img.classList.toggle("active", img === imgElement);
+    if (img === imgElement) currentIndex2 = i;
+  });
 
-    scrollThumbnailIntoView2(currentIndex2);
+  scrollThumbnailIntoView2(currentIndex2);
+}
+
+function scrollThumbnails2(direction) {
+  const scrollAmount = 100;
+  thumbnailsContainer2.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+}
+
+function scrollThumbnailIntoView2(index) {
+  const thumbnail = thumbnails2[index];
+  if (!thumbnail) return;
+
+  const containerRect = thumbnailsContainer2.getBoundingClientRect();
+  const thumbRect = thumbnail.getBoundingClientRect();
+  const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
+
+  thumbnailsContainer2.scrollBy({ left: offset, behavior: "smooth" });
+}
+
+function prevMainPhoto2() {
+  if (currentIndex2 > 0) {
+    currentIndex2--;
+    setMainPhoto2(thumbnails2[currentIndex2]);
   }
+}
 
-  function scrollThumbnails2(direction) {
-    const scrollAmount = 100;
-    thumbnailsContainer2.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+function nextMainPhoto2() {
+  if (currentIndex2 < thumbnails2.length - 1) {
+    currentIndex2++;
+    setMainPhoto2(thumbnails2[currentIndex2]);
   }
+}
 
-  function scrollThumbnailIntoView2(index) {
-    const thumbnail = thumbnails2[index];
-    if (!thumbnail) return;
-
-    const containerRect = thumbnailsContainer2.getBoundingClientRect();
-    const thumbRect = thumbnail.getBoundingClientRect();
-    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
-
-    thumbnailsContainer2.scrollBy({ left: offset, behavior: "smooth" });
-  }
-
-  function prevMainPhoto2() {
-    if (currentIndex2 > 0) {
-      currentIndex2--;
-      setMainPhoto2(thumbnails2[currentIndex2]);
-    }
-  }
-
-  function nextMainPhoto2() {
-    if (currentIndex2 < thumbnails2.length - 1) {
-      currentIndex2++;
-      setMainPhoto2(thumbnails2[currentIndex2]);
-    }
-  }
-
-  setMainPhoto2(thumbnails2[0]);
-
-
-// SECOND GALLERY
-  const thumbnailsContainer2 = document.getElementById("thumbnails2");
-  const thumbnails2 = thumbnailsContainer2.querySelectorAll("img");
-  const mainPhoto2 = document.getElementById("mainPhoto2");
-
-  let currentIndex2 = 0;
-
-  function setMainPhoto2(imgElement) {
-    mainPhoto2.src = imgElement.src;
-    document.getElementById("mainPhotoDescription2").textContent = imgElement.dataset.description || "";
-
-    thumbnails2.forEach((img, i) => {
-      img.classList.toggle("active", img === imgElement);
-      if (img === imgElement) currentIndex2 = i;
-    });
-
-    scrollThumbnailIntoView2(currentIndex2);
-  }
-
-  function scrollThumbnails2(direction) {
-    const scrollAmount = 100;
-    thumbnailsContainer2.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
-  }
-
-  function scrollThumbnailIntoView2(index) {
-    const thumbnail = thumbnails2[index];
-    if (!thumbnail) return;
-
-    const containerRect = thumbnailsContainer2.getBoundingClientRect();
-    const thumbRect = thumbnail.getBoundingClientRect();
-    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
-
-    thumbnailsContainer2.scrollBy({ left: offset, behavior: "smooth" });
-  }
-
-  function prevMainPhoto2() {
-    if (currentIndex2 > 0) {
-      currentIndex2--;
-      setMainPhoto2(thumbnails2[currentIndex2]);
-    }
-  }
-
-  function nextMainPhoto2() {
-    if (currentIndex2 < thumbnails2.length - 1) {
-      currentIndex2++;
-      setMainPhoto2(thumbnails2[currentIndex2]);
-    }
-  }
-
-  setMainPhoto2(thumbnails2[0]);
-
+setMainPhoto2(thumbnails2[0]);
 
 // THIRD GALLERY
-  const thumbnailsContainer3 = document.getElementById("thumbnails3");
-  const thumbnails3 = thumbnailsContainer3.querySelectorAll("img");
-  const mainPhoto3 = document.getElementById("mainPhoto3");
+const thumbnailsContainer3 = document.getElementById("thumbnails3");
+const thumbnails3 = thumbnailsContainer3.querySelectorAll("img");
+const mainPhoto3 = document.getElementById("mainPhoto3");
 
-  let currentIndex3 = 0;
+let currentIndex3 = 0;
 
-  function setMainPhoto3(imgElement) {
-    mainPhoto3.src = imgElement.src;
-    document.getElementById("mainPhotoDescription3").textContent = imgElement.dataset.description || "";
+function setMainPhoto3(imgElement) {
+  mainPhoto3.src = imgElement.src;
+  document.getElementById("mainPhotoDescription3").textContent = imgElement.dataset.description || "";
 
-    thumbnails3.forEach((img, i) => {
-      img.classList.toggle("active", img === imgElement);
-      if (img === imgElement) currentIndex3 = i;
-    });
+  thumbnails3.forEach((img, i) => {
+    img.classList.toggle("active", img === imgElement);
+    if (img === imgElement) currentIndex3 = i;
+  });
 
-    scrollThumbnailIntoView3(currentIndex3);
+  scrollThumbnailIntoView3(currentIndex3);
+}
+
+function scrollThumbnails3(direction) {
+  const scrollAmount = 100;
+  thumbnailsContainer3.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+}
+
+function scrollThumbnailIntoView3(index) {
+  const thumbnail = thumbnails3[index];
+  if (!thumbnail) return;
+
+  const containerRect = thumbnailsContainer3.getBoundingClientRect();
+  const thumbRect = thumbnail.getBoundingClientRect();
+  const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
+
+  thumbnailsContainer3.scrollBy({ left: offset, behavior: "smooth" });
+}
+
+function prevMainPhoto3() {
+  if (currentIndex3 > 0) {
+    currentIndex3--;
+    setMainPhoto3(thumbnails3[currentIndex3]);
   }
+}
 
-  function scrollThumbnails3(direction) {
-    const scrollAmount = 100;
-    thumbnailsContainer3.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+function nextMainPhoto3() {
+  if (currentIndex3 < thumbnails3.length - 1) {
+    currentIndex3++;
+    setMainPhoto3(thumbnails3[currentIndex3]);
   }
+}
 
-  function scrollThumbnailIntoView3(index) {
-    const thumbnail = thumbnails3[index];
-    if (!thumbnail) return;
-
-    const containerRect = thumbnailsContainer3.getBoundingClientRect();
-    const thumbRect = thumbnail.getBoundingClientRect();
-    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
-
-    thumbnailsContainer3.scrollBy({ left: offset, behavior: "smooth" });
-  }
-
-  function prevMainPhoto3() {
-    if (currentIndex3 > 0) {
-      currentIndex3--;
-      setMainPhoto3(thumbnails3[currentIndex3]);
-    }
-  }
-
-  function nextMainPhoto3() {
-    if (currentIndex3 < thumbnails3.length - 1) {
-      currentIndex3++;
-      setMainPhoto3(thumbnails3[currentIndex3]);
-    }
-  }
-
-  setMainPhoto3(thumbnails3[0]);
-
+setMainPhoto3(thumbnails3[0]);
 </script>
 
 </body>
