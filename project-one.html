@@ -1300,7 +1300,7 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
   &#10094;
 </div>
 
-    <img id="mainPhoto2" class="main-photo" src="photos/meshSpar.png" alt="Main Photo" style="display: block; max-width: 100%;">
+    <img id="mainPhoto3" class="main-photo" src="photos/meshSpar.png" alt="Main Photo" style="display: block; max-width: 100%;">
 
     <div id="mainPhotoDescription2" style="color: #ffd8a8; font-style: italic; margin-top: 0.5rem"></div>
 
@@ -1315,7 +1315,7 @@ Below are the photos showing mesh throughout the wing geometry. Wingbox skin mes
   <div class="thumbnails-wrapper" style="display: flex; align-items: center; margin-top: 10px;">
     <div class="arrow" onclick="scrollThumbnails2(-1)" 
          style="cursor: pointer; font-size: 2rem; user-select: none; padding: 5px 10px;">&#10094;</div>
-    <div class="thumbnails" id="thumbnails2" style="overflow-x: auto; white-space: nowrap; flex: 1;">
+    <div class="thumbnails" id="thumbnails3" style="overflow-x: auto; white-space: nowrap; flex: 1;">
       <img src="photos/meshSpar.png" onclick="setMainPhoto2(this)" alt="thumb6" data-description="Mesh Extended Spar">
       <img src="photos/uSpar.png" onclick="setMainPhoto2(this)" class="active" alt="thumb1" data-description="U Magnitude Extended Spar">
       <img src="photos/tsaiwSpar.png" onclick="setMainPhoto2(this)" alt="thumb2" data-description="TSAIW Extended Spar">
@@ -1508,6 +1508,110 @@ function setMainPhoto(imgElement) {
   }
 
   setMainPhoto2(thumbnails2[0]);
+
+
+// SECOND GALLERY
+  const thumbnailsContainer2 = document.getElementById("thumbnails2");
+  const thumbnails2 = thumbnailsContainer2.querySelectorAll("img");
+  const mainPhoto2 = document.getElementById("mainPhoto2");
+
+  let currentIndex2 = 0;
+
+  function setMainPhoto2(imgElement) {
+    mainPhoto2.src = imgElement.src;
+    document.getElementById("mainPhotoDescription2").textContent = imgElement.dataset.description || "";
+
+    thumbnails2.forEach((img, i) => {
+      img.classList.toggle("active", img === imgElement);
+      if (img === imgElement) currentIndex2 = i;
+    });
+
+    scrollThumbnailIntoView2(currentIndex2);
+  }
+
+  function scrollThumbnails2(direction) {
+    const scrollAmount = 100;
+    thumbnailsContainer2.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+  }
+
+  function scrollThumbnailIntoView2(index) {
+    const thumbnail = thumbnails2[index];
+    if (!thumbnail) return;
+
+    const containerRect = thumbnailsContainer2.getBoundingClientRect();
+    const thumbRect = thumbnail.getBoundingClientRect();
+    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
+
+    thumbnailsContainer2.scrollBy({ left: offset, behavior: "smooth" });
+  }
+
+  function prevMainPhoto2() {
+    if (currentIndex2 > 0) {
+      currentIndex2--;
+      setMainPhoto2(thumbnails2[currentIndex2]);
+    }
+  }
+
+  function nextMainPhoto2() {
+    if (currentIndex2 < thumbnails2.length - 1) {
+      currentIndex2++;
+      setMainPhoto2(thumbnails2[currentIndex2]);
+    }
+  }
+
+  setMainPhoto2(thumbnails2[0]);
+
+
+// THIRD GALLERY
+  const thumbnailsContainer3 = document.getElementById("thumbnails3");
+  const thumbnails3 = thumbnailsContainer3.querySelectorAll("img");
+  const mainPhoto3 = document.getElementById("mainPhoto3");
+
+  let currentIndex3 = 0;
+
+  function setMainPhoto3(imgElement) {
+    mainPhoto3.src = imgElement.src;
+    document.getElementById("mainPhotoDescription3").textContent = imgElement.dataset.description || "";
+
+    thumbnails3.forEach((img, i) => {
+      img.classList.toggle("active", img === imgElement);
+      if (img === imgElement) currentIndex3 = i;
+    });
+
+    scrollThumbnailIntoView3(currentIndex3);
+  }
+
+  function scrollThumbnails3(direction) {
+    const scrollAmount = 100;
+    thumbnailsContainer3.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
+  }
+
+  function scrollThumbnailIntoView3(index) {
+    const thumbnail = thumbnails3[index];
+    if (!thumbnail) return;
+
+    const containerRect = thumbnailsContainer3.getBoundingClientRect();
+    const thumbRect = thumbnail.getBoundingClientRect();
+    const offset = (thumbRect.left + thumbRect.width / 2) - (containerRect.left + containerRect.width / 2);
+
+    thumbnailsContainer3.scrollBy({ left: offset, behavior: "smooth" });
+  }
+
+  function prevMainPhoto3() {
+    if (currentIndex3 > 0) {
+      currentIndex3--;
+      setMainPhoto3(thumbnails3[currentIndex3]);
+    }
+  }
+
+  function nextMainPhoto3() {
+    if (currentIndex3 < thumbnails3.length - 1) {
+      currentIndex3++;
+      setMainPhoto3(thumbnails3[currentIndex3]);
+    }
+  }
+
+  setMainPhoto3(thumbnails3[0]);
 
 </script>
 
