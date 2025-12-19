@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wing Structure - Composite Wing</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="chapter-content">
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <a href="index.html" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Project
+                </a>
+                
+                <h1>Wing Structure</h1>
+                <p>Structural design and component placement for the composite wing</p>
+            </div>
+
+            <!-- Chapter Content -->
+            <div class="chapter-body">
+                <p>
+                    Starting idea of the project was to test out how different stiffening solutions affect the structural response of the wing. After making few iterative models, it was noticed that only using the honeycomb core inside of the wings' skin, noticeably lowers the overall wing stiffness thus increasing the susceptibility of critical points to failure. It was then decided that the wing skin will only be stiffened using 'T' profiled stiffeners, or stringers, since combined use of honeycombs and stringers is redundant and adds unnecessary mass to the structure.
+                </p>
+
+                <h2>Spar Placement</h2>
+                
+                <p>
+                    Usually, wing spars are placed at about 25% and 65% of wings' chord length. This matches the maximum thickness of the airfoil and the location of the aerodynamic center of the wing. By looking at the pressure field obtained in the previous chapter, it can be noticed that the maximum pressure acting upon the wing is located between 0 and 200 mm from the leading edge. If this was the only criteria it would lead to the front spar being positioned at 200 mm or around 12% of the root chord length so the environmental loads get effectively transferred to the spars caps. This positioning would put the front spar too much forward of the desireable wings center of gravity. Considering aswell, that the maximum thickness for the NACA0012 airfoil used for the wing is located at 30% of the airfoils chord, it was then decided that a good compromise between the two facts be to place the front wing spar at around 20% of the root chord or 345 mm from the leading edge.
+                </p>
+                
+                <p>
+                    Aft spar location was decided by measuring the control surface dimensions of the reference airplane Edge 540 (ailerons). Aft spar location on the root chord is measured at 1176 mm and 588 at the tip which makes it positioned at 70% of the root and tip chord length respectively. Aft spar will be used as a fixture location for the aileron.
+                </p>
+
+                <h2>Rib Spacing</h2>
+                
+                <p>
+                    Rib positioning was obtained through an iterative process of simple buckle analyses and was set to 240 mm spacing (14.3% of the root chord length) at the inner section of the wing (pre aileron) and 356.25 mm spacing (21.2% of the root chord length) in the aileron zone. Since the wing is being optimized only in regards to the static analysis, buckle analyses might show the wing to be oversized (aswell as undersized) in regards to buckling - if that happens it is possible to increase/decrease the rib spacings and thus reduce the number of ribs in the wing. Considering the expected mass of one rib is around 200 g, (Mass of the inner section rib is 208 g) having 3 or 4 extra ribs throughout the wing doesn't impact the overall wing mass in any significant way.
+                </p>
+
+                <h2>Stringer Layout</h2>
+                
+                <p>
+                    4 stringers were placed equidistantly between the wing spars (measured from caps edges, wing box side). For the last 4 sections of the wing, only the outer stringers are present, since there isn't enough space for all of the stringers to be extended root-to-tip - low wing tip side buckling loads were considered during this design decision. To stiffen the trailing edge section of the wing, 4 top-to-bottom skin stiffening elements were also added with equal distance between all.
+                </p>
+                
+                <p>
+                    To avoid stress singularities present at the intersection of the three faces in non-manifold geommetries, a skin/cap overhang was added at the root of the wing. For this overhang area, no failure index values will be measured, and only the wing without the overhang addition will be considered during the optimization process.
+                </p>
+
+                <img src="photos/ovrallCAD.png" alt="CAD imported" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Wing CAD model imported into Abaqus CAE</p>
+
+                <h2>Technical Drawings</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin: 30px 0;">
+                    <a href="drawings/ovrallDim.pdf" target="_blank" style="display: block; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <img src="drawings/ovrallDimThumbnail.png" alt="Overall Dimensions PDF Preview" style="width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 32px rgba(0, 0, 0, 0.16)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.08)';" />
+                        <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: 10px;">Overall Dimensions (Click to view PDF)</p>
+                    </a>
+
+                    <a href="drawings/elmntsDim.pdf" target="_blank" style="display: block; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                        <img src="drawings/elmntsDimThumbnail.png" alt="Elements Dimensions PDF Preview" style="width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow-sm); cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='0 8px 32px rgba(0, 0, 0, 0.16)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 2px 8px rgba(0, 0, 0, 0.08)';" />
+                        <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: 10px;">Element Dimensions (Click to view PDF)</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="chapter-navigation">
+                <!-- Previous Button (Goes to Aerodynamics) -->
+                <a href="aerodynamics.html" class="nav-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Previous
+                </a>
+
+                <!-- Next Button (Goes to Numerical Analysis) -->
+                <a href="numerical.html" class="nav-button">
+                    Next
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
