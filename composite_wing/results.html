@@ -22,6 +22,124 @@
                 </a>
                 
                 <h1>Optimization Results</h1>
+
+                <p>
+                    After 2184 runs it was noticed the algorithm wasn't converging anymore and thus the simulation was stopped. Even though algorithm sought any solution with Tsai-Wu failure index lower than 1 (while also satisfying other constraints) it was decided that only the thickness sets with Tsai-Wu values lower than 0.95 will be considered to introduce some level of safety margin into the design (Numerical model already considers the material idealized - ply interlaminar interface is considered perfectly bonded, etc.). Chosen solution is presented with an orange point in Tsai-Wu/Mass plot below.
+                </p>
+
+                <img src="photos/optimizationPlot2D.png" alt="Tsai-Wu/Mass optimization plot" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Tsai-Wu/Mass optimization plot with a chosen solution shown</p>
+
+                <p>Results from the best solution are as follows (thicknesses per ply):</p>
+
+                <p style="color: var(--color-text-light); font-style: italic; margin-top: 1.5rem;">Best solution results</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Parameter</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Mass</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">28.133 kg</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">TSAIW</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.94767</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">U2</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">328.5 mm</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p>
+                    It is expected for the failure index to be smaller by around 5-15 % once the realistic layups are implemented in the model, which can be proven using CLT. Also, new CAE model will have a slightly bigger mass since the G1 and G2 layups will be extended by half a distance between the ribs to prevent stress peak on areas where skin and ribs meet.
+                </p>
+
+                <p style="color: var(--color-text-light); font-style: italic; margin-top: 1.5rem;">Layup thicknesses per ply</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Section</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Ply Orientation</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Thickness (mm)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3" style="padding: 12px 15px; border-bottom: 1px solid #eee;">C1</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">+45°/-45°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.250</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1.750</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">90°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.250</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" style="padding: 12px 15px; border-bottom: 1px solid #eee;">C2</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">+45°/-45°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.250</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1.650</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">90°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.250</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" style="padding: 12px 15px; border-bottom: 1px solid #eee;">G1</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">+45°/-45°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.250</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.500</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">90°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.250</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" style="padding: 12px 15px; border-bottom: 1px solid #eee;">G2</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">+45°/-45°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.125</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.250</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">90°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.125</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="3" style="padding: 12px 15px; border-bottom: 1px solid #eee;">G3</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">+45°/-45°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.125</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.125</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">90°</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.125</td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <p>Final layup configurations and structural analysis results</p>
             </div>
 
@@ -206,7 +324,7 @@
                     Previous
                 </a>
 
-                <a href="index.html" class="nav-button">
+                <a href="strike.html" class="nav-button">
                     Next
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
