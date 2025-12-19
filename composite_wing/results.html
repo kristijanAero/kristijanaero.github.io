@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimization Results - Composite Wing</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="chapter-content">
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <a href="index.html" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Project
+                </a>
+                
+                <h1>Optimization Results</h1>
+                <p>Final layup configurations and structural analysis results</p>
+            </div>
+
+            <!-- Chapter Content -->
+            <div class="chapter-body">
+                <h2>Final Layup Configurations</h2>
+                
+                <p>
+                    Based on the presented guidelines and results obtained through the optimization process, determined layups for the wingbox section, as well as for the rest of the wing, are:
+                </p>
+
+                <p style="color: var(--color-text-light); font-style: italic; margin-top: 1.5rem;">Determined layups for the whole wing</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Section</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Layup</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Total Thickness</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">C1</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45°/0°<sub>4</sub>/±45°/0°<sub>4</sub>/90°/0°<sub>4</sub>/90°/0°<sub>2</sub>]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">5.00 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">C2</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45°/0°<sub>4</sub>/±45°/0°<sub>4</sub>/90°/0°<sub>4</sub>/90°/0°]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">4.75 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">G1</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45°/0°/90°/±45°/0°<sub>3</sub>/90]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">2.50 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">G2</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45°/0°/90°/±45°/0°<sub>2</sub>/90]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1.25 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">G3</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45°/0°/90°]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1.00 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">LE1-LE12</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[[±45/0/90]<sub>2</sub>]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">R</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45/HC]<sub style="text-decoration: overline;">s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">5.5 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">SSW</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45<sub>2</sub>]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">STE</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[±45]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">TE</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[[±45/0/90]]<sub>s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">1 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">W</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">[[±45<sub>2</sub>/0/90]/HC]<sub style="text-decoration: overline;">s</sub></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">6.5 mm</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <img src="photos/plyDropOff.png" alt="Ply Drop-Off diagram" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Ply Drop-Off, Wing Box Skin</p>
+
+                <h2>Model Nomenclature</h2>
+
+                <p>To help with model referencing simple nomenclature will be introduced:</p>
+
+                <p style="color: var(--color-text-light); font-style: italic; margin-top: 1.5rem;">Numerical model nomenclature</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Model</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">OPTI0</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Model describing wing where thick plies were used, one obtained through optimization process where layups haven't changed</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">OPTI1</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Model where realistic layups were introduced, plies have constant thickness of 0.125 mm</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">OPTI2</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Model where strengthened spar webs were introduced, both spar webs have extra ±45 plies on each side of the midplane</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2>Structural Analysis Results</h2>
+
+                <p>
+                    Observing the new results with only wingbox skin and spar caps layups being changed, it is noticed that the location of the maximum Tsai Wu failure index has been translated onto a front spar web (OPTI1). Thus, it has been decided to add 2 additional ±45° plies onto each side of the midplane of spar web layups (OPTI2). This change has reduced maximum Tsai Wu failure index from 0.977 to 0.8, and also changing the location of maximum failure index to spar cap skin interface. Maximum displacement in Y direction for the first optimized iteration (OPTI0) is 295.4 mm, and maximum displacement in Y direction for strengthened spar webs is 289.1, which represents a change of 2.2% (6.3 mm).
+                </p>
+
+                <p>
+                    Below is the U2 displacement diagram in spanwise direction for top side of the both front and aft spar caps. Bottom sides' displacement wasn't plotted because of how the pressure field loading is applied since it might not show "realistic" results and the displacement might be more aggressive than it would in real world situation.
+                </p>
+
+                <img src="photos/U2plot.png" alt="Spanwise displacement plot" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Spanwise displacement of Front and Aft Spar Cap Topside in Y direction</p>
+
+                <p>
+                    <strong>Important notice about the maximum failure location and value:</strong> When optimization was being run, maximum failure index was being measured for the whole wing structure - layups were simple 8 ply quasi-isotropic symmetric layups with thick plies (as described in the optimization chapter). After the results were obtained, realistic layups were implemented into the model (OPTI1), thus changing the properties of those layups including the stiffnesses. Implementation of those realistic layups resulted with different structural behavior (different material properties) under the loading conditions meaning different results were obtained - this is why maximum failure index value and location was different between the optimized model with thick plies (OPTI0) and modified one with realistic layups (OPTI1).
+                </p>
+
+                <h2>OPTI1 Model Results</h2>
+
+                <img src="photos/opti1results.png" alt="OPTI1 Tsai Wu failure index" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Maximum Tsai Wu failure index of OPTI1 model</p>
+
+                <img src="photos/opti1U2.png" alt="OPTI1 U2 displacement" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">U2 displacement of OPTI1 model</p>
+
+                <h2>OPTI2 Model Results</h2>
+
+                <img src="photos/opti2results.png" alt="OPTI2 Tsai Wu failure index" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Maximum Tsai Wu failure index of OPTI2 model</p>
+
+                <img src="photos/opti2U2.png" alt="OPTI2 U2 displacement" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">U2 displacement of OPTI2 model</p>
+
+                <p>
+                    Maximum TSAIW value is in the location where spar caps edge and skin (leading edge) meet. Diagram below shows Tsai-Wu failure index values throughout the thickness of the spar cap, and also throughout the thickness of the leading edge skin.
+                </p>
+
+                <h2>Wingbox Analysis</h2>
+
+                <p>
+                    If one is to observe only the layups that were being optimized, it can be noticed how the maximum failure index from the optimization process (OPTI0 model, TSAIW = 0.94767) and the one from realistic layups model (OPTI1 model, TSAIW = 0.7934). This is because using more plies within a layup whose thickness is fixed enables the layup to have more uniformed stress distribution with lower stress peaks.
+                </p>
+
+                <img src="photos/opti1resultsWB.png" alt="OPTI1 wingbox results" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Maximum Tsai Wu failure index of OPTI1 model wingbox</p>
+
+                <img src="photos/opti2resultsWB.png" alt="OPTI2 wingbox results" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Maximum Tsai Wu failure index of OPTI2 model wingbox</p>
+
+                <p>
+                    From now on, only the OPTI2 model results will be considered, as this model represents the final model of this project regarding the strength analysis.
+                </p>
+
+                <h2>Failure Index Distribution Analysis</h2>
+
+                <p>
+                    Plotting the distribution of TSAIW throughout the thickness of the layups where maximum failure index values are located (OPTI2 model), it is noticed that maximum TSAIW value for the tensile spar cap layup, C2, is on the ply oriented at 90 degrees surrounded by four 0 degree plies on each side. Reason to such high TSAIW values is the amount of stress that the neighbouring 0 degree plies take onto themselves is greater in that locality of the layup, and thus the stress transversing from the 4×0 degree plies on one side to the other is transferred through the 90 degree ply, where in contrast, stress is not distributed mainly onto the fiber but rather onto the matrix of the ply, which exhibits greatly lower strength. It is noticed that these TSAIW values drop off from the outside to the inside of the layup. This kind of distribution can be attributed to how the stress is distributed when structures like beams are subjected to loading. This distribution follows a linear rule, with stress being the greatest on the flanges or caps, and lowest in the middle of the beam or at the location of the neutral axis. This then explains why the 90 degree ply closest to the surface exhibits the greatest TSAIW values, and why each subsequent value is lower than the previous one. TSAIW values are mirrored around the midplane and this applies only to the C2 layup (basic skin layup is also plotted in the diagram with 8 plies being represented as the 8 topmost values).
+                </p>
+
+                <img src="photos/tsaiwThickFrontSparCap.png" alt="TSAIW thickness distribution" style="max-width: 85%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">TSAIW thickness-wise distribution on the front spar cap (C2)</p>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="chapter-navigation">
+                <a href="optimization.html" class="nav-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Previous
+                </a>
+
+                <a href="index.html" class="nav-button">
+                    Next
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
