@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numerical Model - Composite Wing</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="chapter-content">
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <a href="index.html" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Project
+                </a>
+                
+                <h1>Numerical Model</h1>
+                <p>FEA model setup and mesh generation for the composite wing structure</p>
+            </div>
+
+            <!-- Chapter Content -->
+            <div class="chapter-body">
+                <h2>Model Import and Setup</h2>
+                
+                <p>
+                    3D model of the wing was imported as .step file into the Abaqus CAE preprocessor. To simplify the optimization process, composite layups of certain wing areas were grouped. For the wing skin between the front and aft spar caps, 3 layup groups were created: G1, G2 and G3, going from the root of the wing outwards. For G1 and G2 layup groups, ply drop-off was taken into consideration and thus they were made to extend to half the section outwards. These layup extensions were added to minimize the stresses that would otherwise happen if the ply drop-off happened in the area where the skin connects to the ribs. Skin/Stringer overlaps in those areas were also grouped within the three groups: G1S, G2S and G3S, S denoting 'stringers'. Leading edge skin was divided into 12 layups (to add some flexibility to the model - even though one layup would suffice), trailing edge into 4, spar caps into two layups – compressive and tensile, or upper and lower cap – C1 and C2 respectively; spar webs were defined with only one layup, the same as skin stringers and top-to-bottom stringers added in the trailing edge. Ribs were also defined through one layup. Overhang area has the same layup properties that their section counterparts have (overhang middle skin has the same layup as G1 group, overhang upper cap layup is equal to C1, etc…). Out of all the stiffening elements, only the wingbox stringers were modeled to have both the cap and a web, to model the failure index plot as precisely as possible, especially because they're located in critically loaded area of the wing.
+                </p>
+
+                <p>
+                    For the initial model, all of the layups were made to be quasi-isotropic: [+-45/0/90]<sub>s</sub>, with exceptions of ribs and spar webs, which had 5 mm of nomex honeycomb core inserts, and skin stringers which had symmetrical layup consisting of +-45 degree plies.
+                </p>
+
+                <p style="color: var(--color-text-light); font-style: italic; margin-top: 1.5rem;">Layup label definitions</p>
+                
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Layup Label</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">G1</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Root side section of the wingbox skin</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">G2</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Middle section of the wingbox skin</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">G3</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Tip side section of the wingbox skin</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">G1S, G2S, G3S</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Wingbox skin+stringer caps overlap section</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">LE1-LE12</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Leading edge sections</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">TE1–TE4</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Trailing edge sections</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">C1</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Compression spar caps</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">C2</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Tension spar caps</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">W</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Spar webs</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">SSW</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Stringer web sections</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">STE</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Trailing edge stiffener sections</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;"><code style="background-color: var(--color-accent-light); padding: 2px 6px; border-radius: 4px; font-family: 'Courier New', monospace; font-size: 0.95em;">R</code></td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Ribs</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <img src="photos/compositeLayups.png" alt="Composite layup sections" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Composite layup sections</p>
+
+                <p>
+                    Optimization analyses will be run using a static solver. To model the aileron hinge moments, continuum distributing coupling was defined between two inner and two outer rib edges on the trailing edge side and with a uniform weighting method. Aileron hinge force was then divided by half and applied at each of the reference points.
+                </p>
+
+                <img src="photos/aileronCoupling.png" alt="Aileron reference point coupling" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Aileron reference point coupling</p>
+
+                <p>
+                    Pressure field resulting from lift was applied to lower section of the wing using an analytical field and a 12G loading magnitude. Encastre was applied to the root of the wing.
+                </p>
+
+                <img src="photos/boundaryConditions.png" alt="Load and boundary conditions" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Load and boundary conditions</p>
+
+                <p>
+                    Model was meshed using 32 340 elements and 31 021 nodes. 32 326 of the elements were S4R and 14 were S3 elements to help with the mesh of curved and narrow sections of the geometry. Average aspect ratio of the mesh elements was 1.41. The model contained elements with AR&gt;2 but considering those elements were present in areas not significant in respect to loading, mesh refinement wasn't carried out – same goes for S3 elements. Below are the photos showing mesh throughout the wing geometry. Wingbox skin mesh was represented with section colors to better show how the mesh transitions spanwise.
+                </p>
+
+                <img src="photos/meshOverall.png" alt="Overall wing mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Overall wing mesh</p>
+
+                <img src="photos/meshSkinDetail1.png" alt="Inner wingbox skin mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Inner wingbox skin mesh</p>
+
+                <img src="photos/meshSkinDetail2.png" alt="Middle wingbox skin mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Middle wingbox skin mesh</p>
+
+                <img src="photos/meshSkinDetail3.png" alt="Outer wingbox skin mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Outer wingbox skin mesh</p>
+
+                <img src="photos/meshLEOverall.png" alt="Leading edge skin mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Leading edge skin mesh</p>
+
+                <img src="photos/meshLEDetail1.png" alt="Root side leading edge skin mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Root side leading edge skin mesh</p>
+
+                <img src="photos/meshTEOverall.png" alt="Trailing edge skin mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Trailing edge skin mesh</p>
+
+                <img src="photos/meshSkeletonOverall.png" alt="Internal wing substructure mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Internal wing substructure mesh</p>
+
+                <img src="photos/meshSkeletonDetail1.png" alt="Root side internal wing substructure mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Root side internal wing substructure mesh</p>
+
+                <img src="photos/meshSkeletonDetail2.png" alt="Root side internal substructure mesh without the stringers" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Root side internal substructure mesh without the stringers</p>
+
+                <img src="photos/meshSparsOverall.png" alt="Overall spars mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Overall spars mesh</p>
+
+                <img src="photos/meshSparsDetail.png" alt="Root side spars mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Root side spars mesh</p>
+
+                <img src="photos/meshRibsInner.png" alt="Inner section ribs mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Inner section ribs mesh</p>
+
+                <img src="photos/meshRibsMiddle.png" alt="Middle section ribs mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Middle section ribs mesh</p>
+
+                <img src="photos/meshRibsOuter.png" alt="Outer section ribs mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Outer section ribs mesh</p>
+
+                <img src="photos/meshStringersOverall.png" alt="Overall stringers mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Overall stringers mesh</p>
+
+                <img src="photos/meshStringersDetail1.png" alt="Root side stringers mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Root side stringers mesh</p>
+
+                <img src="photos/meshStringerTEOverall.png" alt="Overall trailing edge mesh" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Overall trailing edge mesh</p>
+
+                <img src="photos/meshARgreaterThan2.png" alt="Elements with aspect ratio greater than 2 (Highlighted)" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Elements with aspect ratio greater than 2 (Highlighted)</p>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="chapter-navigation">
+                <a href="material.html" class="nav-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Previous
+                </a>
+
+                <a href="optimization.html" class="nav-button">
+                    Next
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
