@@ -30,7 +30,7 @@
         <!-- EDIT THIS: Add or remove chapters as needed -->
         <section class="chapters-grid">
 
-            <a href="aerodynamics" class="chapter-card">
+            <a href="aerodynamics.html" class="chapter-card">
                 <h3>Aerodynamics</h3>
                 <p>Calculation of aerodynamical loads using XFLR5 and analytical methods.</p>
             </a>
