@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- EDIT THIS: Change chapter title -->
-    <title>Aerodynamics</title>
+    <title>Aerodynamics - Composite Wing</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,26 +21,346 @@
                     Back to Project
                 </a>
                 
-                <!-- EDIT THIS: Chapter title and description -->
-                <h1>Chapter 1</h1>
-                <p>Description goes here</p>
+                <h1>Aerodynamics</h1>
+                <p>Aerodynamic analysis and load calculations for the composite wing design</p>
             </div>
 
             <!-- Chapter Content -->
-            <!-- EDIT THIS: Add your chapter content here -->
             <div class="chapter-body">
-                <h2>Content Section 1</h2>
-                <p>Your content goes here. This is where you can add text, images, code blocks, or any other content for this chapter.</p>
+                <h2 id="loads">Aerodynamic Loads</h2>
                 
-                <h2>Content Section 2</h2>
-                <p>Add more paragraphs and sections as needed. The layout will automatically adjust for readability.</p>
+                <p>
+                    To help with the configuration selection process, an aerodynamic analysis was conducted beforehand to extrapolate the pressure field at the marginal flight conditions. The whole process of calculating pressure coefficients was done in XFLR5, a computational tool for airfoils, wings, and planes.
+                </p>
                 
-                <p>You can format this content however you like - add headings, paragraphs, lists, images, etc.</p>
+                <p>
+                    An important thing to notice about XFLR5 is it uses inviscid theories (LLT, VLM1, VLM2, 3D Panel) which cannot accurately capture pressure gradients at higher Reynolds numbers (&gt;1e7). As the "never exceed" velocity for the reference aircraft equals 230 kts, compressibility effects are expected. Per the note from XFLR5 documentation:
+                </p>
+                
+                <blockquote style="border-left: 4px solid var(--color-accent-light); padding-left: 20px; margin: 20px 0; font-style: italic; color: var(--color-text-light);">
+                    "The VLM and 3D method merely interpolate 2D viscous drag from local wing lift – not great…"
+                </blockquote>
+                
+                <p>Consequences of this estimation are:</p>
+                
+                <ol style="padding-left: 1.5rem; margin: 15px 0;">
+                    <li>Underestimation of total drag</li>
+                    <li>Over-estimation of glide ratio and other performance factors</li>
+                </ol>
+                
+                <p>
+                    Beyond these limitations, there are more to XFLR5, but these have the greatest impact on the results. As a result of the drawbacks listed above, resultant lift values are greater than those in real life scenarios. These greater lift values then consequently lead to greater loads on the wings, making the wing overbuilt by adding unnecessary mass with added structural elements and additional plies in composite layups.
+                </p>
+                
+                <p>
+                    Because Edge 540 uses a John Roncz symmetrical airfoil which isn't in the public domain so as an alternative NACA0012 airfoil was choosen as the most suitable replacement.
+                </p>
+                
+                <img src="photos/naca0012.png" alt="NACA0012 Airfoil" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">NACA0012 Airfoil</p>
+
+                <p>Measurements for the Edge 540 wing were taken out of the Pilot's Operating Handbook and are as follows:</p>
+
+                <ul style="list-style-type: disc; padding-left: 1.5rem; margin: 15px 0;">
+                    <li>Wing span – 7.62 m</li>
+                    <li>Root chord length – 1.68 m</li>
+                    <li>Tip chord length – 0.84 m</li>
+                </ul>
+
+                <p>Wings are installed at the mid level and exhibit no dihedral or twist angle.</p>
+
+                <p>
+                    Airfoil simulations were run for <em>Re &lt; 1×10⁷</em>, after which half-wing runs were conducted. Plane analyses were set to run for angles of attack ranging from -15° to +15° in 1° increments. However, due to the limitations mentioned earlier, the solver could not converge beyond 9.5°.
+                </p>
+
+                <p>
+                    As a result, the extrapolated pressure field corresponds to flight conditions of <strong>230 kts</strong> and an angle of attack of <strong>9°</strong>.
+                </p>
+                
+                <img src="photos/pressure_9deg.png" alt="Pressure field on the upper surface of the wing" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Pressure field on the upper surface of the wing</p>
+
+                <img src="photos/CLCD.png" alt="CL/CD graph" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">CL/CD plot obtained through 3D Panel method</p>
+
+                <img src="photos/Lwingspan.png" alt="Lift plot" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Lift distribution over the wingspan</p>
+
+                <p>
+                    To get the two-dimensional pressure field, extrapolation of <em>C<sub>p</sub>(x)</em> and <em>L(b)</em> curve coordinates was needed (pressure coefficients on upper and lower surfaces were subtracted). These two coordinate sets were then multiplied and normalized to obtain the 2D pressure field.
+                </p>
+
+                <p>This field can then be scaled by the loading scalar <em>½ n m g</em>, where:</p>
+
+                <ul style="list-style-type: disc; padding-left: 1.5rem; margin: 15px 0;">
+                    <li><em>n</em> – loading factor</li>
+                    <li><em>m</em> – mass of the airplane</li>
+                    <li><em>g</em> – gravitational constant</li>
+                </ul>
+
+                <p>
+                    In this case, the loading scalar equals <strong>0.5 × 726 × 9.81 = 42673.5 N</strong>. 1/2 in this case just means half of the mass since the calculations were done for one wing only.
+                </p>
+
+                <p>All of the calculations were done in MATLAB. The resultant pressure field is presented below.</p>
+
+                <img src="photos/cpxFitted.png" alt="cp(x) graph" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Extrapolated c<sub>p</sub>(x)</p>
+
+                <img src="photos/clFitted.png" alt="CL/CD graph" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Extrapolated c<sub>l</sub>(y)</p>
+
+                <img src="photos/PressureField.png" alt="pressure field" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">2D Pressure field over the wetted wing surface projection</p>
+
+                <h2>Control Surface Hingemoment Analysis</h2>
+
+                <p>
+                    For calculating the control surface force, hingemoment approximation found in Roskam Airplane Design Part VI Chapter 10 was used. Specifically, a Three-Dimensional Control Surface and Tab Hingemoment Derivatives method was used. The three-dimensional hingemoment coefficient for a control surface is estimated from:
+                </p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    c<sub>h</sub> = c<sub>h0</sub> + c<sub>hα</sub> α + c<sub>hδ</sub> δ + c<sub>hδ<sub>t</sub></sub> δ<sub>t</sub>
+                </p>
+
+                <p style="margin-left: 20px;">
+                    <code>c<sub>h0</sub></code> - zero angle of attack, zero control surface deflection and zero tab deflection hingemoment coefficient – for symmetric airfoils equals 0<br>
+                    <code>c<sub>hα</sub></code> - three dimensional control surface hingemoment derivative due to angle of attack<br>
+                    <code>c<sub>hδ</sub></code> - three dimensional control surface hingemoment derivative due to control surface deflection<br>
+                    <code>c<sub>hδ<sub>t</sub></sub></code> - three dimensional control surface hingemoment derivative due to a tab deflection
+                </p>
+
+                <h2>Calculating c<sub>hα</sub></h2>
+
+                <p>First step is to calculate <code>c<sub>hα</sub></code> and needed variables.</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    c<sub>hα</sub> = [A · cos(Λ<sub>c/4</sub>)] / [A + 2 · cos(Λ<sub>c/4</sub>)] · (c<sub>hα</sub>)<sub>M</sub> + Δc<sub>hα</sub>
+                </p>
+
+                <p>Because there is no sweep angle on the wing, <code>cos(Λ<sub>c/4</sub>) = 0</code>.</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    (c<sub>hα</sub>)<sub>M</sub> = (c<sub>hα</sub>)<sub>balance</sub> / √(1 - M<sup>2</sup>)
+                </p>
+
+                <p><code>(c<sub>hα</sub>)<sub>balance</sub></code> is calculated from all the necessary parameters found in Fig.10.65a.</p>
+
+                <p>
+                    Since there is no overhang, balance ratio is equal to <code>t<sub>c</sub> / (2 c<sub>f</sub>) = 84 / (2 × 260) ≈ 0.162</code>, making<br>
+                    <code>(c<sub>hα</sub>)<sub>balance</sub> / c"<sub>hα</sub> ≈ 0.91</code> (Read from diagram below for round nose).
+                </p>
+
+                <img src="photos/nose_aoa.png" alt="nose aoa" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Effect of Nose Shape and Balance on the Two-Dimensional Hingemoment Derivative due to Angle of Attack</p>
+
+                <p><code>c"<sub>hα</sub></code> is obtained from:</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    c"<sub>hα</sub> = c'<sub>hα</sub> + 2 (c<sub>lα</sub>)<sub>theory</sub> [1 - {c<sub>lα</sub> / (c<sub>lα</sub>)<sub>theory</sub>}] {tan(Φ'<sub>te</sub> / 2) - (t / c)}
+                </p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    c'<sub>hα</sub> = (c'<sub>hα</sub> / (c<sub>hα</sub>)<sub>theory</sub>) (c<sub>hα</sub>)<sub>theory</sub>
+                </p>
+
+                <p>Per the instructions for Eq. 10.128, if the condition:</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    tan((Φ'<sub>te</sub>) / 2) = tan((Φ''<sub>te</sub>) / 2) = tan(Φ<sub>te</sub> / 2) = t / c
+                </p>
+
+                <p>
+                    is satisfied, then <code>c''<sub>hα</sub> = c'<sub>hα</sub></code>. This then leads to<br>
+                    <code>c''<sub>hα</sub> = 0.77 × -0.4 = -0.308</code>. Proof of Eq. 10.128 shows that the upper and lower boundaries of the trailing edge are non-curved lines.
+                </p>
+
+                <img src="photos/derivative_aoa.png" alt="derivative aoa" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Two-Dimensional Control Surface Hingemoment Derivative due to Angle of Attack</p>
+
+                <p>This leads us to finally being able to get <code>(C<sub>hα</sub>)<sub>balanced</sub></code>. If <code>(c<sub>hα</sub>)<sub>balanced</sub> / c"<sub>hα</sub> ≈ 0.91</code> then <code>(c<sub>hα</sub>)<sub>balanced</sub> = -0.2803</code>.</p>
+
+                <p>Now that we know <code>(c<sub>hα</sub>)<sub>balanced</sub></code>, we can calculate <code>(C<sub>hα</sub>)<sub>M</sub></code> for <code>M = 0.35</code> (V<sub>NE</sub>≈119 m/s).</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    (C<sub>hα</sub>)<sub>M</sub> = -0.2992
+                </p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    ΔC<sub>hα</sub> = ((ΔC<sub>hα</sub>) / (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>)) × (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>)
+                </p>
+
+                <p style="margin-left: 20px;">
+                    <code>((ΔC<sub>hα</sub>) / (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>))</code> - a factor obtained from Figure 10.77a<br>
+                    <code>c<sub>lα</sub></code> - airfoil lift-curve slope of the surface to which the control surface is attached<br>
+                    <code>B<sub>2</sub></code> – accounts for control surface and balance chord ratios – determined from Figure 10.77c<br>
+                    <code>K<sub>α</sub></code> – accounts for the effect of control surface span – found from:
+                </p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    K<sub>α</sub> = [ (K<sub>α</sub>)<sub>η<sub>i</sub></sub> (1 - η<sub>i</sub>) - (K<sub>α</sub>)<sub>η<sub>0</sub></sub> (1 - η<sub>0</sub>) ] / (η<sub>0</sub> - η<sub>i</sub>)
+                </p>
+
+                <p style="margin-left: 20px;">
+                    <code>η<sub>i</sub></code> – inboard span station of the control surface as a fraction of the main surface semi-span<br>
+                    <code>(K<sub>α</sub>)<sub>η<sub>i</sub></sub></code> – found from Figure 10.77b<br>
+                    <code>η<sub>0</sub></code> – outboard span station of the control surface as a fraction of the main surface semi-span<br>
+                    <code>(K<sub>α</sub>)<sub>η<sub>0</sub></sub></code> – found from Figure 10.77b
+                </p>
+
+                <p>Reading the diagram in Fig.10.77a, <code>((ΔC<sub>hα</sub>) / (c<sub>lα</sub> B<sub>2</sub> K<sub>α</sub> cosΛ<sub>c/4</sub>))</code> for aspect ratio of 8.23 is 0.004.</p>
+
+                <p>Since the aileron spans from 25.2% of the wingspan inboard all the way to the wing tip, <code>η<sub>0</sub></code> will be 1, because the aileron's outward rib is colinear to the wing's tip rib. For <code>η<sub>i</sub> = 0.252</code>, <code>(K<sub>α</sub>)<sub>η<sub>i</sub></sub> = 1.35</code>. For <code>η<sub>0</sub> = 1</code>, <code>(K<sub>α</sub>)<sub>η<sub>0</sub></sub> = 4.25</code>. Considering this:</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    K<sub>α</sub> = 1.35
+                </p>
+
+                <p><code>B<sub>2</sub></code> is obtained from diagram in Fig.10.77c for <code>c'<sub>f</sub> / c' ≈ 0.2063</code>.</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    B<sub>2</sub> = 1.05
+                </p>
+
+                <p><code>C<sub>lα</sub></code> was calculated in XFLR5 and is valued at 0.11848.</p>
+
+                <img src="photos/corr_factors_aoa.png" alt="corr factors aoa" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Three-Dimensional Correction Factors for the Control Surface Hingemoment Derivative due to Angle of Attack</p>
+
+                <p>We can now calculate for extrapolated values, <code>ΔC<sub>hα</sub></code>:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    ΔC<sub>hα</sub> = 0.0006718
+                </p>
+                
+                <p>Finally, we can obtain the final value of three dimensional control surface hingemoment derivative due to angle of attack:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    C<sub>hα</sub> = -0.2986
+                </p>
+
+                <h2>Calculating C<sub>hδ</sub></h2>
+
+                <p>Second step is the calculation of <code>C<sub>hδ</sub></code>:</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    C<sub>hδ</sub> = (cosΛ<sub>c/4</sub>) (cosΛ<sub>hl</sub>) × [ (c<sub>hδ</sub>)<sub>M</sub> + α<sub>δ</sub> (c<sub>hα</sub>)<sub>M</sub> ( (2 cosΛ<sub>c/4</sub>) / (A + 2 cosΛ<sub>c/4</sub>) ) ] + ΔC<sub>hδ</sub>
+                </p>
+
+                <p style="margin-left: 20px;">
+                    <code>(c<sub>hα</sub>)<sub>M</sub> = -0.2992</code><br>
+                    <code>(c<sub>hδ</sub>)<sub>M</sub> = (c<sub>hδ</sub>)<sub>bal</sub> / √(1 - M²)</code><br>
+                    <code>α<sub>δ</sub> = 0.5</code> (obtained from Fig.8.17 for 30° aileron deflection)
+                </p>
+
+                <p>We will start with <code>(c<sub>hδ</sub>)<sub>M</sub></code>. Solution to this coefficient follows the same path as the one for <code>(C<sub>hα</sub>)<sub>M</sub></code>, so any unnecessary descriptions will be omitted for this step.</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    (c<sub>hδ</sub>)<sub>bal</sub> = c"<sub>hδ</sub> × { (c<sub>hδ</sub>)<sub>bal</sub> / c"<sub>hδ</sub> }
+                </p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    c"<sub>hδ</sub> = c'<sub>hδ</sub> + 2 (c<sub>lδ</sub>)<sub>theory</sub> × [1 - { c<sub>lδ</sub> / (c<sub>lδ</sub>)<sub>theory</sub> }] × { tan(Φ'<sub>te</sub>/2) - (t/c) }
+                </p>
+
+                <p><code>(c<sub>hδ</sub>)<sub>bal</sub> / c"<sub>hδ</sub> ≈ 0.91</code></p>
+
+                <p>Because it was proven before that <code>c"<sub>hδ</sub> = c'<sub>hδ</sub></code>, it follows that:</p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    c"<sub>hδ</sub> = (c'<sub>hδ</sub> / (c<sub>hδ</sub>)<sub>theory</sub>) × (c<sub>hδ</sub>)<sub>theory</sub>
+                </p>
+
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    c"<sub>hδ</sub> = 0.91 × -0.77 = -0.7007
+                </p>
+
+                <img src="photos/derivative_defl.png" alt="derivative defl" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Two-Dimensional Control Surface Hingemoment Derivative due to Control Surface Deflection</p>
+
+                <p>For the round nose and a balance ratio of 0.162, reading a diagram in Fig.10.71, we find <code>(c<sub>hδ</sub>)<sub>balance</sub></code> to be around <code>-0.5676</code>.</p>
+
+                <img src="photos/nose_defl.png" alt="nose defl" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Effect of Nose Shape and Balance on the Two-Dimensional Control Surface Hingemoment Derivative due to Control Surface Deflection</p>
+
+                <p>Finally we get:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    (c<sub>hδ</sub>)<sub>M</sub> = (c<sub>hδ</sub>)<sub>bal</sub> / √(1 - M²) = (-0.5676) / √(1 - 0.35²) = -0.6059
+                </p>
+
+                <p>Next, we ought to calculate <code>ΔC<sub>hδ</sub></code>:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    ΔC<sub>hδ</sub> = ((ΔC<sub>hδ</sub>) / (c<sub>lδ</sub> B<sub>2</sub> K<sub>δ</sub> cosΛ<sub>c/4</sub> cosΛ<sub>hl</sub>)) × (c<sub>lδ</sub> B<sub>2</sub> K<sub>δ</sub> cosΛ<sub>c/4</sub> cosΛ<sub>hl</sub>)
+                </p>
+
+                <p>The first member of the equation is a factor obtained from Fig.10.78a.</p>
+
+                <img src="photos/corr_factors_defl.png" alt="corr factors defl" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Three-Dimensional Correction Factors for the Control Surface Hingemoment Derivative due to Control Surface Deflections</p>
+
+                <p><code>c<sub>lδ</sub></code> is found in Fig.8.14 with the value of 0.37. <code>K<sub>δ</sub></code> is basically the same as <code>K<sub>α</sub></code> with a different index and has the same value of 1.35. Same goes for <code>B<sub>2</sub></code>, which is 1.05.</p>
+
+                <img src="photos/flap_eff.png" alt="flap eff" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Lift Effectiveness of a Plain Flap</p>
+
+                <p>We can now get ΔC<sub>hδ</sub>:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    ΔC<sub>hδ</sub> = 0.009 × 0.37 × 1.05 × 1 = 0.00349
+                </p>
+
+                <p>Lastly,</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    C<sub>hδ</sub> = 1 × [ -0.6059 + 0.5 × (-0.2992) × (2 / (8.23 + 2)) ] + 0.00349<br>
+                    C<sub>hδ</sub> = -0.6314
+                </p>
+
+                <p>Since tab isn't considered in the design, three-dimensional control surface hingemoment derivative due to a tab deflection will be considered zero.</p>
+
+                <h2>Final Results</h2>
+
+                <p>After calculating the needed coefficients, we get estimated total three-dimensional hingemoment coefficient for a control surface:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    C<sub>h</sub> = C<sub>hα</sub> α + C<sub>hδ</sub> δ = -0.2986 × 0.1658 - 0.7239 × 0.5236<br>
+                    C<sub>h</sub> = -0.4285
+                </p>
+
+                <p>Negative coefficient value means the moment is acting opposite to the direction of the control surface deflection. Basically, the force acting upon the control surface wants it to return to the neutral position.</p>
+
+                <p>If hingemoment equals:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    M<sub>hinge</sub> = (1/2) ρ<sub>∞</sub> v<sub>∞</sub><sup>2</sup> S<sub>aileron</sub> MAC<sub>aileron</sub> C<sub>h</sub><br>
+                    ρ<sub>∞</sub> = 1.225 kg/m<sup>3</sup><br>
+                    v<sub>∞</sub> = 119 m/s<br>
+                    S<sub>aileron</sub> = 0.9868125 m<sup>2</sup><br>
+                    MAC<sub>aileron</sub> = 0.34625 m<br>
+                    |M<sub>hinge</sub>| = 1269.92 Nm
+                </p>
+
+                <p>Force on hinge:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    F<sub>hinge</sub> = M<sub>hinge</sub> / MAC<sub>aileron</sub><br>
+                    F<sub>hinge</sub> = 3667.63 N
+                </p>
+
+                <p>Multiplying <code>F<sub>hinge</sub></code> by a loading factor of 12G gives the hinge force applied to the aircraft under maximum loading conditions:</p>
+                
+                <p style="background-color: var(--color-accent-light); padding: 15px; border-radius: 8px; font-family: 'Courier New', monospace; margin: 20px 0;">
+                    F<sub>hinge</sub><sub>12g</sub> = 44011.56 N
+                </p>
+
+                <p>This force will be applied to the rib edges in the direction of the lift.</p>
             </div>
 
             <!-- Navigation Arrows -->
             <div class="chapter-navigation">
-                <!-- Previous Button (Goes to project page since this is first chapter) -->
+                <!-- Previous Button - EDIT THIS: Change href to previous chapter or index.html -->
                 <a href="index.html" class="nav-button">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -49,8 +368,8 @@
                     Previous
                 </a>
 
-                <!-- Next Button (Goes to Chapter 2) -->
-                <a href="chapter2.html" class="nav-button">
+                <!-- Next Button - EDIT THIS: Change href to next chapter filename -->
+                <a href="next-chapter.html" class="nav-button">
                     Next
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
