@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- EDIT THIS: Change project title -->
+    <title>Project 1</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Project Header (Styled differently from main page) -->
+        <div class="project-header">
+            <a href="../index.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Portfolio
+            </a>
+            
+            <!-- EDIT THIS: Project title and description -->
+            <h1>Composite Wing Design</h1>
+            <p>Design, optimization and analysis of aerobatic airplane wing.</p>
+        </div>
+
+        <!-- Chapters Grid -->
+        <!-- EDIT THIS: Add or remove chapters as needed -->
+        <section class="chapters-grid">
+
+            <a href="aerodynamics" class="chapter-card">
+                <h3>Aerodynamics</h3>
+                <p>Calculation of aerodynamical loads using XFLR5 and analytical methods.</p>
+            </a>
+
+            <a href="structure.html" class="chapter-card">
+                <h3>Structure</h3>
+                <p>Selection of the wing's structural configuration and layout.</p>
+            </a>
+
+            <a href="materials.html" class="chapter-card">
+                <h3>Materials</h3>
+                <p>List of all materials used in the project.</p>
+            </a>
+
+            <a href="numerical.html" class="chapter-card">
+                <h3>Numerical model</h3>
+                <p>Setup of numerical model</p>
+            </a>
+
+            <a href="optimization.html" class="chapter-card">
+                <h3>Optimization Setup</h3>
+                <p>Design variables, constraints and objective functions.</p>
+            </a>
+
+            <a href="results.html" class="chapter-card">
+                <h3>Optimization Results</h3>
+                <p>Results of optimization process.</p>
+            </a>
+            
+            <a href="strike.html" class="chapter-card">
+                <h3>Bird Strike Analysis</h3>
+                <p>Setup of numerical model</p>
+            </a>
+
+        
+            <!-- ADD MORE CHAPTERS HERE: Copy the structure above -->
+            <!--
+            <a href="chapter4.html" class="chapter-card">
+                <h3>Chapter 4</h3>
+                <p>Description goes here</p>
+            </a>
+            -->
+        </section>
+
+        <!-- Photo Grid -->
+        <!-- EDIT THIS: Replace placeholder divs with your images -->
+        <section class="photo-grid-section">
+            <h2>Gallery</h2>
+            <div class="photo-grid">
+                <!-- Photo 1 (Large) -->
+                <div class="photo-item">
+                    <!-- Replace this div with: <img src="path/to/your/image1.jpg" alt="Description"> -->
+                    <span>Image 1</span>
+                </div>
+
+                <!-- Photo 2 (Medium) -->
+                <div class="photo-item">
+                    <!-- Replace this div with: <img src="path/to/your/image2.jpg" alt="Description"> -->
+                    <span>Image 2</span>
+                </div>
+
+                <!-- Photo 3 (Small) -->
+                <div class="photo-item">
+                    <!-- Replace this div with: <img src="path/to/your/image3.jpg" alt="Description"> -->
+                    <span>Image 3</span>
+                </div>
+
+                <!-- Photo 4 (Medium) -->
+                <div class="photo-item">
+                    <!-- Replace this div with: <img src="path/to/your/image4.jpg" alt="Description"> -->
+                    <span>Image 4</span>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

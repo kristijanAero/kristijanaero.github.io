@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- EDIT THIS: Change chapter title -->
+    <title>Aerodynamics</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="chapter-content">
+            <!-- Chapter Header -->
+            <div class="chapter-header">
+                <a href="index.html" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back to Project
+                </a>
+                
+                <!-- EDIT THIS: Chapter title and description -->
+                <h1>Chapter 1</h1>
+                <p>Description goes here</p>
+            </div>
+
+            <!-- Chapter Content -->
+            <!-- EDIT THIS: Add your chapter content here -->
+            <div class="chapter-body">
+                <h2>Content Section 1</h2>
+                <p>Your content goes here. This is where you can add text, images, code blocks, or any other content for this chapter.</p>
+                
+                <h2>Content Section 2</h2>
+                <p>Add more paragraphs and sections as needed. The layout will automatically adjust for readability.</p>
+                
+                <p>You can format this content however you like - add headings, paragraphs, lists, images, etc.</p>
+            </div>
+
+            <!-- Navigation Arrows -->
+            <div class="chapter-navigation">
+                <!-- Previous Button (Goes to project page since this is first chapter) -->
+                <a href="index.html" class="nav-button">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Previous
+                </a>
+
+                <!-- Next Button (Goes to Chapter 2) -->
+                <a href="chapter2.html" class="nav-button">
+                    Next
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
