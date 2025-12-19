@@ -1,0 +1,515 @@
+/* ============================================
+   COLOR SCHEME & VARIABLES
+   EDIT THESE to change the entire site's colors
+   ============================================ */
+:root {
+    --color-primary: #1a2332;
+    --color-secondary: #2d4263;
+    --color-accent: #c84b31;
+    --color-accent-light: #ecdbba;
+    --color-text: #1a2332;
+    --color-text-light: #5a6b7f;
+    --color-background: #f8f9fa;
+    --color-card: #ffffff;
+    
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Work Sans', sans-serif;
+    
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================
+   CONTAINER & LAYOUT
+   ============================================ */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px 30px;
+}
+
+/* ============================================
+   MAIN PAGE HEADER
+   ============================================ */
+.main-header {
+    text-align: center;
+    margin-bottom: 80px;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.main-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.main-description {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    color: var(--color-text-light);
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-weight: 400;
+}
+
+.links {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.link-button:hover {
+    background-color: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ============================================
+   PROJECTS GRID (MAIN PAGE)
+   ============================================ */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.project-card {
+    background-color: var(--color-card);
+    padding: 50px 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover::before {
+    transform: scaleX(1);
+}
+
+.project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-accent-light);
+}
+
+.project-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+    letter-spacing: -0.01em;
+}
+
+.project-description {
+    font-size: clamp(1rem, 1.5vw, 1.1rem);
+    color: var(--color-text-light);
+    line-height: 1.7;
+}
+
+/* ============================================
+   PROJECT PAGE HEADER (Different from main)
+   ============================================ */
+.project-header {
+    background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+    color: white;
+    padding: 80px 40px;
+    border-radius: 20px;
+    margin-bottom: 60px;
+    box-shadow: var(--shadow-md);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.project-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+.project-header p {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    opacity: 0.95;
+    max-width: 800px;
+    line-height: 1.6;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(-5px);
+}
+
+/* ============================================
+   CHAPTERS GRID (PROJECT PAGE)
+   ============================================ */
+.chapters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 60px;
+    animation: fadeInUp 0.8s ease-out 0.2s backwards;
+}
+
+.chapter-card {
+    background-color: var(--color-card);
+    padding: 35px 30px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--color-accent-light);
+}
+
+.chapter-card:hover {
+    transform: translateX(5px);
+    box-shadow: var(--shadow-md);
+    border-left-color: var(--color-accent);
+}
+
+.chapter-card h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2vw, 1.6rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.chapter-card p {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+/* ============================================
+   PHOTO GRID (PROJECT PAGE)
+   EDIT grid-template-areas to change layout
+   ============================================ */
+.photo-grid-section {
+    margin-top: 60px;
+}
+
+.photo-grid-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.photo-grid {
+    display: grid;
+    gap: 20px;
+    /* EDIT THIS: Change the layout pattern */
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 250px);
+    /* EDIT THIS: Define which photos take which space
+       Use photo1, photo2, photo3, photo4 */
+    grid-template-areas: 
+        "photo1 photo1 photo2 photo3"
+        "photo1 photo1 photo4 photo4";
+    animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.photo-item {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s ease;
+    background-color: var(--color-accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.photo-item:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-md);
+}
+
+/* EDIT THIS: Assign grid positions to photos */
+.photo-item:nth-child(1) { grid-area: photo1; }
+.photo-item:nth-child(2) { grid-area: photo2; }
+.photo-item:nth-child(3) { grid-area: photo3; }
+.photo-item:nth-child(4) { grid-area: photo4; }
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============================================
+   CHAPTER CONTENT PAGE
+   ============================================ */
+.chapter-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.chapter-header {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-light));
+    color: white;
+    padding: 60px 40px;
+    border-radius: 16px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow-md);
+}
+
+.chapter-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.chapter-header p {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    opacity: 0.95;
+}
+
+.chapter-body {
+    background-color: var(--color-card);
+    padding: 50px 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.chapter-body h2 {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    margin: 30px 0 15px 0;
+}
+
+.chapter-body p {
+    color: var(--color-text);
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   CHAPTER NAVIGATION
+   ============================================ */
+.chapter-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 50px;
+}
+
+.nav-button {
+    flex: 1;
+    padding: 20px 30px;
+    background-color: var(--color-card);
+    border: 2px solid var(--color-accent-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.nav-button:hover {
+    background-color: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.nav-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.nav-button.disabled:hover {
+    transform: none;
+    background-color: var(--color-card);
+    color: var(--color-primary);
+    border-color: var(--color-accent-light);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - TABLET
+   ============================================ */
+@media (max-width: 1024px) {
+    .container {
+        padding: 40px 25px;
+    }
+    
+    .chapters-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 200px);
+        grid-template-areas: 
+            "photo1 photo1"
+            "photo2 photo3"
+            "photo4 photo4";
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN - MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 20px;
+    }
+    
+    .main-header {
+        margin-bottom: 50px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .project-card {
+        padding: 35px 25px;
+    }
+    
+    .chapters-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .photo-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(4, 200px);
+        grid-template-areas: 
+            "photo1"
+            "photo2"
+            "photo3"
+            "photo4";
+    }
+    
+    .project-header {
+        padding: 50px 30px;
+    }
+    
+    .chapter-header {
+        padding: 40px 25px;
+    }
+    
+    .chapter-body {
+        padding: 35px 25px;
+    }
+    
+    .chapter-navigation {
+        flex-direction: column;
+    }
+    
+    .nav-button {
+        padding: 18px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .link-button {
+        justify-content: center;
+    }
+}
