@@ -30,7 +30,41 @@
             <!-- Chapter Content -->
             <div class="chapter-body">
                                
-                <p>Many structural implementations are possible to dissipate the kinetic energy of the bird to protect the internal assemblies. From thickening layups in the vicinity of the leading edge to adding metal plates inside of the layups or implementing V shaped deflectors. The simplest solution was first tested which was implemented as a D shaped spar like the ones seen on helicopter blades. It was planned to test multiple D-Spar thicknesses and maybe other configurations but during tests it showed that the minimal D-Spar configuration with only 1 mm thickness was adequate on completely stopping the bird to penetrate the wing. Results are presented below</p>
+                <p>Many structural implementations are possible to dissipate the kinetic energy of the bird to protect the internal assemblies. From thickening layups in the vicinity of the leading edge to adding metal plates inside of the layups or implementing V shaped deflectors. The simplest solution was first tested which was implemented as a D shaped spar like the ones seen on helicopter blades. It was planned to test multiple D-Spar thicknesses and maybe other configurations but during tests it showed that the minimal D-Spar configuration with only 1 mm thickness was adequate on completely stopping the bird to penetrate the wing.</p>
+
+                <p>The bird was modelled using Smoothed Particle Hydrodynamics (SPH) which is a meshless numerical method appropriate for applications involving extreme deformations. It consists of discretizing the body with individual particles (PC3D elements in Abaqus, by default one element equals one particle). Method is based on pure Lagrangian modelling scheme for each particle. Relevant physical properties are calculated for each particle as an interpolation of the values of the nearest neighbouring particle(s) and then the particle responds according to these neighbouring states. Beyond engineering applications, SPH method has been proven useful in physics as well - gravity currents, wave propagations, free surface flows, etc.</p>
+
+                <p>Bird material was defined using Mie-Gruinesen Equation of State model which provides a hydrodynamic material model in which the materal's volumetric strength is determined by an equation of state. Specifically Us-Up Hugoniot form was used which constants c0 (speed of sound) and s define the linear relationship between the linear shock velocity U<sub>s</sub>>, and the particle velocity U<sub>p</sub>. One more property is needed and that is Gruneisens ratio, &Gamma;<sub>0</sub>
+                . Bird material properties are found in the table below.</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                            <tr>
+                                <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Variable</th>
+                                <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Constraint</th>
+                            </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">c0 [m/s]</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">&lt; 1450</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">s [-]</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">&lt; 0</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">&Gamma<sub>0</sub> [-]</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">&lt; 0</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">$rho<sub>0</sub> [kg/m^3]</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">&lt; 950</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
 
                <img src="photos/reinforcment.png" alt="0_hsnmt" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Leading Edge Reinforcement</p>
