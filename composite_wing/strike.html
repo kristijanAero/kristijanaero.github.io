@@ -32,6 +32,9 @@
                                
                 <p>Many structural implementations are possible to dissipate the kinetic energy of the bird to protect the internal assemblies. From thickening layups in the vicinity of the leading edge to adding metal plates inside of the layups or implementing V shaped deflectors. The simplest solution was first tested which was implemented as a D shaped spar like the ones seen on helicopter blades. It was planned to test multiple D-Spar thicknesses and maybe other configurations but during tests it showed that the minimal D-Spar configuration with only 1 mm thickness was adequate on completely stopping the bird to penetrate the wing.</p>
 
+                <p>Mass of the reinforced wing is now 35.7 kg which equals to 3.2 kg added in the form of aluminium spar and 2 GFRP layers in the area where the spar touches leading edge CFRP, to prevent galvanic corrosion. </p>
+
+
                 <p>The bird was modelled using Smoothed Particle Hydrodynamics (SPH) which is a meshless numerical method appropriate for applications involving extreme deformations. It consists of discretizing the body with individual particles (PC3D elements in Abaqus, by default one element equals one particle). Method is based on pure Lagrangian modelling scheme for each particle. Relevant physical properties are calculated for each particle as an interpolation of the values of the nearest neighbouring particle(s) and then the particle responds according to these neighbouring states. Beyond engineering applications, SPH method has been proven useful in physics as well - gravity currents, wave propagations, free surface flows, etc.</p>
 
                 <p>Bird material was defined using Mie-Gruinesen Equation of State model which provides a hydrodynamic material model in which the materal's volumetric strength is determined by an equation of state. Specifically Us-Up Hugoniot form was used which constants c0 (speed of sound) and s define the linear relationship between the linear shock velocity U<sub>s</sub>>, and the particle velocity U<sub>p</sub>. One more property is needed and that is Gruneisens ratio, &Gamma;<sub>0</sub>
@@ -69,6 +72,8 @@
                 <p>Structurally implemented reinforcement is shown in the image below.</p>
                 <img src="photos/reinforcement.png" alt="reinforcement" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">D spar reinforcement</p>
+                
+                Initial bird velocity represented relative velocity between the bird and the aircraft and it equaled to 115 m/s. Point of impact was chosen arbitrary.
 
                 <img src="photos/0degGIF.gif" alt="0 degree case" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">0 degree impact</p>
@@ -76,7 +81,7 @@
                 <img src="photos/45degGIF.gif" alt="Description of animation" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">45 degree impact</p>
 
-                <p>Permanent leading edge indentations are: 42.6mm for 0 degree case, and 60mm for 45 degree case. Result images provided below.</p>
+                <p>Permanent leading edge indentations are: 42.6mm for 0 degree case, andd 60mm for 45 degree case. Result images provided below.</p>
 
                 <img src="photos/0Uperm.png" alt="0 degree case" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">0 degree permanent deformation</p>
@@ -84,6 +89,11 @@
                 <img src="photos/45Uperm.png" alt="Description of animation" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">45 degree permanent deformation</p>
 
+                Maximum wing tip displacement for both of the cases peaks around 64 and 66 mm, where during the 45 degree impact wing shows bigger rebound and consequent oscillations.
+
+                <img src="photos/strikeUMAG.png" alt="Wing tip displacement" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Wing tip displacement during bird impact</p>
+                
                 <p>Composite layers at the location of impact were destroyed, but since not all plies were damaged, aluminium ply surviving the damage, no shell elements were deleted. Below are presented damage variables JCCRT (Johnson-Cook Criteria) for aluminium reinforcement and PEEQ for the Nomex honeycomb, which was modelled as isotropic compressible material.</p>
 
                 <img src="photos/0jccrt.png" alt="Description of animation" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
@@ -126,12 +136,6 @@
 
                 <img src="photos/45_dmgft.png" alt="45_dmgft" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">45deg - Fiber Tensile Damage</p>
-
-                Maximum wing tip displacement for both of the cases peaks around 64 and 66 mm, where during the 45 degree impact wing shows bigger rebound and consequent oscillations.
-
-                <img src="photos/strikeUMAG.png" alt="Wing tip displacement" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
-                <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Wing tip displacement during bird impact</p>
-                
 
 
 
