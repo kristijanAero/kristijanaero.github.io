@@ -30,6 +30,14 @@
             <!-- Chapter Content -->
             <div class="chapter-body">
 
+                <p>Hinge bracket assembly is based on similar designs used in connecting control surfaces in small aircraft. Since the both inboard and outboard assemblies experience the approximately similar forces, only the inboard (smaller) assembly was designed and analyzed as it represents the critical design case.</p>
+
+                <p>For the material of the brackets Aluminum 2024-T3 alloy was chosen. Parts are to be coated with either phenolic resin, paints or special coatings to prevent galvanic corrosion. HSTM20 pins connect the brackets to the wing and aileron spars, while HSTM10 HI-LITE pins connect the brackets themselves. Per the manufacturer's catalogue, all pins are made from 6Al-4V Titanium alloy.</p>
+
+                <p>Thicknesses of the parts were analyzed through several iterations until the maximum von Mises stress dropped below 246 MPa which represents the safety factor of 1.5.</p>
+
+                <p>In the numerical model, a reference point was defined at the center of each hole and was coupled to the hole surface using distributed coupling. Boundary conditions used were pins in the connecting areas while the hole representing the connection of the two brackets had biaxial force defined. Hole in the aileron bracket, to which the actuator is connected was pinned. Two force cases were obtained using hand calculations, one set for downwards deflection of 17 degrees, and one for upwards deflection of 30 degrees.</p>
+
                 <img src="photos/winghbmises.png" alt="wing bracket mises" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Wing bracket Mises stresses</p>
 
