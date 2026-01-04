@@ -34,7 +34,7 @@
 
                 <p>For the material of the brackets Aluminum 2024-T3 alloy was chosen. Parts are to be coated with either phenolic resin, paints or special coatings to prevent galvanic corrosion. HSTM20 pins connect the brackets to the wing and aileron spars, while HSTM10 HI-LITE pins connect the brackets themselves. Per the manufacturer's catalogue, all pins are made from 6Al-4V Titanium alloy.</p>
 
-                <p>Thicknesses of the parts were analyzed through several iterations until the maximum von Mises stress dropped below 246 MPa which represents the safety factor of 1.5. Wing bracket has a thickness of 3 mm while aileron bracket has thickness of 2 mm.</p>
+                <p>Thicknesses of the parts were analyzed through several iterations until the maximum von Mises stress dropped below 246 MPa which represents the safety factor of 1.5. Wing bracket has a thickness of 3 mm while aileron bracket has thickness of 2 mm. Dimensions of the brackets were defined by the dimensions of the surrounding parts, spar webs more precisely. Total height of the spar webs at the location of the outboard hinge bracket was 72.75 mm. Wing hinge bracket was designed to be ~33% shorter to acommodate the space for the actuator arm extending below it to connect to aileron bracket.</p>
 
                 <p>In the numerical model, a reference point was defined at the center of each hole and was coupled to the hole surface using distributed coupling. Boundary conditions used were pins in the connecting areas while the hole representing the connection of the two brackets had biaxial force defined. Hole in the aileron bracket, to which the actuator is connected was pinned. Two force cases were obtained using hand calculations, one set for downwards deflection of 17°, and one for upwards deflection of 30°. Hinge force calculated in the Aerodynamics chapter for the case of 30° deflection was scaled linearly for the 17° deflection case and is equal to 747.4 N.</p>
 
@@ -101,6 +101,32 @@
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Aileron bracket Mises stresses - Left: 30° up; Right: 17° down</p>
 
 
+                <p>Tensile and shear stresses acting upon pins were calculated by measuring reaction forces for each reference point. Maximum tensile forces in wing bracket were identified for pins in locations 5 and 12 (diference in forces was less than 1 N), while maximum tensile forces in aileron bracket were identified for pins in locations 3 and 6 (delta was also less than 1 N.). These pin locations also exhibited maximum shear forces for both the wing and aileron bracket. Tensile and shear stresses were then calculated and are present in the table below.</p>
+
+                <p>Maximum allowable shear stress for the pins per the manufacturer is 95 ksi which translates to 655 MPa.</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Stress type [MPa]</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Wing bracket</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Aileron bracket</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Shear stresses</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">539.2</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">294.55</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">Tensile stresses</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">102.5645661</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">4.165960744</td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <img src="photos/wing_hinge_bracket.JPG" alt="Wing side bracket" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Wing bracket</p>
 
@@ -110,7 +136,7 @@
                 <img src="photos/30degDeflection.JPG" alt="30 degree upwards deflection" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Hinge bracket in 30° upwards deflection</p>
 
-                <img src="photos/-17degDeflection.JPG" alt="17 degree downwards deflection" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
+                <img src="photos/-17degDeflection.jpg" alt="17 degree downwards deflection" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Hinge bracket in 17° downwards deflection</p>
                 
                 
