@@ -38,7 +38,53 @@
 
                 <p>In the numerical model, a reference point was defined at the center of each hole and was coupled to the hole surface using distributed coupling. Boundary conditions used were pins in the connecting areas while the hole representing the connection of the two brackets had biaxial force defined. Hole in the aileron bracket, to which the actuator is connected was pinned. Two force cases were obtained using hand calculations, one set for downwards deflection of 17°, and one for upwards deflection of 30°. Hinge force calculated in the Aerodynamics chapter for the case of 30° deflection was scaled linearly for the 17° deflection case and is equal to 747.4 N.</p>
 
-                <p>Running the analyses cases shows both of the brackets stand well within set boundaries with maximum Mises stresses apearing on the wing bracket with value of </p>
+                <p>Running the analysis cases shows both of the brackets stand well within the set boundaries with maximum Mises stress appearing on the wing bracket for the 30° deflection case (244.3 MPa). Highest Mises stress on the aileron bracket occurs at 30° deflection (54.93 MPa).</p>
+
+                <p style="color: var(--color-text-light); font-style: italic; margin-top: 1.5rem;">Maximum Mises stresses and displacements</p>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Maximum displacement [mm]</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Wing bracket</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Aileron bracket</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">17° (downwards)</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.5754</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.0494</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">30° (upwards)</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.7745</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">0.01885</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin: 20px 0; background-color: var(--color-card); box-shadow: var(--shadow-sm); border-radius: 8px; overflow: hidden;">
+                    <thead style="background-color: var(--color-accent-light);">
+                        <tr>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">von Mises [MPa]</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Wing bracket</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 600; color: var(--color-primary); border-bottom: 2px solid var(--color-accent);">Aileron bracket</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">17° (downwards)</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">172</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">19.3</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">30° (upwards)</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">244.3</td>
+                            <td style="padding: 12px 15px; border-bottom: 1px solid #eee;">54.93</td>
+                        </tr>
+                    </tbody>
+                </table>
 
                 <img src="photos/wingbracketU.png" alt="wing bracket U" style="max-width: 100%; height: auto; display: block; margin: 30px auto; border-radius: 8px; box-shadow: var(--shadow-sm);" />
                 <p style="color: var(--color-text-light); font-style: italic; text-align: center; margin-top: -20px; margin-bottom: 30px;">Wing bracket maximum displacement - Left: 30° up; Right: 17° down</p>
